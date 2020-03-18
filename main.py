@@ -1,5 +1,6 @@
 import urllib3
 import re
+import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -16,7 +17,8 @@ sains = {
     'tag_type': 'div',
     'tag_id': 'pd-retail-price',
     'tag_attr': 'class',
-    'class_name': 'pd__cost__total--promo undefined'
+    'class_name': 'pd__cost__total--promo undefined',
+    'pause_for_id': 'ln-o-section pd__details ln-o-section'
     }
 morrisons = {
     'name': 'Morrisons',
@@ -24,7 +26,8 @@ morrisons = {
     'tag_type': 'meta',
     'tag_id': '',
     'tag_attr': 'itemprop',
-    'class_name': 'price'
+    'class_name': 'price',
+    'pause_for_id': 'productInformation'
     }
 asda = {
     'name': 'Asda',
@@ -32,15 +35,28 @@ asda = {
     'tag_type': 'strong',
     'tag_id': '',
     'tag_attr': 'class',
-    'class_name': 'co-product__price pdp-main-details__price'
+    'class_name': 'co-product__price pdp-main-details__price',
+    'pause_for_id': 'tagjs'
+    }
+tesco = {
+    'name': 'Tesco',
+    'site': 'https://www.tesco.com/groceries/en-GB/products/253829047',
+    'tag_type': 'div',
+    'tag_id': '',
+    'tag_attr': 'class',
+    'class_name': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
+    'pause_for_id': 'grocery-product grocery-product__product-desc'
     }
 
 #sains
 #<div data-test-id="pd-retail-price" class="pd__cost__total--promo undefined">£1.20</div>
 ##asda
 #<strong class="co-product__price pdp-main-details__price">£1.00</strong>
+#tesco
+#https://www.tesco.com/groceries/en-GB/products/253829047
+#<span data-auto="price-value" class="value">1.00</span>
 
-bagels = [sains, morrisons, asda]
+bagels = [sains, morrisons, asda, tesco]
 
 #chrome_options = Options()  
 #chrome_options.add_argument("--headless")
@@ -55,14 +71,18 @@ output = 'Bagels:\n'
 
 for bagel in bagels:
     driver.get(bagel['site'])
-
+    time.sleep(timeout)
     try:
-        #element_present = EC.presence_of_element_located((By.ID, 'pd__wrapper'))
+        element_present = EC.presence_of_element_located((By.ID, bagel['pause_for_id']))
         WebDriverWait(driver, timeout)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         price_box = soup.find(bagel['tag_type'], attrs={bagel['tag_attr']: bagel['class_name']})
+
+        if price_box is None:
+            price = ""
         #price = price_box.text.strip()
-        price = re.findall(r'(\d+\.\d{2}|\d+)', str(price_box))[0]
+        else:
+            price = re.findall(r'(\d+\.\d{2}|\d+)', str(price_box))[0]
 
     except TimeoutException:
         price = 'Unable to retrieve price'
