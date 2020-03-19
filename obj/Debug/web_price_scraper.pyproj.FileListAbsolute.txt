@@ -1,0 +1,2 @@
+H:\Documents\Projects\web_price_scraper\bin\Microsoft.PythonTools.WebRole.dll
+H:\Documents\Projects\web_price_scraper\bin\wfastcgi.py
