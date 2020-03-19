@@ -58,20 +58,13 @@ tesco = {
 
 bagels = [sains, morrisons, asda, tesco]
 
-#chrome_options = Options()  
-#chrome_options.add_argument("--headless")
-#driver = webdriver.Chrome(chrome_options=chrome_options)
-
-#options = webdriver.ChromeOptions()
-#options.add_argument('headless')
-
 driver = webdriver.Chrome()
 
 output = 'Bagels:\n'
 
 for bagel in bagels:
     driver.get(bagel['site'])
-    #time.sleep(timeout)
+
     try:
         element_present = EC.presence_of_element_located((By.CLASS_NAME, bagel['pause_for_class_name']))
         WebDriverWait(driver, timeout).until(element_present)
@@ -80,7 +73,6 @@ for bagel in bagels:
 
         if price_box is None:
             price = ""
-        #price = price_box.text.strip()
         else:
             price = re.findall(r'(\d+\.\d{2}|\d+)', str(price_box))[0]
 
