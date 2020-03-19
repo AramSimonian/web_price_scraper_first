@@ -18,7 +18,7 @@ sains = {
     'tag_id': 'pd-retail-price',
     'tag_attr': 'class',
     'class_name': 'pd__cost__total--promo undefined',
-    'pause_for_id': 'ln-o-section pd__details ln-o-section'
+    'pause_for_class_name': 'pd__cost__per-unit'
     }
 morrisons = {
     'name': 'Morrisons',
@@ -27,7 +27,7 @@ morrisons = {
     'tag_id': '',
     'tag_attr': 'itemprop',
     'class_name': 'price',
-    'pause_for_id': 'productInformation'
+    'pause_for_class_name': 'bop-price__wrapper'
     }
 asda = {
     'name': 'Asda',
@@ -36,7 +36,7 @@ asda = {
     'tag_id': '',
     'tag_attr': 'class',
     'class_name': 'co-product__price pdp-main-details__price',
-    'pause_for_id': 'tagjs'
+    'pause_for_class_name': 'pdp-main-details__price-container'
     }
 tesco = {
     'name': 'Tesco',
@@ -45,7 +45,7 @@ tesco = {
     'tag_id': '',
     'tag_attr': 'class',
     'class_name': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
-    'pause_for_id': 'grocery-product grocery-product__product-desc'
+    'pause_for_class_name': 'price-details--wrapper'
     }
 
 #sains
@@ -71,10 +71,10 @@ output = 'Bagels:\n'
 
 for bagel in bagels:
     driver.get(bagel['site'])
-    time.sleep(timeout)
+    #time.sleep(timeout)
     try:
-        element_present = EC.presence_of_element_located((By.ID, bagel['pause_for_id']))
-        WebDriverWait(driver, timeout)
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, bagel['pause_for_class_name']))
+        WebDriverWait(driver, timeout).until(element_present)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         price_box = soup.find(bagel['tag_type'], attrs={bagel['tag_attr']: bagel['class_name']})
 
