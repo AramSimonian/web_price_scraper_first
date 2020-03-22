@@ -58,6 +58,14 @@ def get_shop_from_link(link):
     shop = link.split(".")
     return shop[1]
 
+def get_shop_tags(all_tags, shop):
+    pause_for_class_name = all_tags[shop]['pause_for_class_name']
+    tag_type = all_tags[shop]['tag_type']
+    tag_attr = all_tags[shop]['tag_attr']
+    class_name = all_tags[shop]['class_name']
+
+    return pause_for_class_name, tag_type, tag_attr, class_name
+
 def main():
     all_tags = build_supermarket_tags()
 
@@ -72,11 +80,7 @@ def main():
         # determine the shop and retrieve the tag info
         shop = get_shop_from_link(bagel_link)
 
-        pause_for_class_name = all_tags[shop]['pause_for_class_name']
-        tag_type = all_tags[shop]['tag_type']
-        tag_attr = all_tags[shop]['tag_attr']
-        class_name = all_tags[shop]['class_name']
-
+        pause_for_class_name, tag_type, tag_attr, class_name = get_shop_tags(all_tags, shop)
 
         try:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, pause_for_class_name))
