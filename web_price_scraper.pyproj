@@ -29,19 +29,11 @@
   <ItemGroup>
     <Folder Include="test_data\" />
     <Folder Include="tests\" />
-    <Folder Include="test_data\sainsburys\" />
-    <Folder Include="test_data\sainsburys\sains_promo_files\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test_data\sainsburys\sains_promo.html" />
-    <Content Include="test_data\sainsburys\sains_promo_files\640x640.jpg" />
-    <Content Include="test_data\sainsburys\sains_promo_files\app.51b66b62.js.download" />
-    <Content Include="test_data\sainsburys\sains_promo_files\app.b75371d2.css" />
-    <Content Include="test_data\sainsburys\sains_promo_files\config.js.download" />
-    <Content Include="test_data\sainsburys\sains_promo_files\logo-sainsburys.8aee22e3.svg" />
-    <Content Include="test_data\sainsburys\sains_promo_files\newrelic.2b9bee70.js.download" />
-    <Content Include="test_data\sainsburys\sains_promo_files\nr-spa-1071.min.js.download" />
-    <Content Include="test_data\sainsburys\sains_promo_files\utag.js.download" />
+    <Content Include="test_data\asda_nybagels_promo.html" />
+    <Content Include="test_data\morrisons_nybagels_no_promo.html" />
+    <Content Include="test_data\sainsburys_nybagels_promo.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <ProjectExtensions>

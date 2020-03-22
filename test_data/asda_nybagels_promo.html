@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en" data-appversion="v175" data-triggered="true"><head><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="Container" data-namespace="s7classic">[data-namespace='s7classic'].s7container {
+	width:100%;
+	height:100%;
+	-ms-touch-action:;
+	touch-action:;
+ }
+[data-namespace='s7classic'].s7container .s7innercontainer {
+	position:relative;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	border:0px !important;
+	margin:0px !important;
+	padding:0px !important;
+	max-width:none !important;
+	max-height:none !important;
+ }
+[data-namespace='s7classic'].s7container[mode='fullscreen'] {
+	z-index:9900;
+	overflow:visible !important;
+ }
+[data-namespace='s7classic'].s7container .s7innercontainer[mode='fullscreen'] {
+	position:absolute;
+ }
+[data-namespace='s7classic'].s7supressminsize {
+	padding:0px !important;
+	border:0px !important;
+	min-width:0px !important;
+	min-height:0px !important;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="NextButton" data-namespace="s7classic">[data-namespace='s7classic'].s7nextbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7nextbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_up.png);
+ }
+[data-namespace='s7classic'].s7nextbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_over.png);
+ }
+[data-namespace='s7classic'].s7nextbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_down.png);
+ }
+[data-namespace='s7classic'].s7nextbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_disabled.png);
+ }
+[data-namespace='s7classic'].s7nextbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PreviousButton" data-namespace="s7classic">[data-namespace='s7classic'].s7previousbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7previousbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_up.png);
+ }
+[data-namespace='s7classic'].s7previousbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_over.png);
+ }
+[data-namespace='s7classic'].s7previousbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_down.png);
+ }
+[data-namespace='s7classic'].s7previousbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_disabled.png);
+ }
+[data-namespace='s7classic'].s7previousbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrollLeftRightButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrollleftrightbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarleftbutton_dark_up.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarleftbutton_dark_over.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarleftbutton_dark_down.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarleftbutton_dark_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarrightbutton_dark_up.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarrightbutton_dark_over.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarrightbutton_dark_down.png);
+ }
+[data-namespace='s7classic'].s7scrollleftrightbutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/controlbarrightbutton_dark_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="SearchButton" data-namespace="s7classic">[data-namespace='s7classic'].s7searchbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7searchbutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_on_over.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_on_over.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_on_over.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_off_disabled.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_off_up.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_off_over.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_off_down.png);
+ }
+[data-namespace='s7classic'].s7searchbutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/searchbutton_off_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="Download" data-namespace="s7classic">[data-namespace='s7classic'].s7download {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7download[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/download_up.png);
+ }
+[data-namespace='s7classic'].s7download[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/download_over.png);
+ }
+[data-namespace='s7classic'].s7download[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/download_down.png);
+ }
+[data-namespace='s7classic'].s7download[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/download_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ClosedCaptionButton" data-namespace="s7classic">[data-namespace='s7classic'].s7closedcaptionbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_up.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_over.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_down.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_disabled.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_disabled.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_over.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_down.png);
+ }
+[data-namespace='s7classic'].s7closedcaptionbutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/closedcaptions_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ThumbnailPageButton" data-namespace="s7classic">[data-namespace='s7classic'].s7thumbnailpagebutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/thumb_up.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/thumb_over.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/thumb_down.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/thumb_disabled.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/page_up.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/page_over.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/page_down.png);
+ }
+[data-namespace='s7classic'].s7thumbnailpagebutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/page_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrubberSwatchesButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrubberswatchesbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/swatches_up.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/swatches_over.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/swatches_down.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/swatches_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scrubber_up.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scrubber_over.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scrubber_down.png);
+ }
+[data-namespace='s7classic'].s7scrubberswatchesbutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scrubber_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="FullScreenButton" data-namespace="s7classic">[data-namespace='s7classic'].s7fullscreenbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/fullscreen_up.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/fullscreen_over.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/fullscreen_down.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/fullscreen_disabled.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/minscreen_up.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/minscreen_over.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/minscreen_down.png);
+ }
+[data-namespace='s7classic'].s7fullscreenbutton[selected='false'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/minscreen_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PlayPauseButton" data-namespace="s7classic">[data-namespace='s7classic'].s7playpausebutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7playpausebutton {
+	position:absolute;
+	width:25px;
+	height:25px;
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/play_up.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/play_over.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/play_down.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/play_disabled.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='false'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pause_up.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='false'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pause_over.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='false'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pause_down.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='false'][state='disabled'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pause_disabled.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][replay='true'][state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/replay_up.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][replay='true'][state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/replay_over.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][replay='true'][state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/replay_down.png);
+ }
+[data-namespace='s7classic'].s7playpausebutton[selected='true'][replay='true'][state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/replay_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrollDownButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrolldownbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrolldownbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_up.png);
+ }
+[data-namespace='s7classic'].s7scrolldownbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_over.png);
+ }
+[data-namespace='s7classic'].s7scrolldownbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_down.png);
+ }
+[data-namespace='s7classic'].s7scrolldownbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrolldownbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrollUpButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrollupbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrollupbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_up.png);
+ }
+[data-namespace='s7classic'].s7scrollupbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_over.png);
+ }
+[data-namespace='s7classic'].s7scrollupbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_down.png);
+ }
+[data-namespace='s7classic'].s7scrollupbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrollupbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrollRightButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrollrightbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrollrightbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_up.png);
+ }
+[data-namespace='s7classic'].s7scrollrightbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_over.png);
+ }
+[data-namespace='s7classic'].s7scrollrightbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_down.png);
+ }
+[data-namespace='s7classic'].s7scrollrightbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrollrightbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ScrollLeftButton" data-namespace="s7classic">[data-namespace='s7classic'].s7scrollleftbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7scrollleftbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_up.png);
+ }
+[data-namespace='s7classic'].s7scrollleftbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_over.png);
+ }
+[data-namespace='s7classic'].s7scrollleftbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_down.png);
+ }
+[data-namespace='s7classic'].s7scrollleftbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_disabled.png);
+ }
+[data-namespace='s7classic'].s7scrollleftbutton {
+	width:20px;
+	height:20px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PanRightButton" data-namespace="s7classic">[data-namespace='s7classic'].s7panrightbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7panrightbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panright_up.png);
+ }
+[data-namespace='s7classic'].s7panrightbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panright_over.png);
+ }
+[data-namespace='s7classic'].s7panrightbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panright_down.png);
+ }
+[data-namespace='s7classic'].s7panrightbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panright_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PanLeftButton" data-namespace="s7classic">[data-namespace='s7classic'].s7panleftbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7panleftbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panleft_up.png);
+ }
+[data-namespace='s7classic'].s7panleftbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panleft_over.png);
+ }
+[data-namespace='s7classic'].s7panleftbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panleft_down.png);
+ }
+[data-namespace='s7classic'].s7panleftbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panleft_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PanDownButton" data-namespace="s7classic">[data-namespace='s7classic'].s7pandownbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7pandownbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pandown_up.png);
+ }
+[data-namespace='s7classic'].s7pandownbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pandown_over.png);
+ }
+[data-namespace='s7classic'].s7pandownbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pandown_down.png);
+ }
+[data-namespace='s7classic'].s7pandownbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/pandown_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="PanUpButton" data-namespace="s7classic">[data-namespace='s7classic'].s7panupbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7panupbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panup_up.png);
+ }
+[data-namespace='s7classic'].s7panupbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panup_over.png);
+ }
+[data-namespace='s7classic'].s7panupbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panup_down.png);
+ }
+[data-namespace='s7classic'].s7panupbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/panup_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ZoomOutButton" data-namespace="s7classic">[data-namespace='s7classic'].s7zoomoutbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7zoomoutbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomout_up.png);
+ }
+[data-namespace='s7classic'].s7zoomoutbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomout_over.png);
+ }
+[data-namespace='s7classic'].s7zoomoutbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomout_down.png);
+ }
+[data-namespace='s7classic'].s7zoomoutbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomout_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ZoomInButton" data-namespace="s7classic">[data-namespace='s7classic'].s7zoominbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7zoominbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomin_up.png);
+ }
+[data-namespace='s7classic'].s7zoominbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomin_over.png);
+ }
+[data-namespace='s7classic'].s7zoominbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomin_down.png);
+ }
+[data-namespace='s7classic'].s7zoominbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomin_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="ZoomResetButton" data-namespace="s7classic">[data-namespace='s7classic'].s7zoomresetbutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7zoomresetbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomreset_up.png);
+ }
+[data-namespace='s7classic'].s7zoomresetbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomreset_over.png);
+ }
+[data-namespace='s7classic'].s7zoomresetbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomreset_down.png);
+ }
+[data-namespace='s7classic'].s7zoomresetbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoomreset_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="CloseButton" data-namespace="s7classic">[data-namespace='s7classic'].s7closebutton {
+	width:25px;
+	height:25px;
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+ }
+[data-namespace='s7classic'].s7closebutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/close_up.png);
+ }
+[data-namespace='s7classic'].s7closebutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/close_over.png);
+ }
+[data-namespace='s7classic'].s7closebutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/close_down.png);
+ }
+[data-namespace='s7classic'].s7closebutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/close_disabled.png);
+ }
+[data-namespace='s7classic'].s7closebutton {
+	width:32px;
+	height:32px;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="SimpleToolTip" data-namespace="s7classic">[data-namespace='s7classic'].s7tooltip {
+	position:absolute;
+	padding:5px;
+	line-height:100%;
+	text-align:center;
+	background-color:rgb(224, 224, 224);
+	color:rgb(26,26,26);
+	font-family:Helvetica, sans-serif;
+	font-size:11px;
+	z-index:10000;
+	border:1px solid rgb(191,191,191);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="Thumb" data-namespace="s7classic">[data-namespace='s7classic'].s7thumbcell .s7thumb {
+	background-repeat:no-repeat;
+	background-position:center;
+ }
+[data-namespace='s7classic'].s7thumbcell .s7thumboverlay {
+	background-repeat:no-repeat;
+	background-position:center;
+ }
+[data-namespace='s7classic'].s7thumbcell .s7label {
+	text-align:center;
+	word-wrap:break-word;
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="Swatches" data-namespace="s7classic">[data-namespace='s7classic'].s7swatches {
+	background-color:rgba(100, 100, 100, 0.2);
+	z-index:0;
+	user-select:none;
+	-ms-user-select:none;
+	-moz-user-select:-moz-none;
+	-webkit-user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-ms-touch-action:;
+	touch-action:;
+	width:500px;
+	height:250px;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumbcell {
+	margin:5px;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumbcell[type='none'] {
+	border:none !important;
+	background-color:transparent !important;
+	pointer-events:none !important;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb {
+	border:1px solid transparent;
+	width:75px;
+	height:75px;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb[state='selected'] {
+	border:1px solid #FFFFFF;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb .s7thumboverlay {
+	width:100%;
+	height:100%;
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb .s7thumboverlay[type='swatchset'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/asset_type_swatches.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb .s7thumboverlay[type='spinset'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/asset_type_spin.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7thumb .s7thumboverlay[type='video'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/asset_type_video.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7label {
+	font-family:Helvetica, sans-serif;
+	font-size:12px;
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollleftbutton {
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:20px;
+	height:20px;
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollleftbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_up.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollleftbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_over.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollleftbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_down.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollleftbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_left_disabled.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollrightbutton {
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:20px;
+	height:20px;
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollrightbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_up.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollrightbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_over.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollrightbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_down.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollrightbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_right_disabled.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollupbutton {
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:20px;
+	height:20px;
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollupbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_up.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollupbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_over.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollupbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_down.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrollupbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_up_disabled.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrolldownbutton {
+	display:block;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:20px;
+	height:20px;
+ }
+[data-namespace='s7classic'].s7swatches .s7scrolldownbutton[state='up'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_up.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrolldownbutton[state='over'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_over.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrolldownbutton[state='down'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_down.png);
+ }
+[data-namespace='s7classic'].s7swatches .s7scrolldownbutton[state='disabled'] {
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/scroll_down_disabled.png);
+ }
+</style><style type="text/css" media="screen" data-description="Scene7DefaultCSS" data-component="FlyoutZoomView" data-namespace="s7classic">[data-namespace='s7classic'].s7flyoutzoomview {
+	position:relative;
+	width:360px;
+	height:480px;
+	border:1px solid #c2c2c2;
+	-moz-user-select:-moz-none;
+	-webkit-user-select:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-ms-user-select:none;
+	user-select:none;
+	text-align:left;
+	-ms-touch-action:;
+	touch-action:;
+ }
+[data-namespace='s7classic'].s7flyoutzoomview img {
+	width:auto;
+	max-width:none !important;
+	max-height:none !important;
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7highlight {
+	opacity:0.6;
+	background-color:#FFFFFF;
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7cursor[input='mouse'] {
+	width:80px;
+	height:80px;
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoom-cursor-desktop.png);
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7cursor[input='touch'] {
+	width:80px;
+	height:100px;
+	background-image:url(https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/../../../../../../../../s7sdk/3.8/images/sdk/zoom-cursor-tablet-1x.png);
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7overlay {
+	opacity:0.6;
+	background-color:#FFFFFF;
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7flyoutzoom {
+	width:600px;
+	height:480px;
+	left:365px;
+	top:0px;
+	position:absolute;
+	border:1px solid #c2c2c2;
+	-webkit-transform:translateZ(0px);
+ }
+[data-namespace='s7classic'].s7flyoutzoomview .s7tip {
+	position:absolute;
+	bottom:50px;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	padding-bottom:10px;
+	padding-top:10px;
+	padding-left:12px;
+	padding-right:12px;
+	background-color:#000000;
+	border-radius:4px;
+	-webkit-transform:translateZ(0px);
+	opacity:0.5;
+ }
+</style>
+<!-- // -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge"><link href="//s7d1.scene7.com" rel="dns-prefetch"><link href="//dynamic.criteo.com" rel="dns-prefetch">
+  <title>New York Bakery Co Cinnamon &amp; Raisin Bagels - ASDA Groceries</title>
+  
+  <meta name="distribution" content="global">
+  <meta name="rating" content="general">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="icon" sizes="192x192" href="/browse_app_assets/icons/icon_192x192.png">
+  <link rel="apple-touch-icon" href="/browse_app_assets/icons/ios/icon_192x192.png">
+
+  <meta name="google-site-verification" content="Qqw7MCGPTZDyFLQni1CsSwXSAU2d5i_vuKk9EYhYUuQ">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="bam.nr-data.net.com">
+  <link rel="dns-prefetch" href="//ui2.assets-asda.com">
+  <link rel="dns-prefetch" href="//ui1.assets-asda.com">
+  <link rel="dns-prefetch" href="//ui3.assets-asda.com">
+  <link rel="dns-prefetch" href="i.groceries.asda.com">
+  <link rel="dns-prefetch" href="beacon.groceries.asda.com">
+  <link rel="dns-prefetch" href="b.wal.co">
+  <link rel="dns-prefetch" href="omniture.groceries.asda.com">
+  <link rel="dns-prefetch" href="servedby.flashtalking.com">
+  <link rel="dns-prefetch" href="b.criteo.com">
+  <link rel="dns-prefetch" href="cdn.decibelinsight.net">
+
+  <link rel="preload" href="https://s7d1.scene7.com/s7viewers/html5/js/FlyoutViewer.js" as="script">
+
+  <link href="/browse_app_assets/css/styles.app.604984f1b681c004dab5.css" rel="stylesheet">
+<meta name="theme-color" content="#68A51C"><link rel="manifest" href="/manifest.json" crossorigin="use-credentials"><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.routes.f0a446af1c51fde65b46.css"><link type="text/css" href="https://cdn.cookielaw.org/skins/5.7.0/default_flat_top_two_button_white/v2/css/optanon.css" rel="stylesheet"><style>#optanon ul#optanon-menu li { background-color: #FFFFFF !important }#optanon ul#optanon-menu li.menu-item-selected { background-color: #FFFFFF !important }#optanon #optanon-popup-wrapper .optanon-white-button-middle { background-color: #FDC301 !important }.optanon-alert-box-wrapper .optanon-alert-box-button-middle { background-color: #FDC301 !important; border-color: #FDC301 !important; }#optanon #optanon-popup-wrapper .optanon-white-button-middle button { color: #000000 !important }.optanon-alert-box-wrapper .optanon-alert-box-button-middle button { color: #000000 !important }#optanon #optanon-popup-bottom { background-color: #FFFFFF !important }#optanon.modern #optanon-popup-top, #optanon.modern #optanon-popup-body-left-shading { background-color: #FFFFFF !important }.optanon-alert-box-wrapper { background-color:#626262 !important }.optanon-alert-box-wrapper .optanon-alert-box-bg p { color:#FFFFFF !important }/* Bulleted lists in Cookie settings pop-up */
+.optanon-main-info-text ul{
+padding-left: 16px !important;
+margin: 8px 0 !important;
+}
+.optanon-main-info-text ul li{
+margin: 8px 0 !important;
+}
+
+/* Stop section title and toggle control hiding on screens smaller than 400px */
+@media only screen and (max-width: 400px){
+.vendor-header-container{
+float: left !important;
+width: 100% !important;
+margin-bottom: 20px !important;
+}
+}
+
+/* Hide title if we don't need it? */
+.legacy-preference-banner-title.h2{
+display: none;
+}
+
+/* Rounded corners on buttons */
+.optanon-alert-box-wrapper .optanon-alert-box-button-middle, #optanon #optanon-popup-wrapper .optanon-white-button-middle{
+border-radius: 3px !important;
+color: #191919 !important;
+} 
+
+#optanon #optanon-popup-wrapper .optanon-white-button-middle{
+padding: 12px 8px !important;
+}
+
+/* Save settings button in pop-up -secondary CTA */
+#optanon #optanon-popup-wrapper .optanon-save-settings-button .optanon-white-button-middle{
+background-color: #d8d8d8 !important;
+border-radius: 3px !important;
+}
+
+/* Hide tick icon from Accept button */
+.optanon-alert-box-wrapper .optanon-button-allow .optanon-alert-box-button-middle button:before{
+content: none !important;
+}
+
+/*Hiding close button as we want to make sure people accept*/
+#optanon #optanon-popup-top .optanon-close, .optanon-alert-box-wrapper .optanon-alert-box-corner-close button{
+display: none !important;
+}
+
+
+/* Adjust padding on tablet and below */
+@media only screen and (max-width: 47em){
+.optanon-alert-box-wrapper .optanon-alert-box-body {
+    margin-right: 12px !important;
+    margin-left: 12px !important;
+    padding-top: 0px !important;
+}
+}
+
+/* Size and padding of paragraph text */
+.optanon-alert-box-wrapper .optanon-alert-box-bg p{
+font-size:10pt !important;
+line-height: 14pt !important;
+}
+
+/* Reducing vertical padding to keep banner as short as poss on mobile*/
+@media only screen and (max-width: 47em){
+.optanon-alert-box-wrapper .optanon-alert-box-bg p#alert-box-message{
+padding-bottom: 3px !important
+}
+}
+
+/* Cookies policy and setting links white */
+.optanon-alert-box-wrapper .optanon-button-more .optanon-alert-box-button-middle button, .optanon-alert-box-wrapper .banner-content .banner-policy-link{
+color: #fff !important;
+}
+
+/*  Remove chevron from Cookie settings link */
+.optanon-alert-box-wrapper .optanon-button-more .optanon-alert-box-button-middle button:before{
+content: none !important;
+}
+
+/* Sit buttons flush to the right on tablet and below */
+@media only screen and (max-width: 47em){
+.optanon-alert-box-bg .optanon-alert-box-button-container{
+padding-right: 0 !important;
+}
+}
+
+/* Active menu item in Cookie settings pop-up */
+.preference-menu-item button[aria-selected~="true"]{
+color: #000 !important;
+}
+
+/* Text colour in settings pop-up */
+#optanon #optanon-popup-wrapper{
+color: #191919 !important;
+}
+
+#optanon #optanon-popup-bottom-logo{
+margin-left: 12px !important;
+}
+
+/* Make buttons in settings pop-up fit on iPhone 5s */
+@media only screen and (max-width: 400px){
+#optanon #optanon-popup-bottom-logo{
+width: 94px !important;
+font-size: 10px !important;
+}
+}
+
+/* make credit on setting pop-up smaller */
+@media only screen and (max-width: 47em){
+#optanon #optanon-popup-bottom-logo:before{
+font-size: 10px;
+margin-left: 0 !important;
+}
+}
+
+/* make credit on setting pop-up smaller */
+@media only screen and (max-width: 47em){
+#optanon #optanon-popup-bottom-logo:after{
+font-size: 10px;
+}
+}</style><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.recur-slot-banner.1b60bcc94eb0c520aa4c.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.recur-slot-banner.1b60bcc94eb0c520aa4c.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.aisle-category-checkout-cms-listing-delivery-pass-department-favs-lists-home-incomplete-offers-navig-15f89e33.76b25d813440134632fe.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.aisle-category-checkout-cms-listing-delivery-pass-department-favs-lists-home-incomplete-offers-navig-15f89e33.76b25d813440134632fe.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.navigation-menu.6bb998c61d1501452920.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.navigation-menu.6bb998c61d1501452920.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.footer.7680b2146d067538df9a.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.footer.7680b2146d067538df9a.js"></script><script charset="utf-8" src="/browse_app_assets/js/bundle.sign-out-modal.85a3e3b24ae8bca4595d.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.sign-in-modal.2104579c508754537be8.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.sign-in-modal.2104579c508754537be8.js"></script><script charset="utf-8" src="/browse_app_assets/js/bundle.aisle-category-checkout-cms-listing-delivery-pass-department-evouchers-favs-lists-home-incomplete-of-6a77dff6.9bf4f66c80f149f2950e.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.aisle-category-checkout-cms-listing-delivery-pass-department-evouchers-favs-lists-home-incomplete-of-c9758f5b.4d8c2a5137b1fad3ebfa.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.aisle-category-checkout-cms-listing-delivery-pass-department-evouchers-favs-lists-home-incomplete-of-c9758f5b.4d8c2a5137b1fad3ebfa.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.aisle-category-checkout-cms-listing-delivery-pass-department-favs-lists-home-incomplete-offers-order-4dc2dd2b.f7c192baa02d539b7bd7.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.aisle-category-checkout-cms-listing-delivery-pass-department-favs-lists-home-incomplete-offers-order-4dc2dd2b.f7c192baa02d539b7bd7.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.tandc-accept-overlay.9bcc626e432dcc79e77d.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.tandc-accept-overlay.9bcc626e432dcc79e77d.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.recipes-modal.3b581755706a331d1f35.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.recipes-modal.3b581755706a331d1f35.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.font-face.554278b45085f5eb0943.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.font-face.554278b45085f5eb0943.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.search-bar.feaebe758f753a158201.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.search-bar.feaebe758f753a158201.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.product-details.33a5ca7bebd8e0202a63.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.product-details.33a5ca7bebd8e0202a63.js"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.banner-static.dba73c63f0c1f72688e7.css"><link rel="canonical" href="https://groceries.asda.com/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338" data-react-helmet="true"><meta name="description" content="Buy New York Bakery Co Cinnamon &amp; Raisin Bagels at ASDA.com" data-react-helmet="true"><script language="javascript" type="text/javascript" src="?namespace=s7classic" data-src="https://s7d1.scene7.com/s7viewers/html5/../../s7viewersdk/3.8/FlyoutViewer/js/s7sdk/utils/Utils.js?namespace=s7classic"></script><link media="all" href="https://s7d1.scene7.com/is/content/Scene7SharedAssets/htmlviewerskins/css/html5_inlinezoomviewer.css" rel="stylesheet" type="text/css" pmid="s7classic_3"><script id="wcpp-load-content" src="https://scontent.webcollage.net/asdagrocery/api/js/method/load-content/type/ppp?environment=live&amp;cpi=1000004372338" async=""></script><style type="text/css" media="screen" data-description=".s7swatches" data-component=".s7swatches" data-instance="s7viewer_swatches">#s7viewer_swatches.s7swatches{
+	visibility:inherit;
+}</style><style type="text/css" media="screen" data-description=".s7flyoutzoomview" data-component=".s7flyoutzoomview" data-instance="s7viewer_flyout">#s7viewer_flyout.s7flyoutzoomview{
+	visibility:inherit;
+}</style><script type="text/javascript" id="wc-loaded-acssite" src="https://scontent.webcollage.net/apps/pp/assets/asdagrocery/js/acssite%40s.min.js?ver=R00ZPAJEV00ZBTIK6"></script><link rel="stylesheet" type="text/css" href="/browse_app_assets/css/styles.slide-navigation-menu.cf0a5cf1f8f4ebb12d90.css"><script charset="utf-8" src="/browse_app_assets/js/bundle.slide-navigation-menu.cf0a5cf1f8f4ebb12d90.js"></script></head>
+<body><div class="optanon-alert-box-wrapper  " role="alertdialog" aria-labelledby="alert-box-title" aria-describedby="alert-box-message" style="display:none"><div class="optanon-alert-box-bottom-top"><div class="optanon-alert-box-corner-close"><button class="optanon-alert-box-close banner-close-button" aria-label="Close" title="Close" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Close Button');" tabindex="3"></button></div></div><div class="optanon-alert-box-bg"><div class="optanon-alert-box-logo"> </div><div class="optanon-alert-box-body"><p class="optanon-alert-box-title legacy-banner-title" id="alert-box-title" role="heading" aria-level="2">You know what to do! Accept all cookies across Asda and George websites, or check and change settings to do your own thing.</p><p class="banner-content" id="alert-box-message">We use <a href="https://www.asda.com/privacy/customer-information/online/cookies-policy" target="_blank" rel="noopener" style="text-decoration:underline;" class="banner-policy-link" aria-label="cookies">cookies</a> to improve your online experience and 
+help advertise.</p></div><div class="optanon-clearfix"></div><div class="optanon-alert-box-button-container"><div class="optanon-alert-box-button optanon-button-close"><div class="optanon-alert-box-button-middle"><button class="optanon-alert-box-close" aria-label="Close">Close</button></div></div><div class="optanon-alert-box-button optanon-button-allow"><div class="optanon-alert-box-button-middle accept-cookie-container"><button class="optanon-allow-all accept-cookies-button" title="Accept Cookies" aria-label="Accept Cookies" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Accept Cookies');" tabindex="2">Accept Cookies</button></div></div><div class="optanon-alert-box-button optanon-button-more"><div class="optanon-alert-box-button-middle"><button class="optanon-toggle-display cookie-settings-button" title="Cookie Settings" aria-label="Cookie Settings" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Open Preferences');" tabindex="1">Cookie Settings</button></div></div></div><div class="optanon-clearfix optanon-alert-box-bottom-padding"></div></div></div><div id="optanon" class="modern"><div id="optanon-popup-bg"></div><div id="optanon-popup-wrapper" role="dialog" aria-modal="true" tabindex="-1" lang="en-GB"><div id="optanon-popup-top"><button onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Close Button');" aria-label="Close" class="optanon-close-link optanon-close optanon-close-ui" title="Close"><div id="optanon-close" style="background: url(https://cdn.cookielaw.org/skins/5.7.0/default_flat_top_two_button_white/v2/images/optanon-pop-up-close.png);width:34px;height:34px;"></div></button></div><div id="optanon-popup-body"><div id="optanon-popup-body-left"><div id="optanon-popup-body-left-shading"></div><div id="optanon-branding-top-logo" style="background-image: url('https://cdn.cookielaw.org/logos/6134/6134:asda.com/Logo%20-%20cookie%20settings.jpg') !important;"></div><ul id="optanon-menu" aria-label="Navigation Menu" role="tablist"><li class="menu-item-on menu-item-about" title="Cookie Settings" data-group="{&quot;GroupLanguagePropertiesSets&quot;:[{&quot;GroupName&quot;:{&quot;Text&quot;:&quot;Cookie Settings&quot;},&quot;GroupDescription&quot;:{&quot;Text&quot;:&quot;<p>By clicking on the options on the left, you can find out more about what the different types of Cookies we use do, and for some you can turn them on and off – simply use the slider and click the save settings button.</p>\n<p>Don’t know what a cookie is? Need the full legal lowdown? View our <a href=\&quot;https://www.asda.com/privacy/customer-information/online/cookies-policy\&quot; target=\&quot;_blank\&quot; rel=\&quot;noopener\&quot; style=\&quot;text-decoration:underline;\&quot;>Cookie Policy</a>.</p>\n \n<p>You can change your settings at any time in the future by clicking on the Cookie Settings link at the bottom of our website pages.</p>&quot;}}]}"><p class="preference-menu-item"><button role="tab" aria-selected="true" aria-controls="Cookie-Settings" id="Cookie-Settings">Cookie Settings</button></p></li><li class="menu-item-necessary menu-item-on" title="Essential Cookies" data-group="{&quot;ShowInPopup&quot;:true,&quot;Order&quot;:0,&quot;OptanonGroupId&quot;:1,&quot;Parent&quot;:null,&quot;GroupLanguagePropertiesSets&quot;:[{&quot;DefaultStatus&quot;:{&quot;Text&quot;:&quot;Always Active&quot;},&quot;GroupDescription&quot;:{&quot;Text&quot;:&quot;Essential cookies are always switched on. Our online services cannot work without them.\n\nThese cookies allow our online services to work. For example to load images, or let you log in securely. &quot;},&quot;GroupName&quot;:{&quot;Text&quot;:&quot;Essential Cookies&quot;},&quot;IsDntEnabled&quot;:false}],&quot;Cookies&quot;:[{&quot;Name&quot;:&quot;cf_use_ob&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;NAV_UI&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:2914743},{&quot;Name&quot;:&quot;_pxvid&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:539},{&quot;Name&quot;:&quot;akaau_P2&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;SMD&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_abck&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:1967},{&quot;Name&quot;:&quot;TS01f4281b&quot;,&quot;Host&quot;:&quot;www.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_pxff_tm&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;TS01e563ab&quot;,&quot;Host&quot;:&quot;www.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;SSRT&quot;,&quot;Host&quot;:&quot;.groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;HIDE_OLDSITE_BUTTON&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:2914743},{&quot;Name&quot;:&quot;TS016dc15d&quot;,&quot;Host&quot;:&quot;.www.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;international_country_welcome_popup&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:9999},{&quot;Name&quot;:&quot;akaau_P1&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_px3&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__cq_dnt&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;international_country&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:21899},{&quot;Name&quot;:&quot;NAV_CHECKOUT&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:2914802},{&quot;Name&quot;:&quot;__cq_seg&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:29},{&quot;Name&quot;:&quot;ASDACOOKIECHECK&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;resize_redirect&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;MTEP_EXISTING_SESSION&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;DCENV&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;asdaReferrer&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dwpersonalization_6b8ba8b3b3e4761745ced6bb10db8e48&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:179},{&quot;Name&quot;:&quot;PX_MONITOR&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;SSLB&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dwac_bcessiaag0odoaaacyb761b78n&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;SSSC&quot;,&quot;Host&quot;:&quot;.groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dw_dnt&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;TS012efab3&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;OptanonConsent&quot;,&quot;Host&quot;:&quot;asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:365},{&quot;Name&quot;:&quot;OptanonAlertBoxClosed&quot;,&quot;Host&quot;:&quot;asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:365},{&quot;Name&quot;:&quot;_dc_gtm_UA-44546151-5&quot;,&quot;Host&quot;:&quot;.my.car-insurance.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_dc_gtm_UA-89349249-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_dc_gtm_UA-52482178-1&quot;,&quot;Host&quot;:&quot;.money.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;JSESSIONID&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;NSC_mc-350244270-1-434837555&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dwsecuretoken_xxxxxxxx&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__cfduid&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;dwsid&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmb&quot;,&quot;Host&quot;:&quot;.opticians.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;ARRAffinity&quot;,&quot;Host&quot;:&quot;cards.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;ASP.NET_SessionId&quot;,&quot;Host&quot;:&quot;opticians.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;XSRF-TOKEN&quot;,&quot;Host&quot;:&quot;mobile.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__RequestVerificationToken&quot;,&quot;Host&quot;:&quot;cards.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;PHPSESSID&quot;,&quot;Host&quot;:&quot;lifeandstyle.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_dc_gtm_UA-4480603-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_dc_gtm_UA-4480603-30&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;identitytoken&quot;,&quot;Host&quot;:&quot;mobile.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:3652},{&quot;Name&quot;:&quot;wordfence_verifiedHuman&quot;,&quot;Host&quot;:&quot;lifeandstyle.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;TS01208a09&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0}],&quot;Purposes&quot;:[],&quot;CustomGroupId&quot;:null,&quot;GroupId&quot;:216280}" data-optanongroupid="1"><p class="preference-menu-item"><button role="tab" aria-selected="false" aria-controls="Essential-Cookies" id="Essential-Cookies">Essential Cookies</button></p></li><li class="menu-item-on menu-item-performance" title=" Experience Cookies" data-group="{&quot;ShowInPopup&quot;:true,&quot;Order&quot;:1,&quot;OptanonGroupId&quot;:2,&quot;Parent&quot;:null,&quot;GroupLanguagePropertiesSets&quot;:[{&quot;DefaultStatus&quot;:{&quot;Text&quot;:&quot;Always Active&quot;},&quot;GroupDescription&quot;:{&quot;Text&quot;:&quot;Right now these are always active. But we are working to let you choose to switch this off.\n\nThese cookies let us:\n<ul>\n<li>remember you and the choices you make so we can tailor services to you</li>\n<li>check how you use our digital services so we know they work and can make them better</li>\n</ul>&quot;},&quot;GroupName&quot;:{&quot;Text&quot;:&quot; Experience Cookies&quot;},&quot;IsDntEnabled&quot;:false}],&quot;Cookies&quot;:[{&quot;Name&quot;:&quot;btc&quot;,&quot;Host&quot;:&quot;beacon.direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:3652},{&quot;Name&quot;:&quot;uspiosv3&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dtCookie&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_pageViewsPerSession&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;BVImplmain_site&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_LastAPV&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_lv_s&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_eVar104&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;uspiosv2&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_gtag_UA_89349249_1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_landingSite&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_rollupGa_gid&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_pageName&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;oo_events&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:27},{&quot;Name&quot;:&quot;btpdb.1OgLjh2.dXNlciBpbXByZXNzaW9uIGNvdW50&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;searchServiceEnabled&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:269},{&quot;Name&quot;:&quot;btpdb.QdBDfe5.dXNlciBpbXByZXNzaW9uIGNvdW50&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;btpdb.QdBDfe5.c2lnbmFsIGlkOiBmaXJzdCBwYXJ0eQ&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;bt_notFirstPage&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_rollupGa&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:729},{&quot;Name&quot;:&quot;bstc&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_orderPlaced&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_vis_opt_s&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:99},{&quot;Name&quot;:&quot;s_vi&quot;,&quot;Host&quot;:&quot;asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:2914745},{&quot;Name&quot;:&quot;_ga&quot;,&quot;Host&quot;:&quot;.my.car-insurance.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;_gid&quot;,&quot;Host&quot;:&quot;.my.car-insurance.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_sq&quot;,&quot;Host&quot;:&quot;.money.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__cq_uuid&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:394},{&quot;Name&quot;:&quot;_pk_ses*&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_UA-32574893-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_sess&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;optimizelyEndUserId&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:179},{&quot;Name&quot;:&quot;bv_metrics&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_nr&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:29},{&quot;Name&quot;:&quot;_pk_id*&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:392},{&quot;Name&quot;:&quot;BVBRANDSID&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_lv&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:1094},{&quot;Name&quot;:&quot;s_cc&quot;,&quot;Host&quot;:&quot;.car-insurance.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_pers&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:1826},{&quot;Name&quot;:&quot;s_dfa&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_vwo_uuid_v2&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:365},{&quot;Name&quot;:&quot;_gat&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;cqcid&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dtLatC&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;BVBRANDID&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;dtSa&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_fid&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:1826},{&quot;Name&quot;:&quot;_vis_opt_test_cookie&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;dtPC&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmt_ya&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utma&quot;,&quot;Host&quot;:&quot;.opticians.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:729},{&quot;Name&quot;:&quot;__utmz&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:182},{&quot;Name&quot;:&quot;_gat_UA-24761755-3&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmt&quot;,&quot;Host&quot;:&quot;.opticians.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;s_ppv&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmb&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;AMCV_xxxxxAdobeOrg&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:730},{&quot;Name&quot;:&quot;__utmc&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_UA-70315239-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmt_asda2&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmt_asda&quot;,&quot;Host&quot;:&quot;.storelocator.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_UA-44713605-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_v66&quot;,&quot;Host&quot;:&quot;.direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_UA-90170582-1&quot;,&quot;Host&quot;:&quot;.groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;hashtagurl&quot;,&quot;Host&quot;:&quot;groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:126},{&quot;Name&quot;:&quot;_gat_UA-83759036-48&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__utmv&quot;,&quot;Host&quot;:&quot;.opticians.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;utag_main&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;sc.ASP.NET_SESSIONID&quot;,&quot;Host&quot;:&quot;loans.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_asda&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__atuvs&quot;,&quot;Host&quot;:&quot;money.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;__atuvc&quot;,&quot;Host&quot;:&quot;money.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:395},{&quot;Name&quot;:&quot;mf_user&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:89},{&quot;Name&quot;:&quot;_gat_UA-4480603-1&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_v69&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;v_id&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:89},{&quot;Name&quot;:&quot;main_gid&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_main&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;_gat_UA-nnnnnnn-nn&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;bt_findingMethod&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;rxVisitor&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;rxvt&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;sc.Status&quot;,&quot;Host&quot;:&quot;travelmoney.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0}],&quot;Purposes&quot;:[],&quot;CustomGroupId&quot;:null,&quot;GroupId&quot;:216276}" data-optanongroupid="2"><p class="preference-menu-item"><button role="tab" aria-selected="false" aria-controls="-Experience-Cookies" id="-Experience"> Experience Cookies</button></p></li><li class="menu-item-on menu-item-advertising" title="Marketing Cookies" data-group="{&quot;ShowInPopup&quot;:true,&quot;Order&quot;:3,&quot;OptanonGroupId&quot;:4,&quot;Parent&quot;:null,&quot;GroupLanguagePropertiesSets&quot;:[{&quot;DefaultStatus&quot;:{&quot;Text&quot;:&quot;Inactive&quot;},&quot;GroupDescription&quot;:{&quot;Text&quot;:&quot;Let us:\n<ul>\n<li>show you online adverts based on your activities and interests. This is both on our sites and on other sites you visit</li>\n<li>limit how many times you see the same advert</li>\n<li>measure how effective our adverts are</li> \n</ul>&quot;},&quot;GroupName&quot;:{&quot;Text&quot;:&quot;Marketing Cookies&quot;},&quot;IsDntEnabled&quot;:false}],&quot;Cookies&quot;:[{&quot;Name&quot;:&quot;sid&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;T1&quot;,&quot;Host&quot;:&quot;www.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0},{&quot;Name&quot;:&quot;vtc&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:3652},{&quot;Name&quot;:&quot;_gcl_au&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:89},{&quot;Name&quot;:&quot;SIVISITOR&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:3284},{&quot;Name&quot;:&quot;SSID&quot;,&quot;Host&quot;:&quot;.groceries.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:364},{&quot;Name&quot;:&quot;__gads&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:729},{&quot;Name&quot;:&quot;AMCV_walmartasda%40AdobeOrg&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:730},{&quot;Name&quot;:&quot;_fbp&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:89},{&quot;Name&quot;:&quot;dwanonymous_xxxxxxxx&quot;,&quot;Host&quot;:&quot;direct.asda.com&quot;,&quot;IsSession&quot;:false,&quot;Length&quot;:179},{&quot;Name&quot;:&quot;AMCVS_xxxxxAdobeOrg&quot;,&quot;Host&quot;:&quot;.asda.com&quot;,&quot;IsSession&quot;:true,&quot;Length&quot;:0}],&quot;Purposes&quot;:[],&quot;CustomGroupId&quot;:null,&quot;GroupId&quot;:216278}" data-optanongroupid="4"><p class="preference-menu-item"><button role="tab" aria-selected="false" aria-controls="Marketing-Cookies" id="Marketing-Cookies">Marketing Cookies</button></p></li><li class="menu-item-moreinfo menu-item-off" title="Privacy Centre"><p class="preference-menu-item"><a target="_blank" aria-label="Privacy Centre" href="https://www.asda.com/privacy" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Cookie Policy');">Privacy Centre</a></p></li></ul></div><div><div id="optanon-popup-body-right"><p role="heading" aria-level="2" class="legacy-preference-banner-title h2" aria-label=""></p><div class="vendor-header-container"><p class="header-3" role="heading" aria-level="3"></p><div id="optanon-popup-more-info-bar"><div class="optanon-status"><div class="optanon-status-editable"><form><span class="fieldset"><p><input type="checkbox" value="check" id="chkMain" checked="checked" class="legacy-group-status optanon-status-checkbox"><label for="chkMain">Active</label></p></span></form></div><div class="optanon-status-always-active optanon-status-on"><p>Always active</p></div></div></div></div><div class="optanon-main-info-text" role="tabpanel"></div></div></div><div class="optanon-bottom-spacer"></div></div><div id="optanon-popup-bottom"> <a href="https://onetrust.com/poweredbyonetrust" target="_blank" rel="noopener"><div id="optanon-popup-bottom-logo" alt="OneTrust Website" style="background: url(https://cdn.cookielaw.org/skins/5.7.0/default_flat_top_two_button_white/v2/images/cookie-collective-top-bottom.png);width:155px;height:35px;" title="powered by OneTrust"></div></a><div class="optanon-button-wrapper optanon-save-settings-button optanon-close optanon-close-consent"><div class="optanon-white-button-left"></div><div class="optanon-white-button-middle"><button title="Save settings" aria-label="Save settings" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Save Settings');">Save settings</button></div><div class="optanon-white-button-right"></div></div><div class="optanon-button-wrapper optanon-allow-all-button optanon-allow-all" style="display: none;"><div class="optanon-white-button-left"></div><div class="optanon-white-button-middle"><button title="Allow all" aria-label="Allow all" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Allow All');">Allow all</button></div><div class="optanon-white-button-right"></div></div></div></div></div>
+<style>
+.site-wide-banner {
+    text-align: center;
+    background: #FDF5D9;
+    padding: 20px;
+    z-index: 100;
+}
+.aside__content[style] {
+margin-top: 60px;
+}
+.aside__content[style*="12px"] {
+margin-top: 0px;
+}
+</style>
+<div class="site-wide-banner ">Self isolating? Tell us in the checkout under 'Other Information' - 'Delivery Instructions'</div>
+  <!--[if lte IE 10]>
+  <p style="background: rgba(247,204,0,.1); margin: 0; padding: 16px;">
+    You are using an <strong>outdated</strong> browser.
+    Please upgrade your browser
+    to improve your experience and security.
+  </p>
+  <![endif]-->
+  <!--Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-MDCJ74D"
+    height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!--End Google Tag Manager (noscript) -->
+
+  <div id="root"><main class="layout"><header data-auto-id="header" class="header " data-show-over-backdrop="false" data-taxonomy-open="false" data-compact="false"><div class="header__wrapper" data-fixed="false" data-compact="false"><div class="header__container"><div class="header__content"><div class="header__hamburger-menu"><button class="menu-button" type="button" aria-label="toggle navigation menu"><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 23a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-16a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm-6-8a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-10a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm9-8a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-19a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></button></div><div class="header__logo"><button type="button" data-auto-id="linkHeaderLogo" class="asda-link asda-link--primary asda-link--button" aria-disabled="false" aria-label="ASDA home"><div class="asda-logo " data-size="small"><span data-auto-id="" class="asda-icon asda-icon--green asda-icon--regular asda-icon--rotate0 asda-icon--brand asda-logo__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113 34"><path class="asda-icon__draw" fill-rule="evenodd" d="M101.698 2.012H90.337l-6.479 18.752c.29-1.557.341-2.802.341-3.343 0-7.856-4.501-15.409-15.076-15.409H56.978l.036 18.653c-1.05-5.3-5.892-6.72-11.913-8.55-2.25-.693-3.486-1.794-3.035-2.82.385-.896 1.765-1.177 3.44-.946 2.554.366 4.594 1.22 6.558 2.289l2.684-6.651c-.605-.299-4.954-2.909-10.404-2.909-7.6 0-12.454 3.708-12.454 9.18 0 4.876 3.003 7.711 8.525 9.3 5.939 1.723 7.445 2.416 7.266 4.124-.154 1.472-3.835 3.265-12.841-2.276l-2.676 5.537-8.26-24.93H12.547L1.814 33.003h8.952L12.5 28H23l1.784 5.004h9.398l-1.066-3.031c3.177 1.836 7.117 3.517 11.83 3.517 7.22 0 11.123-3.943 12.054-7.722v7.236h12.11c7.219 0 10.995-3.442 12.968-7.126l-2.477 7.126h8.945L90.336 28H101l1.572 5.004h9.41L101.697 2.012zM14.5 21l3.338-10.648L21 21h-6.5zM66 25.012V10h2.135c3.043 0 6.365 1.232 6.365 7.506 0 5.557-2.934 7.506-6.339 7.506H66zM92.5 21l3.184-10.521L99 21h-6.5z"></path></svg></span></div></button></div><div class="header__menu"><div data-auto-id="menu" class="top-menu" data-compact="false"><button data-auto-id="btnTrolleyDetail" type="button" class="asda-btn asda-btn--clear menu-trolley top-menu__item" aria-label="Trolley 0 items total price £0.00" aria-expanded="false"><span class="menu-trolley__total-items"><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--large asda-icon--rotate0 menu-trolley__icon-cart"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M5.678 6A2 2 0 017.61 7.482L8.016 9h18.746a.5.5 0 01.483.63l-2.382 8.888A2 2 0 0122.931 20H10.964l.3 1.119c.498.16.928.471 1.235.88h9.002A2.5 2.5 0 1121.05 24h-8.1a2.5 2.5 0 11-3.7-2.666L5.777 8.371A.5.5 0 005.294 8H4.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm19.129 5H8.552l1.876 7h12.12a.5.5 0 00.482-.37z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></span><span class="menu-trolley__value">£0.00</span></button></div></div><div class="header__search"><div class="search"><form data-auto-id="searchForm" method="get" role="search" class="search-form"><label class="co-label search-form__label"><span class="search-form--visually-hidden">Search</span><input type="text" name="search" id="search" placeholder="Search for products and recipes..." autocomplete="off" class="co-text-field search-form__input"></label><input type="reset" name="reset" class="co-text-field search-form--visually-hidden"><button data-auto-id="btnSearch" type="submit" class="search-form__search-button" aria-label="submit search"><span data-auto-id="" class="asda-icon asda-icon--white asda-icon--regular asda-icon--rotate0"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 5a9 9 0 017.032 14.617l5.1 5.1a.5.5 0 010 .708l-.707.707a.5.5 0 01-.707 0l-5.1-5.1A9 9 0 1114 5zm0 2a7 7 0 100 14 7 7 0 000-14z" fill="#3d3d3d" class="asda-icon__draw"></path></svg></span></button></form><div class="search__container"></div></div></div></div></div></div></header><section class="layout__section"><div id="modal-root"></div><main class="product-detail-page layout__main"><div class="product-detail-page__breadcrumb-container"><button data-auto-id="btnBack" type="button" class="asda-btn asda-btn--primary-outline">Back</button></div><div class="product-detail-page__main-cntr"><div class="product-detail-page__left-cntr"><div class="product-detail-page__image-with-linksave"><div class="product-detail-page__images-container" data-auto-id="image"><div id="s7viewer" class="product-detail-page__s7viewer s7flyoutviewer s7mouseinput s7size_small s7device_landscape" style=""><div id="s7viewer_container" class="s7container" data-description="Scene7ComponentHolder" data-component="Container" data-namespace="s7classic" lang="en" mode="normal" role="region" aria-label="Flyout viewer" style="position: relative; overflow: visible;"><div mode="normal" class="s7container s7innercontainer" id="s7viewer_container_inner"><div id="s7viewer_flyout" class="s7flyoutzoomview" data-description="Scene7ComponentHolder" data-component="FlyoutZoomView" data-namespace="s7classic" lang="en" tabindex="0" role="application" aria-roledescription="zoomable image" aria-describedby="s7viewer_flyout_hint" style="width: 288px; height: 188px;"><span id="s7viewer_flyout_hint" style="display: none;">Use + and - keys to zoom in and out, arrow keys move the zoomed portion of the image</span><div class="s7staticimage" style="position: absolute; overflow: hidden; left: 50px; top: 0px; width: 188px; height: 188px;"><img alt="" style="pointer-events: none; position: absolute; width: 188px; height: 188px;" src="https://ui.assets-asda.com/dm/asdagroceries/5018297007829_T1?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;id=Au_R92&amp;fmt=jpg&amp;fit=constrain,1&amp;wid=188&amp;hei=188"><img alt="" style="pointer-events: none; position: absolute; visibility: hidden;"></div><div class="s7flyoutzoom" role="img" aria-label="Zoomed" style="overflow: hidden; pointer-events: none; display: none; width: 288px; height: 188px; position: absolute; left: 0px; top: 0px; opacity: 0; zoom: 1;"><div style="position: relative; width: 288px; height: 188px;"><img alt="" style="position: absolute; left: -273px; top: -288px; width: 564px; height: 564px;" src="https://ui.assets-asda.com/dm/asdagroceries/5018297007829_T1?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;id=Au_R92&amp;fmt=jpg&amp;fit=constrain,1&amp;wid=188&amp;hei=188"><img src="https://ui.assets-asda.com:443/dm/asdagroceries/5018297007829_T1?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;id=Au_R92&amp;scl=4.1932624&amp;req=tile&amp;rect=256,256,256,256&amp;fmt=jpg" style="display: block; position: absolute; zoom: 1; left: -17px; top: -32px;"><img src="https://ui.assets-asda.com:443/dm/asdagroceries/5018297007829_T1?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;id=Au_R92&amp;scl=4.1932624&amp;req=tile&amp;rect=512,256,52,256&amp;fmt=jpg" style="display: block; position: absolute; zoom: 1; left: 239px; top: -32px;"></div></div><div id="InfoMessage_s7classic_4" class="s7tip" data-description="Scene7ComponentHolder" data-component="undefined" data-namespace="s7classic" style="display: none; left: 33.5px; opacity: 0;">Mouse over image for a closer look.</div></div><div id="s7viewer_swatches" class="s7swatches" data-description="Scene7ComponentHolder" data-component="Swatches" data-namespace="s7classic" lang="en" tabindex="0" role="listbox" aria-label="swatches" style="width: 288px; height: 100px; position: absolute;"><div style="width: 142px; height: 66px; position: absolute; overflow: hidden; left: 73px; top: 17px;"><div id="s7viewer_swatches_listbox" style="position: absolute; width: 132px; height: 66px; left: 0px; top: 0px; transform: translateZ(0px);"><div data-namespace="s7classic" class="s7thumbcell" tabindex="0" role="option" aria-selected="true" swindex="0" aria-setsize="2" aria-posinset="1" style="margin: 0px; position: absolute; left: 5px; top: 5px;"><div data-namespace="s7classic" class="s7thumb" state="selected" style="width: 56px; height: 56px; background-image: url(&quot;https://ui.assets-asda.com/dm/asdagroceries/5018297007829_T1?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;layer=comp&amp;fit=constrain,1&amp;wid=56&amp;hei=56&amp;fmt=jpg&quot;);"><div data-namespace="s7classic" class="s7thumboverlay" type="image"></div></div></div><div data-namespace="s7classic" class="s7thumbcell" tabindex="-1" role="option" aria-selected="false" swindex="1" aria-setsize="2" aria-posinset="2" style="margin: 0px; position: absolute; left: 71px; top: 5px;"><div data-namespace="s7classic" class="s7thumb" state="default" style="width: 56px; height: 56px; background-image: url(&quot;https://ui.assets-asda.com/dm/asdagroceries/5018297007829_T3?defaultImage=asdagroceries/noImage&amp;resMode=sharp2&amp;layer=comp&amp;fit=constrain,1&amp;wid=56&amp;hei=56&amp;fmt=jpg&quot;);"><div data-namespace="s7classic" class="s7thumboverlay" type="image"></div></div></div></div></div></div></div></div></div></div></div></div><div class="product-detail-page__main-detail-cntr" data-auto-id="mainContainer"><div class="pdp-main-details" data-auto-id="mainProductDetails"><div data-auto-id="titleRating"><h1 class="pdp-main-details__title">New York Bakery Co Cinnamon &amp; Raisin Bagels</h1><div class="pdp-main-details__meta-info"><div class="pdp-main-details__weight">5pk</div><div class="co-product__rating"><div role="presentation" class="rating-stars rating-stars--large"><div class="rating-stars__stars rating-stars__stars--top" style="width: 91.2%;"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="rating-stars__stars rating-stars__stars--bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div></div><span class="co-product__review-count co-product__review-count--large">(50+)</span></div><span class="pdp-main-details__product-code">Product code: 5893839</span></div></div><hr class="pdp-main-details__divider"><div class="co-item__icon-list-container"><ul class="co-product__promo-icon-list co-item__promo-icon-list pdp-icon-list"><li class="co-product__promo-icon-item pdp-icon-list__promo-icon-item"><div class="co-product__promo-icon-image-cntr pdp-icon-list__promo-icon-image-cntr"><button data-auto-id="btnPromo" type="button" class="asda-btn asda-btn--plain co-product__promo-icon-button pdp-icon-list__promo-icon-button" aria-label="promotion"><img class="co-product__promo-icon-img pdp-icon-list__promo-icon-img" title="Typically fresh for 2 days" alt="Typically fresh for 2 days" src="https://ui.assets-asda.com:443/dm/icon_freshpledge?$days=2&amp;$Icon-wapp$"></button></div><div class="co-product__promo-icon-desc pdp-icon-list__promo-icon-desc">Typically fresh for 2 days</div></li></ul></div><hr class="pdp-main-details__divider"><div class="pdp-main-details__price-and-uom"><div class="pdp-main-details__price-container"><strong class="co-product__price pdp-main-details__price">£1.00</strong></div><span class="co-product__price-per-uom">20.0p/each</span></div><div class="pdp-main-details__actions-cntr"><form class="co-quantity co-product-quantity co-product-quantity--big pdp-main-details__quantity" novalidate=""><div class="co-product-quantity__qty-and-desc-cntr"><div class="co-product-quantity__add-butt-cont"><div class="tooltip-wrapper"><button data-auto-id="btnAdd" type="submit" class="asda-btn asda-btn--primary co-quantity__add-btn pdp-main-details__quantity">Add</button></div></div></div></form><button data-auto-id="btnFavorite" type="button" class="asda-btn asda-btn--primary-outline pdp-main-details__fav-action" aria-label="favorite item" aria-pressed="false"><span data-auto-id="" class="asda-icon asda-icon--green asda-icon--regular asda-icon--rotate0 pdp-main-details__fav-icon"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.4c0-1.934-1.234-3.4-3-3.4-.724 0-1.996.687-3.662 2.187L16 12.39l-1.338-1.204C12.996 9.687 11.724 9 11 9c-1.766 0-3 1.466-3 3.4 0 2.303 2.62 5.76 8 10.062 5.38-4.303 8-7.759 8-10.062zM16 25C9.333 19.9 6 15.7 6 12.4 6 9.7 7.818 7 11 7c1.333 0 3 .9 5 2.7C18 7.9 19.667 7 21 7c3.182 0 5 2.7 5 5.4 0 3.3-3.333 7.5-10 12.6z" fill="#3d3d3d" class="asda-icon__draw"></path></svg></span><span class="pdp-main-details__fav-text">Favourite</span></button><button data-auto-id="btnAddToList" type="button" class="asda-btn asda-btn--primary-outline pdp-main-details__add-to-list"><span data-auto-id="" class="asda-icon asda-icon--green asda-icon--regular asda-icon--rotate0 pdp-main-details__add-to-list-icon"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M24 4a2 2 0 012 2v20a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2zm-.5 2h-15a.5.5 0 00-.5.5v19a.5.5 0 00.5.5h15a.5.5 0 00.5-.5v-19a.5.5 0 00-.5-.5zm-11 14a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm8 0a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm-8-5a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm8 0a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm-8-5a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5zm8 0a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span><span class="pdp-main-details__add-to-list-text">Add to list</span></button></div><div class="pdp-main-details__promo-cntr"></div><hr class="pdp-main-details__divider"><div class="pdp-nutrition__nutrition-container" data-auto-id="nutrition"><div class="pdp-nutrition__nutrition-serving">Each bagel (approx. 90g) contains:</div><ul class="pdp-nutrition__nutrition-panel-container"><div class="asda-nutrition-light pdp-nutrition__nutrition-panel" data-auto-id="nutritionEnergy"><div class="asda-nutrition-light__title">Energy</div><div class="asda-nutrition-light__quantity"><div class="pdp-nutrition__nutrition-panel-quantity pdp-nutrition__nutrition-panel-quantity--energy"><div class="pdp-nutrition__primary-GDA">982kJ</div><div class="pdp-nutrition__secondary-GDA">232kcal</div></div></div><div class="asda-nutrition-light__percentage asda-nutrition-light__percentage--regular">12%</div></div><div class="asda-nutrition-light pdp-nutrition__nutrition-panel" data-auto-id="nutritionFat"><div class="asda-nutrition-light__title">Fat</div><div class="asda-nutrition-light__quantity"><div class="pdp-nutrition__nutrition-panel-quantity pdp-nutrition__nutrition-panel-quantity--fat"><div class="pdp-nutrition__primary-GDA">1.2g</div></div></div><div class="asda-nutrition-light__percentage asda-nutrition-light__percentage--low">2%</div></div><div class="asda-nutrition-light pdp-nutrition__nutrition-panel" data-auto-id="nutritionSaturates"><div class="asda-nutrition-light__title">Saturates</div><div class="asda-nutrition-light__quantity"><div class="pdp-nutrition__nutrition-panel-quantity pdp-nutrition__nutrition-panel-quantity--saturates"><div class="pdp-nutrition__primary-GDA">0.2g</div></div></div><div class="asda-nutrition-light__percentage asda-nutrition-light__percentage--low">1%</div></div><div class="asda-nutrition-light pdp-nutrition__nutrition-panel" data-auto-id="nutritionSugars"><div class="asda-nutrition-light__title">Sugars</div><div class="asda-nutrition-light__quantity"><div class="pdp-nutrition__nutrition-panel-quantity pdp-nutrition__nutrition-panel-quantity--sugars"><div class="pdp-nutrition__primary-GDA">7.4g</div></div></div><div class="asda-nutrition-light__percentage asda-nutrition-light__percentage--medium">8%</div></div><div class="asda-nutrition-light pdp-nutrition__nutrition-panel" data-auto-id="nutritionSalt"><div class="asda-nutrition-light__title">Salt</div><div class="asda-nutrition-light__quantity"><div class="pdp-nutrition__nutrition-panel-quantity pdp-nutrition__nutrition-panel-quantity--salt"><div class="pdp-nutrition__primary-GDA">0.62g</div></div></div><div class="asda-nutrition-light__percentage asda-nutrition-light__percentage--medium">10%</div></div></ul><div class="pdp-nutrition__nutrition-intake"><div class="pdp-nutrition__primary-footer">of an adult's reference intake</div><div class="pdp-nutrition__secondary-footer">Typical values per 100g: Energy 1091kJ / 258kcal</div></div></div></div><div class="">
+<div id="wc-power-page" style="max-width:490px;width:100%;">&nbsp;</div></div><div class="pdp-main-details"><div><div class="asda-tab-list" data-auto-id="tabPDP" role="tablist"><button type="button" data-auto-id="tab-0" class="asda-tab asda-tab--selected asda-tab--fluid" role="tab" aria-label="Description" aria-selected="true"><span class="asda-tab__label">Description</span></button><button type="button" data-auto-id="tab-1" class="asda-tab asda-tab--fluid" role="tab" aria-label="Reviews (73)" aria-selected="false"><span class="asda-tab__label">Reviews (73)</span></button></div><div class=""><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Life Style</div><div class="pdp-description-reviews__product-details-content">Low Fat. Suitable for Vegans. Suitable for Vegetarians. </div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Allergy Advice</div><div class="pdp-description-reviews__product-details-content"><strong class="pdp-description-reviews__allergy-text" data-auto-id="allergyInfo">May Contain: Sesame. Contains: Barley, Wheat.</strong></div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Additives</div><div class="pdp-description-reviews__product-details-content">Free From: Artificial Colours, Artificial Flavours. </div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Ingredients</div><div class="pdp-description-reviews__product-details-content"><span><strong>Wheat</strong> Flour (<strong>Wheat</strong> Flour, Calcium Carbonate, Iron, Niacin, Thiamin), </span>Water, Raisins (6%), Sugar, Yeast, Maize, <span><strong>Wheat</strong> Gluten, </span>Salt, Cinnamon (Cassia), Rapeseed Oil, Mixed Spice, <span>Malted <strong>Barley</strong> Flour, </span>Preservative (Calcium Propionate), Brown Sugar, Orange Peel, Flour Treatment Agent (Ascorbic Acid)</div><p class="pdp-description-reviews__allergy-warning" data-auto-id="allergyWarning"><span>For allergens, see ingredients in</span><strong> bold</strong></p><div class="pdp-description-reviews__taggable-allergy-text-container" data-auto-id="taggableAllergyText"><p class="pdp-description-reviews__taggable-allergy-text">May contain traces of Sesame</p></div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Nutritional Values</div><div class="pdp-description-reviews__product-details-content"><div class="pdp-description-reviews__nutrition-table-cntr" data-auto-id="nutritionTable"><div class="pdp-description-reviews__nutrition-header-group"><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--title"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--title">Typical values</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--title">Per 100g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--title">Per Bagel</div></div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Energy </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">1091kJ</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">982kJ</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Energy </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">258kcal</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">232kcal</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Fat </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">1.3g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">1.2g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">(of which saturates) </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">0.2g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">0.2g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Carbohydrate </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">49.5g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">44.6g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">(of which sugars) </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">8.2g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--grouped">7.4g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Fibre </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">4.1g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">3.7g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Protein </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">9.9g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">8.9g</div></div><div class="pdp-description-reviews__nutrition-row pdp-description-reviews__nutrition-row--details"><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">Salt </div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">0.69g</div><div class="pdp-description-reviews__nutrition-cell pdp-description-reviews__nutrition-cell--details">0.62g</div></div></div></div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Features</div><div class="pdp-description-reviews__product-details-content">5 tasty bagels. Authentic New York style. Soft &amp; chewy for an authentic NY taste. Low in fat. Free from artificial colours &amp; flavours. Suitable for vegans &amp; vegetarians.</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Storage</div><div class="pdp-description-reviews__product-details-content">Store in a cool dry place.<br>Suitable for freezing. Freeze on day of purchase &amp; use within one month. Defrost thoroughly before use.<br>For Best Before Date: See Bag Closure</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Storage And Usage Statements</div><div class="pdp-description-reviews__product-details-content">Suitable for Home Freezing.</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Country of Origin</div><div class="pdp-description-reviews__product-details-content">United Kingdom</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Product Information</div><div class="pdp-description-reviews__product-details-content">The Real Deal<br>Deliciously soft &amp; chewy boiled &amp; stone baked bagels</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Further Description</div><div class="pdp-description-reviews__product-details-content">For all the latest news and recipe ideas join our Facebook community at www.facebook.com/newyorkbakery</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Regulated Product Name</div><div class="pdp-description-reviews__product-details-content">5 Raisin and Cinnamon Bagels</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Storage Type</div><div class="pdp-description-reviews__product-details-content">Ambient</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Manufacturer Address</div><div class="pdp-description-reviews__product-details-content">Grupo Bimbo UK Ltd,<br>Swinton Meadows Industrial Estate,<br>Rotherham,<br>S64 8AB.</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">Return To</div><div class="pdp-description-reviews__product-details-content">Grupo Bimbo UK Ltd,<br>Swinton Meadows Industrial Estate,<br>Rotherham,<br>S64 8AB.<br>Contact us via our website at www.newyorkbakeryco.com</div></div><div class="pdp-description-reviews__product-details-cntr" data-auto-id="defaultComponent"><div class="pdp-description-reviews__product-details-title">ASDA Product Information</div><div class="pdp-description-reviews__product-details-content"><p>
+        At ASDA, we do everything we can to make sure the information about the products we sell is
+        always as accurate as possible. However, because products are regularly improved, the
+        product information, ingredients, nutritional guides and dietary or allergy advice may
+        occasionally change.
+      </p><p>
+        As a result, we recommend that you always read the label carefully before using or consuming
+        any products. Please do not solely rely on the information provided on this website Because
+        of this, ASDA is unable to accept liability for any inaccuracies or incorrect information
+        contained on this site.
+      </p><p>
+        If you have any queries, or you'd like advice on any ASDA own label products, please contact
+        our friendly Customer Services team on 0800 952 0101. For up to date information on other
+        products, please speak to the manufacturer.
+      </p><p>
+        This does not affect your statutory rights. This information is supplied for personal use
+        only. It must not be reproduced in any way whatsoever without the prior consent of ASDA, nor
+        without due acknowledgement.
+      </p></div></div></div></div></div><div class=""><style>
+.recipe-info-notify {display:none !important}
+</style></div></div><div class="pdp-personal-recs" data-auto-id="personalRecs"><div class="pdp-personal-recs__list"><div class="pdp-personal-recs__title"><div class="pdp-personal-recs__title-backdrop">Sponsored products you might like</div></div><div class="pdp-personal-recs__item"><div class="pdp-personal-recs__image-cntr"><button type="button" data-auto-id="linkProductImage" class="asda-link asda-link--primary asda-link--button" aria-disabled="false"><img class="co-product__image co-product__image--load-effect pdp-personal-recs__image" alt="" importance="high"><div></div></button><div class="pdp-personal-recs__vol-and-favs"><span class="co-product__volume pdp-personal-recs__volume">160g</span><div class="co-item-fsl__favourites-image-container pdp-personal-recs__favs-shop-lists" role="presentation" data-auto-id="favouritesAndShoppingList"><div class="context-wrapper"><button data-auto-id="" type="button" class="asda-btn asda-btn--plain asda-btn--icon" aria-label="options for favourite shopping list" aria-expanded="false"><span data-auto-id="" class="asda-icon asda-icon--white asda-icon--regular asda-icon--rotate0 co-item-fsl__favourites-image co-item__items"><svg viewBox="0 0 35 23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="asda_fav_list_1" d="M7.02 2C7 2.344 7 2.685 7 3h6c0-.315 0-.656-.02-1H18c1 0 2 .784 2 1.667v17.667C20 22.167 19 23 18 23H2c-1 0-2-.833-2-1.666V3.667C0 2.833 1 2 2 2h5.02zM12 2H8c0-1 1-2 2-2s2 1 2 2zM7 17v2h10v-2H7zm-4-5v2h2v-2H3zm0-5v2h2V7H3zm0 10v2h2v-2H3zm4-5v2h10v-2H7zm0-5v2h10V7H7z"></path><path id="asda_fav_list_2" d="M24 21c-1.818-1.8-10-7.65-10-12.6C14 5.7 15.818 3 19 3c2 0 4 .82 5 3.295C25 3.82 27 3 29 3c3.182 0 5 2.7 5 5.4 0 4.95-8.182 10.8-10 12.6z"></path></defs><g class="asda-icon__draw" fill="none" fill-rule="evenodd"><use fill="#3d3d3d" xlink:href="#asda_fav_list_1"></use><use class="asda-icon__draw" fill="#FFF" stroke="#3d3d3d" stroke-width="1.9" xlink:href="#asda_fav_list_2"></use></g></svg></span></button></div></div></div></div><div class="pdp-personal-recs__main-details"><div class="pdp-personal-recs__title-cntr"><h3 class="co-product__title pdp-personal-recs__prod-title"><a class="co-product__anchor" data-auto-id="linkProductTitle" href="/product/1000145216144?origin=/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338">ASDA Extra Special Hand Picked Tenderstem Broccoli</a></h3><div class="pdp-personal-recs__price-and-uom"><div class="pdp-personal-recs__price-container"><strong class="co-product__price pdp-personal-recs__price">£1.00</strong></div></div></div><form class="co-quantity co-product-quantity pdp-personal-recs__quantity" novalidate=""><div class="co-product-quantity__qty-and-desc-cntr"><div class="co-product-quantity__add-butt-cont"><div class="tooltip-wrapper"><button data-auto-id="btnAdd" type="submit" class="asda-btn asda-btn--primary co-quantity__add-btn pdp-personal-recs__quantity">Add</button></div></div></div></form></div></div><div class="pdp-personal-recs__item"><div class="pdp-personal-recs__image-cntr"><button type="button" data-auto-id="linkProductImage" class="asda-link asda-link--primary asda-link--button" aria-disabled="false"><img class="co-product__image co-product__image--load-effect pdp-personal-recs__image" alt="" importance="high"><div></div></button><div class="pdp-personal-recs__vol-and-favs"><span class="co-product__volume pdp-personal-recs__volume">4pk</span><div class="co-item-fsl__favourites-image-container pdp-personal-recs__favs-shop-lists" role="presentation" data-auto-id="favouritesAndShoppingList"><div class="context-wrapper"><button data-auto-id="" type="button" class="asda-btn asda-btn--plain asda-btn--icon" aria-label="options for favourite shopping list" aria-expanded="false"><span data-auto-id="" class="asda-icon asda-icon--white asda-icon--regular asda-icon--rotate0 co-item-fsl__favourites-image co-item__items"><svg viewBox="0 0 35 23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="asda_fav_list_1" d="M7.02 2C7 2.344 7 2.685 7 3h6c0-.315 0-.656-.02-1H18c1 0 2 .784 2 1.667v17.667C20 22.167 19 23 18 23H2c-1 0-2-.833-2-1.666V3.667C0 2.833 1 2 2 2h5.02zM12 2H8c0-1 1-2 2-2s2 1 2 2zM7 17v2h10v-2H7zm-4-5v2h2v-2H3zm0-5v2h2V7H3zm0 10v2h2v-2H3zm4-5v2h10v-2H7zm0-5v2h10V7H7z"></path><path id="asda_fav_list_2" d="M24 21c-1.818-1.8-10-7.65-10-12.6C14 5.7 15.818 3 19 3c2 0 4 .82 5 3.295C25 3.82 27 3 29 3c3.182 0 5 2.7 5 5.4 0 4.95-8.182 10.8-10 12.6z"></path></defs><g class="asda-icon__draw" fill="none" fill-rule="evenodd"><use fill="#3d3d3d" xlink:href="#asda_fav_list_1"></use><use class="asda-icon__draw" fill="#FFF" stroke="#3d3d3d" stroke-width="1.9" xlink:href="#asda_fav_list_2"></use></g></svg></span></button></div></div></div></div><div class="pdp-personal-recs__main-details"><div class="pdp-personal-recs__title-cntr"><h3 class="co-product__title pdp-personal-recs__prod-title"><a class="co-product__anchor" data-auto-id="linkProductTitle" href="/product/910001037283?origin=/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338">Pink Lady Apples</a></h3><div class="pdp-personal-recs__price-and-uom"><div class="pdp-personal-recs__price-container"><strong class="co-product__price pdp-personal-recs__price">£1.95</strong></div></div></div><form class="co-quantity co-product-quantity pdp-personal-recs__quantity" novalidate=""><div class="co-product-quantity__qty-and-desc-cntr"><div class="co-product-quantity__add-butt-cont"><div class="tooltip-wrapper"><button data-auto-id="btnAdd" type="submit" class="asda-btn asda-btn--primary co-quantity__add-btn pdp-personal-recs__quantity">Add</button></div></div></div></form></div></div><div class="pdp-personal-recs__item"><div class="pdp-personal-recs__image-cntr"><button type="button" data-auto-id="linkProductImage" class="asda-link asda-link--primary asda-link--button" aria-disabled="false"><img class="co-product__image co-product__image--load-effect pdp-personal-recs__image" alt="" importance="high"><div></div></button><div class="pdp-personal-recs__vol-and-favs"><span class="co-product__volume pdp-personal-recs__volume">518g</span><div class="co-item-fsl__favourites-image-container pdp-personal-recs__favs-shop-lists" role="presentation" data-auto-id="favouritesAndShoppingList"><div class="context-wrapper"><button data-auto-id="" type="button" class="asda-btn asda-btn--plain asda-btn--icon" aria-label="options for favourite shopping list" aria-expanded="false"><span data-auto-id="" class="asda-icon asda-icon--white asda-icon--regular asda-icon--rotate0 co-item-fsl__favourites-image co-item__items"><svg viewBox="0 0 35 23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="asda_fav_list_1" d="M7.02 2C7 2.344 7 2.685 7 3h6c0-.315 0-.656-.02-1H18c1 0 2 .784 2 1.667v17.667C20 22.167 19 23 18 23H2c-1 0-2-.833-2-1.666V3.667C0 2.833 1 2 2 2h5.02zM12 2H8c0-1 1-2 2-2s2 1 2 2zM7 17v2h10v-2H7zm-4-5v2h2v-2H3zm0-5v2h2V7H3zm0 10v2h2v-2H3zm4-5v2h10v-2H7zm0-5v2h10V7H7z"></path><path id="asda_fav_list_2" d="M24 21c-1.818-1.8-10-7.65-10-12.6C14 5.7 15.818 3 19 3c2 0 4 .82 5 3.295C25 3.82 27 3 29 3c3.182 0 5 2.7 5 5.4 0 4.95-8.182 10.8-10 12.6z"></path></defs><g class="asda-icon__draw" fill="none" fill-rule="evenodd"><use fill="#3d3d3d" xlink:href="#asda_fav_list_1"></use><use class="asda-icon__draw" fill="#FFF" stroke="#3d3d3d" stroke-width="1.9" xlink:href="#asda_fav_list_2"></use></g></svg></span></button></div></div></div></div><div class="pdp-personal-recs__main-details"><div class="pdp-personal-recs__title-cntr"><h3 class="co-product__title pdp-personal-recs__prod-title"><a class="co-product__anchor" data-auto-id="linkProductTitle" href="/product/1000114856557?origin=/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338">Old El Paso Gluten Free Cheesy Baked Enchilada Kit</a></h3><div class="pdp-personal-recs__price-and-uom"><div class="pdp-personal-recs__price-container"><strong class="co-product__price pdp-personal-recs__price">£4.49</strong></div></div></div><form class="co-quantity co-product-quantity pdp-personal-recs__quantity" novalidate=""><div class="co-product-quantity__qty-and-desc-cntr"><div class="co-product-quantity__add-butt-cont"><div class="tooltip-wrapper"><button data-auto-id="btnAdd" type="submit" class="asda-btn asda-btn--primary co-quantity__add-btn pdp-personal-recs__quantity">Add</button></div></div></div></form></div></div><div class="pdp-personal-recs__item"><div class="pdp-personal-recs__image-cntr"><button type="button" data-auto-id="linkProductImage" class="asda-link asda-link--primary asda-link--button" aria-disabled="false"><img class="co-product__image co-product__image--load-effect pdp-personal-recs__image" alt="" importance="high"><div></div></button><div class="pdp-personal-recs__vol-and-favs"><span class="co-product__volume pdp-personal-recs__volume">800g</span><div class="co-item-fsl__favourites-image-container pdp-personal-recs__favs-shop-lists" role="presentation" data-auto-id="favouritesAndShoppingList"><div class="context-wrapper"><button data-auto-id="" type="button" class="asda-btn asda-btn--plain asda-btn--icon" aria-label="options for favourite shopping list" aria-expanded="false"><span data-auto-id="" class="asda-icon asda-icon--white asda-icon--regular asda-icon--rotate0 co-item-fsl__favourites-image co-item__items"><svg viewBox="0 0 35 23" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="asda_fav_list_1" d="M7.02 2C7 2.344 7 2.685 7 3h6c0-.315 0-.656-.02-1H18c1 0 2 .784 2 1.667v17.667C20 22.167 19 23 18 23H2c-1 0-2-.833-2-1.666V3.667C0 2.833 1 2 2 2h5.02zM12 2H8c0-1 1-2 2-2s2 1 2 2zM7 17v2h10v-2H7zm-4-5v2h2v-2H3zm0-5v2h2V7H3zm0 10v2h2v-2H3zm4-5v2h10v-2H7zm0-5v2h10V7H7z"></path><path id="asda_fav_list_2" d="M24 21c-1.818-1.8-10-7.65-10-12.6C14 5.7 15.818 3 19 3c2 0 4 .82 5 3.295C25 3.82 27 3 29 3c3.182 0 5 2.7 5 5.4 0 4.95-8.182 10.8-10 12.6z"></path></defs><g class="asda-icon__draw" fill="none" fill-rule="evenodd"><use fill="#3d3d3d" xlink:href="#asda_fav_list_1"></use><use class="asda-icon__draw" fill="#FFF" stroke="#3d3d3d" stroke-width="1.9" xlink:href="#asda_fav_list_2"></use></g></svg></span></button></div></div></div></div><div class="pdp-personal-recs__main-details"><div class="pdp-personal-recs__title-cntr"><h3 class="co-product__title pdp-personal-recs__prod-title"><a class="co-product__anchor" data-auto-id="linkProductTitle" href="/product/42747415?origin=/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338">Kingsmill Medium Soft White Bread</a></h3><div class="pdp-personal-recs__price-and-uom"><div class="pdp-personal-recs__price-container"><strong class="co-product__price pdp-personal-recs__price">£0.95</strong></div></div><span arialabel="Low price every day, browse similar products to Kingsmill Medium Soft White Bread" data-auto-id="secondaryPromoBanner" class="co-product__promo co-product__promo--staying-back pdp-personal-recs__promo" title="Low price every day, browse similar products to Kingsmill Medium Soft White Bread"><span class="co-product__promo-text"><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0 asda-icon--brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 30"><g fill="none" fill-rule="evenodd"><path fill="#2E8800" d="M51 0v19.796L72.115 27 95 19.197V0z"></path><path fill="#FFCE00" d="M72.115 27.079L51 19.626v1.92L72.115 29 95 20.921V19z"></path><path d="M0 .508h3.375v11.944h7.312v2.776H0zM20.27 11.98a4.28 4.28 0 001.636-1.672c.396-.715.594-1.528.594-2.44 0-.91-.198-1.724-.594-2.439a4.281 4.281 0 00-1.636-1.671c-.694-.4-1.472-.6-2.333-.6-.861 0-1.639.2-2.333.6a4.275 4.275 0 00-1.636 1.671c-.396.715-.593 1.528-.593 2.44 0 .91.197 1.724.593 2.439a4.275 4.275 0 001.636 1.671c.694.4 1.472.6 2.333.6.861 0 1.639-.2 2.333-.6m-6.427 2.513a7.297 7.297 0 01-2.854-2.723c-.687-1.156-1.03-2.457-1.03-3.9 0-1.444.343-2.745 1.03-3.901a7.297 7.297 0 012.854-2.724c1.216-.658 2.58-.988 4.094-.988 1.514 0 2.875.33 4.083.988a7.394 7.394 0 012.855 2.724c.694 1.156 1.041 2.457 1.041 3.9 0 1.444-.347 2.745-1.041 3.901a7.394 7.394 0 01-2.855 2.723c-1.208.66-2.57.989-4.083.989-1.514 0-2.878-.33-4.094-.989M48.562.508l-4.771 14.72h-3.625l-3.208-9.967-3.313 9.967h-3.604L25.25.508h3.5l3.291 10.346L35.478.51h3.126l3.333 10.43L45.333.509zM7.096 23.5c.443-.371.664-.897.664-1.58 0-.693-.221-1.225-.664-1.596-.443-.37-1.09-.556-1.94-.556H2.85v4.287h2.307c.85 0 1.497-.185 1.94-.556m1.04-5.512c.798.365 1.412.882 1.843 1.553.431.67.647 1.464.647 2.38 0 .906-.216 1.697-.647 2.373-.43.676-1.045 1.194-1.843 1.552-.798.36-1.74.538-2.822.538H2.849v3.405H.02V17.44h5.295c1.083 0 2.024.183 2.822.547m10.353 2.337c-.443-.37-1.09-.556-1.94-.556h-2.307v4.305h2.307c.85 0 1.497-.189 1.94-.565.442-.376.664-.905.664-1.587 0-.694-.222-1.226-.664-1.597zm.716 9.464l-2.359-3.44h-2.604v3.44h-2.83V17.44h5.294c1.084 0 2.024.183 2.823.547.797.365 1.412.882 1.843 1.553.43.67.647 1.464.647 2.38 0 .918-.219 1.709-.656 2.373-.437.665-1.057 1.173-1.86 1.526l2.743 3.969h-3.04zm3.827-.001h2.83V17.44h-2.83zm6.981-.608a6.088 6.088 0 01-2.377-2.275c-.576-.97-.865-2.067-.865-3.29 0-1.223.289-2.32.865-3.29a6.092 6.092 0 012.377-2.275c1.007-.547 2.14-.82 3.399-.82 1.06 0 2.018.188 2.875.564a5.764 5.764 0 012.158 1.623l-1.818 1.693c-.827-.964-1.852-1.446-3.075-1.446-.758 0-1.433.167-2.027.503a3.555 3.555 0 00-1.39 1.402c-.332.6-.498 1.282-.498 2.046 0 .764.166 1.446.498 2.046a3.55 3.55 0 001.39 1.402c.594.336 1.27.503 2.027.503 1.223 0 2.248-.488 3.075-1.464l1.818 1.694a5.672 5.672 0 01-2.167 1.64c-.863.376-1.824.564-2.884.564-1.246 0-2.374-.273-3.381-.82m18.584-1.685v2.294h-9.471V17.44h9.244v2.293h-6.43v2.681h5.679v2.223h-5.68v2.857z" fill="#6F6F6F"></path><text fill="#FFF" font-family="Helvetica,arial,sans-serif" font-size="11" font-weight="bold" letter-spacing="-.279"><tspan x="55" y="11">EVERY</tspan><tspan x="61.676" y="21">DAY</tspan></text></g></svg></span></span></span></div><form class="co-quantity co-product-quantity pdp-personal-recs__quantity" novalidate=""><div class="co-product-quantity__qty-and-desc-cntr"><div class="co-product-quantity__add-butt-cont"><div class="tooltip-wrapper"><button data-auto-id="btnAdd" type="submit" class="asda-btn asda-btn--primary co-quantity__add-btn pdp-personal-recs__quantity">Add</button></div></div></div></form></div></div></div></div></div></main><aside class="aside"><div class="aside__content" style=""><div class="aside__child-content"></div><ul class="mini-trolley-banners"><div class="asda-banner-static mini-trolley-banners__item"><button type="button" data-auto-id="" class="asda-link asda-link--primary asda-link--button" aria-disabled="false"><img class="asda-banner-static__image" src="https://ui3.assets-asda.com/dm/200319_Easter_Trolley_WhiteButtons_Egg?scl=1" alt="Cadburys White Chocolate Buttons Easter Egg"></button></div></ul></div></aside></section><footer class="footer"><div class="footer__back-to-top-container"><button data-auto-id="btnBackToTop" type="button" class="asda-btn asda-btn--fluid asda-btn--light-outline" aria-label="back to top">Back to top<span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--small asda-icon--rotate180"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.46 19.339l9.193-9.193a.5.5 0 01.707 0l.707.708a.5.5 0 010 .707l-9.546 9.546a2 2 0 01-2.829 0L5.146 11.56a.5.5 0 010-.707l.708-.708a.5.5 0 01.707 0l9.192 9.193a.5.5 0 00.707 0z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></button></div><div class="footer footer--regular"><div class="footer__container"><div class="footer__row "><div class="footer__primary-header"><div class="footer__column "><a class="asda-link asda-link--primary footer__anchor-logo" data-auto-id="linkFooterLogo" href="/"><div class="asda-logo footer__logo" data-size="small"><span data-auto-id="" class="asda-icon asda-icon--green asda-icon--regular asda-icon--rotate0 asda-icon--brand asda-logo__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113 34"><path class="asda-icon__draw" fill-rule="evenodd" d="M101.698 2.012H90.337l-6.479 18.752c.29-1.557.341-2.802.341-3.343 0-7.856-4.501-15.409-15.076-15.409H56.978l.036 18.653c-1.05-5.3-5.892-6.72-11.913-8.55-2.25-.693-3.486-1.794-3.035-2.82.385-.896 1.765-1.177 3.44-.946 2.554.366 4.594 1.22 6.558 2.289l2.684-6.651c-.605-.299-4.954-2.909-10.404-2.909-7.6 0-12.454 3.708-12.454 9.18 0 4.876 3.003 7.711 8.525 9.3 5.939 1.723 7.445 2.416 7.266 4.124-.154 1.472-3.835 3.265-12.841-2.276l-2.676 5.537-8.26-24.93H12.547L1.814 33.003h8.952L12.5 28H23l1.784 5.004h9.398l-1.066-3.031c3.177 1.836 7.117 3.517 11.83 3.517 7.22 0 11.123-3.943 12.054-7.722v7.236h12.11c7.219 0 10.995-3.442 12.968-7.126l-2.477 7.126h8.945L90.336 28H101l1.572 5.004h9.41L101.697 2.012zM14.5 21l3.338-10.648L21 21h-6.5zM66 25.012V10h2.135c3.043 0 6.365 1.232 6.365 7.506 0 5.557-2.934 7.506-6.339 7.506H66zM92.5 21l3.184-10.521L99 21h-6.5z"></path></svg></span></div><div class="footer__slogan">Save Money. Live Better.</div></a></div><div class="footer__column footer__feedback-wrapper"><button type="button" data-auto-id="linkWebsiteFeedback" class="asda-link asda-link--secondary asda-link--standalone asda-link--button footer__feedback" aria-disabled="false"><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0 footer__feedback-icon"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M26 8a2 2 0 012 2v12a2 2 0 01-2 2H13l-5.223 3.482A.5.5 0 017 27.066V24H6a2 2 0 01-2-2V10a2 2 0 012-2zm-.5 2h-19a.5.5 0 00-.5.5v11a.5.5 0 00.5.5H9v1.796a.25.25 0 00.389.208L12.394 22H25.5a.5.5 0 00.5-.5v-11a.5.5 0 00-.5-.5zm-9 2a.5.5 0 01.492.41l.008.09V15h2.5a.5.5 0 01.492.41l.008.09v1a.5.5 0 01-.41.492L19.5 17H17v2.5a.5.5 0 01-.41.492L16.5 20h-1a.5.5 0 01-.492-.41L15 19.5V17h-2.5a.5.5 0 01-.492-.41L12 16.5v-1a.5.5 0 01.41-.492L12.5 15H15v-2.5a.5.5 0 01.41-.492L15.5 12z" fill="#3d3d3d" class="asda-icon__draw"></path></svg></span><span class="footer__feedback-text">Website Feedback</span></button></div></div></div><div class="footer__row footer__top-list"><div class="footer__column-top footer__column-border"><div class="footer__panel footer__panel--collapsed"><div class="footer__heading-container footer__heading-container--collapsed"><button data-auto-id="footerLinkSection" type="button" class="asda-btn asda-btn--plain asda-btn--fluid footer__heading footer__heading--is-clickable" aria-expanded="false"><span>About Asda</span><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.46 19.339l9.193-9.193a.5.5 0 01.707 0l.707.708a.5.5 0 010 .707l-9.546 9.546a2 2 0 01-2.829 0L5.146 11.56a.5.5 0 010-.707l.708-.708a.5.5 0 01.707 0l9.192 9.193a.5.5 0 00.707 0z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></button></div><div class="footer__split-container"><ul role="menu" tabindex="0" class="footer__list"><li class="footer__item"><a class="footer__anchor" href="https://storelocator.asda.com/?cmpid=ghs-_-otc-storeloc-_-groceries-dsk-_-globalfooter-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter&amp;amp;utm_campaign=otc-storeloc&amp;amp;#!/" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-store-locator">Store locator<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://your.asda.com/about-asda?cmpid=ghs-_-otc-yourasda-_-groceries-dsk-_-globalfooter-aboutasda-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-aboutasda&amp;amp;utm_campaign=otc-yourasda" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-about-asda">About Asda<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://www.asda.jobs/?cmpid=ghs-_-otc-asdajobs-_-groceries-dsk-_-globalfooter-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter&amp;amp;utm_campaign=otc-asdajobs" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-careers">Asda Careers<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://your.asda.com/?cmpid=ghs-_-otc-yourasda-_-groceries-dsk-_-globalfooter-asdayou-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-asdayou&amp;amp;utm_campaign=otc-yourasda" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-and-you">Asda and you<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="/cmslisting/content/list?N=3958557532" target="" data-auto-id="footer-link-click-collect">Click &amp; Collect</a></li><li class="footer__item"><a class="asda-link asda-link--secondary footer__anchor" data-auto-id="footer-link-delivery-pass" href="/delivery-pass">Delivery Pass</a></li></ul></div></div></div><div class="footer__column-top footer__column-border"><div class="footer__panel footer__panel--collapsed"><div class="footer__heading-container footer__heading-container--collapsed"><button data-auto-id="footerLinkSection" type="button" class="asda-btn asda-btn--plain asda-btn--fluid footer__heading footer__heading--is-clickable" aria-expanded="false"><span>More Asda Websites</span><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.46 19.339l9.193-9.193a.5.5 0 01.707 0l.707.708a.5.5 0 010 .707l-9.546 9.546a2 2 0 01-2.829 0L5.146 11.56a.5.5 0 010-.707l.708-.708a.5.5 0 01.707 0l9.192 9.193a.5.5 0 00.707 0z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></button></div><div class="footer__split-container"><ul role="menu" tabindex="0" class="footer__list"><li class="footer__item"><a class="footer__anchor" href="https://direct.asda.com/george/clothing/10,default,sc.html?cmpid=ghs-_-geor-_-groceries-dsk-_-globalfooter-_-globalnav" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-george">George<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://direct.asda.com/Wine/AD12,default,sc.html?cmpid=ghs-_-otc-wine-_-groceries-dsk-_-globalfooter-_-globalnav" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-wine-shop">Asda Wine Shop<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://www.asda-photo.co.uk?utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter&amp;amp;utm_campaign=otc-photo&amp;amp;cmpid=ghs-_-otc-photo-_-groceries-dsk-_-globalfooter-_-globalnav" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-photo-prints">Photo Prints<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://mobile.asda.com/?cmpid=ghs-_-otc-mob-_-groceries-dsk-_-globalfooter-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter&amp;amp;utm_campaign=otc-mob" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-mobile">Asda Mobile<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/travel-money/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-tra-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-tra&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-travel-money">Travel Money<span class="footer__item footer__item--accessible">Opens a new window</span></a></li></ul><ul role="menu" tabindex="0" class="footer__list"><li class="footer__item"><a class="footer__anchor" href="http://www.asdatyres.co.uk/?utm_source=asda.groceries&amp;amp;utm_medium=internal&amp;amp;utm_term=groceries.footer&amp;amp;utm_content=hp&amp;amp;utm_campaign=generic" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-tyres">Asda Tyres<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://opticians.asda.com?utm_source=asda.groceries&amp;amp;utm_medium=internal&amp;amp;utm_term=groceries.footer&amp;amp;utm_content=hp&amp;amp;utm_campaign=generic" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-opticians">Opticians<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/breakdown-cover/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-bdc-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-bdc&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-breakdown-cover">Breakdown Cover<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/credit-cards/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-credc-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-credc&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-credit-card">Credit Card<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://cards.asda.com/?cmpid=ghs-_-otc-cards-_-groceries-dsk-_-globalfooter-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter&amp;amp;utm_campaign=otc-cards" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-gift-cards">Gift Cards<span class="footer__item footer__item--accessible">Opens a new window</span></a></li></ul><ul role="menu" tabindex="0" class="footer__list"><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/car-insurance/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-car-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-car&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-car-insurance">Car Insurance<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/home-insurance/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-home-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-home&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-home-insurance">Home Insurance<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="http://money.asda.com/pet-insurance/?cmpid=ghs-_-otc-mon-_-groceries-dsk-_-globalfooter-pet-_-globalnav&amp;amp;utm_source=groceries-dsk&amp;amp;utm_medium=ghs&amp;amp;utm_term=globalnav&amp;amp;utm_content=globalfooter-pet&amp;amp;utm_campaign=otc-mon" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-pet-insurance">Pet Insurance<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://www.asdagoodliving.co.uk/" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-asda-magazine">Asda Magazine<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="https://www.toyou.co.uk/home?utm_source=asda.groceries&amp;amp;utm_medium=internal&amp;amp;utm_term=groceries.footer&amp;amp;utm_content=hp&amp;amp;utm_campaign=generic" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-toyou">toyou<span class="footer__item footer__item--accessible">Opens a new window</span></a></li></ul></div></div></div><div class="footer__column-top footer__column-border"><div class="footer__panel footer__panel--collapsed"><div class="footer__heading-container footer__heading-container--collapsed"><button data-auto-id="footerLinkSection" type="button" class="asda-btn asda-btn--plain asda-btn--fluid footer__heading footer__heading--is-clickable" aria-expanded="false"><span>Help &amp; Customer service</span><span data-auto-id="" class="asda-icon asda-icon--charcoal asda-icon--regular asda-icon--rotate0"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.46 19.339l9.193-9.193a.5.5 0 01.707 0l.707.708a.5.5 0 010 .707l-9.546 9.546a2 2 0 01-2.829 0L5.146 11.56a.5.5 0 010-.707l.708-.708a.5.5 0 01.707 0l9.192 9.193a.5.5 0 00.707 0z" fill="#3d3d3d" class="asda-icon__draw" fill-rule="evenodd"></path></svg></span></button></div><div class="footer__split-container"><ul role="menu" tabindex="0" class="footer__list"><li class="footer__item"><a class="footer__anchor" href="https://asda-grocery.custhelp.com/" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-contact-fa-qs">Contact &amp; FAQs<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="/cmslisting/content/list?N=2269267931" target="" data-auto-id="footer-link-how-to-shop">How to shop</a></li><li class="footer__item"><a class="footer__anchor" href="https://your.asda.com/notes-and-briefings" target="_blank" rel="noopener noreferrer" data-auto-id="footer-link-product-recalls">Product recalls<span class="footer__item footer__item--accessible">Opens a new window</span></a></li></ul></div></div></div></div><div class="footer__bottom-layout"><div class="footer__bottom-container"><div class="footer__bottom-wrapper"><div class="footer__column footer__medicines-column"><a target="_blank" rel="noopener noreferrer" href="https://medicine-seller-register.mhra.gov.uk/search-registry/107" class="footer__medicine"><img src="/browse_app_assets/img/footer-medicine-f7b219aca7c7e1ddb452ae84e00a21d6.png" alt="Click to verify if this website is operating legally"><span class="footer__item footer__item--accessible">Opens a new window</span></a></div><ul role="menu" tabindex="0" class="footer__list footer__meta-list"><li class="footer__item"><a class="footer__anchor" target="">© ASDA 2020</a></li><li class="footer__item"><a class="footer__anchor" href="/terms-and-conditions" target="">Terms &amp; Conditions</a></li><li class="footer__item"><a class="footer__anchor" href="https://www.asda.com/privacy/your-information/customer-information/online/asda-grocery-home-shopping" target="_blank" rel="noopener noreferrer">Privacy Policy<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><a class="footer__anchor" href="/sitemap-index.xml" target="">Site map</a></li><li class="footer__item"><a class="footer__anchor" href="https://www.asda.com/help/company-details?cmpid=ahc-_-ahc-_-asdacom-_-privacy-_-footer-_-about-companies" target="_blank" rel="noopener noreferrer">Asda Company Details<span class="footer__item footer__item--accessible">Opens a new window</span></a></li><li class="footer__item"><span class="footer__optanon-link optanon-toggle-display">Cookie Settings</span></li></ul></div></div></div></div></div></footer></main></div>
+
+  <script id="tagjs" type="text/javascript">
+    (function () {
+      var tagjs = document.createElement("script");
+      var s = document.getElementsByTagName("script")[0];
+      tagjs.async = true;
+      tagjs.src = "//s.btstatic.com/tag.js#site=eI7jAuz";
+      s.parentNode.insertBefore(tagjs, s);
+    }());
+  </script>
+
+  <noscript>
+    <iframe src="//s.thebrighttag.com/iframe?c=eI7jAuz" width="1" height="1" frameborder="0" scrolling="no" marginheight="0"
+      marginwidth="0"></iframe>
+  </noscript>
+
+  <!-- Start Criteo library -->
+  <script src="//dynamic.criteo.com/js/ld/ld.js?a=44800" type="text/javascript" defer=""></script>
+  <script type="text/javascript">
+    window.criteo_q = window.criteo_q || [];
+    window.crit_app = {
+      'isPageReady': false,
+    }
+  </script>
+  <!-- End Criteo library -->
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+<script>
+// Core Files
+window.require&&window.define&&(define("sitespect",["https://groceries.asda.com/__ssobj/static/core-9-12-2017.js", "https://groceries.asda.com/__ssobj/ssdomvar.js+generic-adapter.js","https://groceries.asda.com/__ssobj/static/10-5-2017-events-api.js"]),require(["sitespect"]));
+
+//Adobe Integration
+var SS_Campaigns="51134:1798259,51608:1816413"
+
+//getCookieByName
+function getCookieByName(e){var t=new RegExp(e+"=([^;]+)"),n=t.exec(document.cookie);return n!=null?unescape(n[1]):null};
+
+console.log('SiteSpect Loaded - NR')
+
+
+!function(){      
+    window.addEventListener('triggerSignal', function(){
+        if(window.SS && document.location.pathname.indexOf('/checkout') >= 0){            
+            if(window.co && window.co.analyticsData){
+                var d = window.co.analyticsData
+                if(d.isPageview == 'true'){
+                    var n = d.pageName.replace(/[^a-z0-9]/gi, '')
+                    SS.EventTrack.rp('CheckoutPageView', n);
+                    if(n == 'CheckoutOrderConfirmation'){
+                        var c = {}
+                        c["bId"] = d.orderId;
+                        c["Total"] = d.orderTotal; 
+                        c["subTotal"] = d.orderSubTotal;
+                        c["Qty"] = d.uniqueUnits;            
+                        c["Units"] = d.units;
+                        c["Type"] = d.orderType;
+                        c["Delivery"] = d.slotType;
+                        SS.EventTrack.rp("orderConfirm", c);
+                    }
+                } else {
+                    if(d.quantity && d.quantity > 0){
+                        var c = {}
+                        var loc = d.cartLocation.split('>');
+                        c["Page"] = loc[0].replace(/[^a-z0-9]/gi, '');
+                        c["Loc"] = loc[1].replace(/[^a-z0-9]/gi, '');
+                        c["Qty"] = d.quantity;
+                        c["Price"] = d.price;
+                        SS.EventTrack.rp("checkoutAdd", c)
+                    }
+                }
+            }            
+        }
+    })    
+}(); 
+
+</script>
+<script>
+var ssDecibelCamp=SS_Campaigns.match(/\d+:\d+/gi),ssDecibel=[];for(i=0;i<ssDecibelCamp.length;i++)ssDecibel.push({campaign:ssDecibelCamp[i].match(/^\d+/gi)[0],variation:ssDecibelCamp[i].match(/\d+$/gi)[0]});
+</script>
+<script>
+window.require && require.specified("sitespect") && require(["sitespect"], function () {
+    console.log('SV002');    
+    var ss_first_run = 0;
+    window.addEventListener('triggerSignal', function(){
+        // console.log('triggered')
+        if(window.SS){
+            if(window.co && window.co.analyticsData){
+
+                var d = window.co.analyticsData;
+                // console.log(d)
+                var loc = window.location.href.split('/')[3];
+                if(loc == ''){loc = 'home'}
+
+                // Page View
+                if (d.isPageview == true){
+                    SS.EventTrack.rp('page_' + loc)
+                }
+                // Cart Add
+                else if(d.eventId == "103"){
+                    SS.EventTrack.rp('add_from_' + loc)
+                    SS.EventTrack.rp('nav_add')
+                }
+                if(ss_first_run == 0){
+                // Customer ID
+                  if(d.customerId){ SS.EventTrack.rp('cv__customerid', d.customerId) }
+                  // Session ID
+                  if(d.sessionId){ SS.EventTrack.rp('cv__jsessionid', d.sessionId) }
+                  // Store ID
+                  if(d.storeId){ SS.EventTrack.rp('store_'+d.storeId) }
+                  ss_first_run = 1;
+                }
+            }
+        }
+    });
+
+    // Screen size
+    var screen = window.innerWidth;
+    if(screen >= 1200){
+        var size = 'screen_1200_above';
+    } else if(screen >= 961 && screen <= 1199){
+        size = 'screen_961_to_1199';
+    } else if(screen >= 768 && screen <= 960){
+        size = 'screen_768_to_960';
+    } else if(screen >= 481 && screen <= 767){
+        size = 'screen_481_to_767';
+    } else if(screen <= 480){
+        size = 'screen_480_below';
+    }
+    SS.EventTrack.rp(size);
+    SS.EventTrack.rp('cv__screen_width', screen);
+
+});
+</script>
+<script>
+window.require && require.specified("sitespect") && require(["sitespect"], function () {
+  $('body').on('click','.beta-modal__button', function(){
+    if($(this).attr('href') == "https://beta-opt-out.asda.com"){
+      SS.EventTrack.rp('leave_beta')
+    }
+  })
+});
+</script>
+<script src="https://s7d1.scene7.com/s7viewers/html5/js/FlyoutViewer.js" async=""></script><span id="s7classic_0" class="" data-description="Scene7ComponentHolder" data-component="ParameterManager" data-namespace="s7classic" style="display: none;"></span><span id="s7classic_3" class="" data-description="Scene7ComponentHolder" data-component="ParameterManager" data-namespace="s7classic" style="display: none;"></span></body></html>
