@@ -74,15 +74,16 @@ def main():
     output = 'Bagels:\n'
 
     for bagel_link in nybagel_links:
-        # navigate to the grocery item site
-        driver.get(bagel_link)
-
-        # determine the shop and retrieve the tag info
-        shop = get_shop_from_link(bagel_link)
-
-        pause_for_class_name, tag_type, tag_attr, class_name = get_shop_tags(all_tags, shop)
-
         try:
+            # determine the shop
+            shop = get_shop_from_link(bagel_link)
+
+            # retrieve the tag info for the shop
+            pause_for_class_name, tag_type, tag_attr, class_name = get_shop_tags(all_tags, shop)
+
+            # navigate to the grocery item site
+            driver.get(bagel_link)
+
             element_present = EC.presence_of_element_located((By.CLASS_NAME, pause_for_class_name))
             WebDriverWait(driver, timeout).until(element_present)
             soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -91,12 +92,12 @@ def main():
             if price_box is None:
                 price = ""
             else:
-                price = re.findall(r'(\d+\.\d{2}|\d+)', str(price_box))[0]
+                price = '£' + re.findall(r'(\d+\.\d{2}|\d+)', str(price_box))[0]
 
         except TimeoutException:
             price = 'Unable to retrieve price'
         finally:
-            output += "{0}: £{1}\n".format(shop.title(), price)
+            output += "{0}: {1}\n".format(shop.title(), price)
 
     with open("C:\\Temp\\price_check.txt", "w") as file:
         file.write(output)
