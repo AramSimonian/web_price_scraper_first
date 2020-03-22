@@ -19,28 +19,24 @@ nybagel_links = ['https://www.sainsburys.co.uk/shop/gb/groceries/product/details
 def build_supermarket_tags():
     sainsburys_tags = {
         'tag_type': 'div',
-        'tag_id': 'pd-retail-price',
         'tag_attr': 'class',
         'class_name': 'pd__cost__total--promo undefined',
         'pause_for_class_name': 'pd__cost__per-unit'
         }
     morrisons_tags = {
         'tag_type': 'meta',
-        'tag_id': '',
         'tag_attr': 'itemprop',
         'class_name': 'price',
         'pause_for_class_name': 'bop-price__wrapper'
         }
     asda_tags = {
         'tag_type': 'strong',
-        'tag_id': '',
         'tag_attr': 'class',
         'class_name': 'co-product__price pdp-main-details__price',
         'pause_for_class_name': 'pdp-main-details__price-container'
         }
     tesco_tags = {
         'tag_type': 'div',
-        'tag_id': '',
         'tag_attr': 'class',
         'class_name': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
         'pause_for_class_name': 'price-details--wrapper'
