@@ -24,13 +24,18 @@ nybagel_links = ['https://www.sainsburys.co.uk/shop/gb/groceries/product/details
 product_details = [
                         ['sainsburys','ny bagels','new-york-bakery-co-cinnamon---raisin-bagels-x5'],
                         ['morrisons','ny bagels','New-York-Bagel-Co-Cinnamon--Raisin/114353011'],
-                        ['asda','ny bagels','new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
+                        ['asda','ny bagels','bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
                         ['tesco','ny bagels','253829047'],
+                        ['waitrose','ny bagels','new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
                         ['sainsburys','warburtons bagels','warburtons-cinnamon-raisin-bagel-x5'],
                         ['morrisons','warburtons bagels','warburtons-bagels-cinnamon-raisin-475566011'],
-                        ['asda','warburtons bagels','1000112419729'],
+                        ['asda','warburtons bagels','bagels/1000112419729'],
                         ['tesco','warburtons bagels','303351662'],
-                        ['waitrose','warburtons bagels','new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
+                        ['sainsburys','yeo valley strawb yog','yeo-valley-organic-yogurt-strawberry-450g'],
+                        ['morrisons','yeo valley strawb yog','yeo-valley-family-farm-strawberry-yogurt-216892011'],
+                        ['asda','yeo valley strawb yog','big-pots/yeo-valley-strawberry-yogurt/24151900'],
+                        ['tesco','yeo valley strawb yog','250983242'],
+                        ['waitrose','yeo valley strawb yog','yeo-valley-strawberry-bio-live-yeogurt/053024-26459-26460'],
                    ]
 
 def build_supermarket_attribs():
@@ -49,7 +54,7 @@ def build_supermarket_attribs():
         'pause_for_class_name': 'bop-price__per'
         }
     asda_tags = {
-        'link_prefix': 'https://groceries.asda.com/product/bagels/{0}',
+        'link_prefix': 'https://groceries.asda.com/product/{0}',
         'tag_type': 'strong',
         'tag_attr': 'class',
         'class_name': 'co-product__price pdp-main-details__price',
@@ -64,9 +69,9 @@ def build_supermarket_attribs():
         }
     waitrose_tags = {
         'link_prefix': 'https://www.waitrose.com/ecom/products/{0}',
-        'tag_type': 'div',
+        'tag_type': 'span',
         'tag_attr': 'data-test',
-        'class_name': 'priceAndActions___16N4-',
+        'class_name': 'product-pod-price',
         'pause_for_class_name': 'fullDetails___j6CuY'
         }
 
