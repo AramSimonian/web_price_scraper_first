@@ -21,19 +21,24 @@ nybagel_links = ['https://www.sainsburys.co.uk/shop/gb/groceries/product/details
                'https://groceries.asda.com/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338',
                'https://www.tesco.com/groceries/en-GB/products/253829047']
 
-product_stub_details = [
+product_details = [
                         ['sainsburys','ny bagels','new-york-bakery-co-cinnamon---raisin-bagels-x5'],
                         ['morrisons','ny bagels','New-York-Bagel-Co-Cinnamon--Raisin/114353011'],
                         ['asda','ny bagels','new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
-                        ['tesco','ny bagels','253829047']
-                    ]
+                        ['tesco','ny bagels','253829047'],
+                        ['sainsburys','warburtons bagels','warburtons-cinnamon-raisin-bagel-x5'],
+                        ['morrisons','warburtons bagels','warburtons-bagels-cinnamon-raisin-475566011'],
+                        ['asda','warburtons bagels','1000112419729'],
+                        ['tesco','warburtons bagels','303351662'],
+                        ['waitrose','warburtons bagels','new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
+                   ]
 
 def build_supermarket_attribs():
     sainsburys_tags = {
         'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
         'tag_type': 'div',
-        'tag_attr': 'class',
-        'class_name': 'pd__cost__total--promo undefined',
+        'tag_attr': 'data-test-id',
+        'class_name': 'pd-retail-price',
         'pause_for_class_name': 'pd__cost__per-unit'
         }
     morrisons_tags = {
@@ -41,7 +46,7 @@ def build_supermarket_attribs():
         'tag_type': 'meta',
         'tag_attr': 'itemprop',
         'class_name': 'price',
-        'pause_for_class_name': 'bop-price__wrapper'
+        'pause_for_class_name': 'bop-price__per'
         }
     asda_tags = {
         'link_prefix': 'https://groceries.asda.com/product/bagels/{0}',
@@ -57,12 +62,20 @@ def build_supermarket_attribs():
         'class_name': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
         'pause_for_class_name': 'price-details--wrapper'
         }
+    waitrose_tags = {
+        'link_prefix': 'https://www.waitrose.com/ecom/products/{0}',
+        'tag_type': 'div',
+        'tag_attr': 'data-test',
+        'class_name': 'priceAndActions___16N4-',
+        'pause_for_class_name': 'fullDetails___j6CuY'
+        }
 
     output = {
         'sainsburys': sainsburys_tags,
         'morrisons': morrisons_tags,
         'asda': asda_tags,
-        'tesco': tesco_tags
+        'tesco': tesco_tags,
+        'waitrose': waitrose_tags
         }
     return output
 
@@ -70,36 +83,29 @@ def get_shop_from_link(link):
     shop = link.split(".")
     return shop[1]
 
-def get_shop_attribs(shop):
-    link_prefix = this.all_tags[shop]['link_prefix']
-    tag_type = this.all_tags[shop]['tag_type']
-    tag_attr = this.all_tags[shop]['tag_attr']
-    class_name = this.all_tags[shop]['class_name']
-    pause_for_class_name = this.all_tags[shop]['pause_for_class_name']
-
-    return link_prefix, tag_type, tag_attr, class_name, pause_for_class_name
+def get_shop_attribs_dict(shop):
+    return this.all_tags[shop]
 
 def build_product_link(link_prefix, product_stub):
     return link_prefix.format(product_stub)
 
-def extract_price_wrapper(shop, product_stub):
-    # retrieve the tag info for the shop
-    link_prefix, tag_type, tag_attr, class_name, pause_for_class_name = get_shop_attribs(shop)
+def extract_price_wrapper(shop_attribs_dict, product_link):
+    try:
+        # navigate to the grocery item site
+        this.driver.get(product_link)
 
-    product_link = build_product_link(link_prefix, product_stub)
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
+        WebDriverWait(this.driver, timeout).until(element_present)
+        soup = BeautifulSoup(this.driver.page_source, 'html.parser')
+        output = soup.find(shop_attribs_dict['tag_type'], attrs={shop_attribs_dict['tag_attr']: shop_attribs_dict['class_name']})
+    except:
+        output = None
 
-    # navigate to the grocery item site
-    this.driver.get(product_link)
+    return output
 
-    element_present = EC.presence_of_element_located((By.CLASS_NAME, pause_for_class_name))
-    WebDriverWait(this.driver, timeout).until(element_present)
-    soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-    return soup.find(tag_type, attrs={tag_attr: class_name})
-
-def get_price_from_stub(shop, product_stub):
+def get_price_from_wrapper(price_wrapper):
 
     try:
-        price_wrapper = extract_price_wrapper(shop, product_stub)
         if price_wrapper is None:
             price = 'Unable to locate price wrapper'
         else:
@@ -107,7 +113,7 @@ def get_price_from_stub(shop, product_stub):
     except TimeoutException:
         price = 'Unable to retrieve price - timeout'
 
-    return "{0}: {1}".format(shop.title(), price)
+    return price
 
 def main():
     this.all_tags = build_supermarket_attribs()
@@ -116,10 +122,16 @@ def main():
 
     output = ''
 
-    for product_stub_detail in product_stub_details:
-        shop, product_type, product_stub = product_stub_detail
+    for product_detail in product_details:
+        shop, product_type, product_stub = product_detail
+        shop_attribs_dict = get_shop_attribs_dict(shop)
 
-        output += '{0}, {1}\n'.format(product_type.title(), get_price_from_stub(shop, product_stub))
+        product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
+
+        price_wrapper = extract_price_wrapper(shop_attribs_dict, product_link)
+        price = get_price_from_wrapper(price_wrapper)
+
+        output += '{0}, {1}: {2}\n'.format(shop.title(), product_type.title(), price)
 
     with open("C:\\Temp\\price_check.txt", "w") as file:
         file.write(output)

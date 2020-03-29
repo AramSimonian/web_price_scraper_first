@@ -34,6 +34,8 @@
     <Content Include="test_data\asda_nybagels_promo.html" />
     <Content Include="test_data\morrisons_nybagels_no_promo.html" />
     <Content Include="test_data\sainsburys_nybagels_promo.html" />
+    <Content Include="test_data\tesco_nybagels_unavailable.html" />
+    <Content Include="test_data\waitrose_nybagels_no_promo.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <ProjectExtensions>
