@@ -94,31 +94,32 @@ def get_shop_attribs_dict(shop):
 def build_product_link(link_prefix, product_stub):
     return link_prefix.format(product_stub)
 
-def extract_price_wrapper(shop_attribs_dict, product_link):
-    try:
-        # navigate to the grocery item site
-        this.driver.get(product_link)
+class PriceWrapper:
+    def extract(self, shop_attribs_dict, product_link):
+        try:
+            # navigate to the grocery item site
+            this.driver.get(product_link)
 
-        element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
-        WebDriverWait(this.driver, timeout).until(element_present)
-        soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-        output = soup.find(shop_attribs_dict['tag_type'], attrs={shop_attribs_dict['tag_attr']: shop_attribs_dict['class_name']})
-    except:
-        output = None
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
+            WebDriverWait(this.driver, timeout).until(element_present)
+            soup = BeautifulSoup(this.driver.page_source, 'html.parser')
+            output = soup.find(shop_attribs_dict['tag_type'], attrs={shop_attribs_dict['tag_attr']: shop_attribs_dict['class_name']})
+        except:
+            output = None
 
-    return output
+        return output
 
-def get_price_from_wrapper(price_wrapper):
+    def get_price(self, price_wrapper):
 
-    try:
-        if price_wrapper is None:
-            price = 'Unable to locate price wrapper'
-        else:
-            price = '£' + re.findall(r'(\d+\.\d{2}|\d+)', str(price_wrapper))[0]
-    except TimeoutException:
-        price = 'Unable to retrieve price - timeout'
+        try:
+            if price_wrapper is None:
+                price = 'Unable to locate price wrapper'
+            else:
+                price = '£' + re.findall(r'(\d+\.\d{2}|\d+)', str(price_wrapper))[0]
+        except TimeoutException:
+            price = 'Unable to retrieve price - timeout'
 
-    return price
+        return price
 
 def main():
     this.all_tags = build_supermarket_attribs()
@@ -126,6 +127,7 @@ def main():
     this.driver = webdriver.Chrome()
 
     output = ''
+    price_wrapper = PriceWrapper()
 
     for product_detail in product_details:
         shop, product_type, product_stub = product_detail
@@ -133,8 +135,8 @@ def main():
 
         product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
 
-        price_wrapper = extract_price_wrapper(shop_attribs_dict, product_link)
-        price = get_price_from_wrapper(price_wrapper)
+        pw = price_wrapper.extract(shop_attribs_dict, product_link)
+        price = price_wrapper.get_price(pw)
 
         output += '{0}, {1}: {2}\n'.format(shop.title(), product_type.title(), price)
 
@@ -143,4 +145,4 @@ def main():
 
     driver.quit()
 
-main()
+#main()
