@@ -16,27 +16,29 @@ this.driver = ''
 
 timeout = 3
 
-nybagel_links = ['https://www.sainsburys.co.uk/shop/gb/groceries/product/details/new-york-bakery-co-cinnamon---raisin-bagels-x5',
-               'https://groceries.morrisons.com/webshop/product/New-York-Bagel-Co-Cinnamon--Raisin/114353011',
-               'https://groceries.asda.com/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338',
-               'https://www.tesco.com/groceries/en-GB/products/253829047']
+nybagel_links = [
+    'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/new-york-bakery-co-cinnamon---raisin-bagels-x5',
+    'https://groceries.morrisons.com/webshop/product/New-York-Bagel-Co-Cinnamon--Raisin/114353011',
+    'https://groceries.asda.com/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338',
+    'https://www.tesco.com/groceries/en-GB/products/253829047']
 
 product_details = [
-                        ['sainsburys','ny bagels','new-york-bakery-co-cinnamon---raisin-bagels-x5'],
-                        ['morrisons','ny bagels','New-York-Bagel-Co-Cinnamon--Raisin/114353011'],
-                        ['asda','ny bagels','bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
-                        ['tesco','ny bagels','253829047'],
-                        ['waitrose','ny bagels','new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
-                        ['sainsburys','warburtons bagels','warburtons-cinnamon-raisin-bagel-x5'],
-                        ['morrisons','warburtons bagels','warburtons-bagels-cinnamon-raisin-475566011'],
-                        ['asda','warburtons bagels','bagels/1000112419729'],
-                        ['tesco','warburtons bagels','303351662'],
-                        ['sainsburys','yeo valley strawb yog','yeo-valley-organic-yogurt-strawberry-450g'],
-                        ['morrisons','yeo valley strawb yog','yeo-valley-family-farm-strawberry-yogurt-216892011'],
-                        ['asda','yeo valley strawb yog','big-pots/yeo-valley-strawberry-yogurt/24151900'],
-                        ['tesco','yeo valley strawb yog','250983242'],
-                        ['waitrose','yeo valley strawb yog','yeo-valley-strawberry-bio-live-yeogurt/053024-26459-26460'],
-                   ]
+    ['sainsburys', 'ny bagels', 'new-york-bakery-co-cinnamon---raisin-bagels-x5'],
+    ['morrisons', 'ny bagels', 'New-York-Bagel-Co-Cinnamon--Raisin/114353011'],
+    ['asda', 'ny bagels', 'bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
+    ['tesco', 'ny bagels', '253829047'],
+    ['waitrose', 'ny bagels', 'new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
+    ['sainsburys', 'warburtons bagels', 'warburtons-cinnamon-raisin-bagel-x5'],
+    ['morrisons', 'warburtons bagels', 'warburtons-bagels-cinnamon-raisin-475566011'],
+    ['asda', 'warburtons bagels', 'bagels/1000112419729'],
+    ['tesco', 'warburtons bagels', '303351662'],
+    ['sainsburys', 'yeo valley strawb yog', 'yeo-valley-organic-yogurt-strawberry-450g'],
+    ['morrisons', 'yeo valley strawb yog', 'yeo-valley-family-farm-strawberry-yogurt-216892011'],
+    ['asda', 'yeo valley strawb yog', 'big-pots/yeo-valley-strawberry-yogurt/24151900'],
+    ['tesco', 'yeo valley strawb yog', '250983242'],
+    ['waitrose', 'yeo valley strawb yog', 'yeo-valley-strawberry-bio-live-yeogurt/053024-26459-26460'],
+]
+
 
 def build_supermarket_attribs():
     sainsburys_tags = {
@@ -45,35 +47,35 @@ def build_supermarket_attribs():
         'tag_attr': 'data-test-id',
         'class_name': 'pd-retail-price',
         'pause_for_class_name': 'pd__cost__per-unit'
-        }
+    }
     morrisons_tags = {
         'link_prefix': 'https://groceries.morrisons.com/webshop/product/{0}',
         'tag_type': 'meta',
         'tag_attr': 'itemprop',
         'class_name': 'price',
         'pause_for_class_name': 'bop-price__per'
-        }
+    }
     asda_tags = {
         'link_prefix': 'https://groceries.asda.com/product/{0}',
         'tag_type': 'strong',
         'tag_attr': 'class',
         'class_name': 'co-product__price pdp-main-details__price',
         'pause_for_class_name': 'pdp-main-details__price-container'
-        }
+    }
     tesco_tags = {
         'link_prefix': 'https://www.tesco.com/groceries/en-GB/products/{0}',
         'tag_type': 'div',
         'tag_attr': 'class',
         'class_name': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
         'pause_for_class_name': 'price-details--wrapper'
-        }
+    }
     waitrose_tags = {
         'link_prefix': 'https://www.waitrose.com/ecom/products/{0}',
         'tag_type': 'span',
         'tag_attr': 'data-test',
         'class_name': 'product-pod-price',
         'pause_for_class_name': 'fullDetails___j6CuY'
-        }
+    }
 
     output = {
         'sainsburys': sainsburys_tags,
@@ -81,18 +83,22 @@ def build_supermarket_attribs():
         'asda': asda_tags,
         'tesco': tesco_tags,
         'waitrose': waitrose_tags
-        }
+    }
     return output
+
 
 def get_shop_from_link(link):
     shop = link.split(".")
     return shop[1]
 
+
 def get_shop_attribs_dict(shop):
     return this.all_tags[shop]
 
+
 def build_product_link(link_prefix, product_stub):
     return link_prefix.format(product_stub)
+
 
 class PriceWrapper:
     def extract(self, shop_attribs_dict, product_link):
@@ -103,7 +109,8 @@ class PriceWrapper:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-            output = soup.find(shop_attribs_dict['tag_type'], attrs={shop_attribs_dict['tag_attr']: shop_attribs_dict['class_name']})
+            output = soup.find(shop_attribs_dict['tag_type'],
+                               attrs={shop_attribs_dict['tag_attr']: shop_attribs_dict['class_name']})
         except:
             output = None
 
@@ -120,6 +127,7 @@ class PriceWrapper:
             price = 'Unable to retrieve price - timeout'
 
         return price
+
 
 def main():
     this.all_tags = build_supermarket_attribs()
@@ -143,6 +151,7 @@ def main():
     with open("C:\\Temp\\price_check.txt", "w") as file:
         file.write(output)
 
-    driver.quit()
+    this.driver.quit()
 
-#main()
+
+main()
