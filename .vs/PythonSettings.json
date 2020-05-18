@@ -1,6 +1,0 @@
-{
-  "Interpreter": "Global|PythonCore|3.7-32",
-  "TestFramework": "pytest",
-  "UnitTestRootDirectory": "testing",
-  "UnitTestPattern": "test_*.py"
-}
