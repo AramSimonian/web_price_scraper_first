@@ -64,7 +64,7 @@ class Test_price_wrapper(unittest.TestCase):
             }
         asda_promo = 'file://../test_data/asda_nybagels_promo.html'
         price_wrapper = PriceWrapper()
-        pw = price_wrapper.extract(asda_tags, asda_promo)
+        pw = price_wrapper.extract_wrappers(asda_tags, asda_promo)
         price = price_wrapper.get_price(pw)
 
         self.assertEqual("£1.00", price)
@@ -79,7 +79,7 @@ class Test_price_wrapper(unittest.TestCase):
             }
         sainsburys_promo = open('./test_data/sainsburys_nybagels_promo.html')
         price_wrapper = PriceWrapper()
-        pw = price_wrapper.extract(sainsburys_tags, sainsburys_promo)
+        pw = price_wrapper.extract_wrappers(sainsburys_tags, sainsburys_promo)
         price = price_wrapper.get_price(pw)
 
         self.assertEqual("£1.00", price)
