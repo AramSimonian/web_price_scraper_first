@@ -2,6 +2,7 @@ import urllib3
 import re
 import sys
 import datetime
+import csv
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -16,45 +17,13 @@ this.driver = ''
 
 timeout = 3
 
-nybagel_links = [
-    'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/new-york-bakery-co-cinnamon---raisin-bagels-x5',
-    'https://groceries.morrisons.com/webshop/product/New-York-Bagel-Co-Cinnamon--Raisin/114353011',
-    'https://groceries.asda.com/product/bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338',
-    'https://www.tesco.com/groceries/en-GB/products/253829047']
-
-product_details = [
-    ['sainsburys', 'ny bagels', 'new-york-bakery-co-cinnamon---raisin-bagels-x5'],
-    ['morrisons', 'ny bagels', 'New-York-Bagel-Co-Cinnamon--Raisin/114353011'],
-    ['asda', 'ny bagels', 'bagels/new-york-bakery-co-cinnamon-raisin-bagels/1000004372338'],
-    ['tesco', 'ny bagels', '253829047'],
-    ['waitrose', 'ny bagels', 'new-york-bakery-co-cinnamon-raisin-bagels/488463-162428-162429'],
-    ['sainsburys', 'warburtons bagels', 'warburtons-cinnamon-raisin-bagel-x5'],
-    ['morrisons', 'warburtons bagels', 'warburtons-bagels-cinnamon-raisin-475566011'],
-    ['asda', 'warburtons bagels', 'bagels/1000112419729'],
-    ['tesco', 'warburtons bagels', '303351662'],
-    ['sainsburys', 'yeo valley strawb yog', 'yeo-valley-organic-yogurt-strawberry-450g'],
-    ['morrisons', 'yeo valley strawb yog', 'yeo-valley-family-farm-strawberry-yogurt-216892011'],
-    ['asda', 'yeo valley strawb yog', 'big-pots/yeo-valley-strawberry-yogurt/24151900'],
-    ['tesco', 'yeo valley strawb yog', '250983242'],
-    ['waitrose', 'yeo valley strawb yog', 'yeo-valley-strawberry-bio-live-yeogurt/053024-26459-26460'],
-    ['sainsburys', 'mcvities dark chocolate dig 433g', 'mcvities-digestives-dark-chocolate-433g'],
-    ['morrisons','mcvities dark chocolate dig 433g','mcvitie-s-digestives-dark-chocolate-408294011'],
-    ['asda','mcvities dark chocolate dig 433g','chocolate-biscuits/mc-vities-digestives-dark-chocolate/1000052709666'],
-    ['sainsburys', 'mcvities dark chocolate dig 2x316g', 'mcvities-digestives-dark-chocolate-x2-316g'],
-    ['asda', 'mcvities dark chocolate dig 2x316g', 'chocolate-biscuits/mc-vities-digestives-dark-chocolate-twin-pack/1000046413189'],
-    ['asda','lavazza qualita rossa coffee single pack','filter-cafetiere-coffee/lavazza-qualita-rossa-ground-coffee/19344'],
-    ['tesco','lavazza qualita rossa coffee single pack','254889083'],
-    ['morrisons','lavazza qualita rossa coffee single pack','lavazza-qualit-rossa-ground-coffee-113704011'],
-    ['waitrose','lavazza qualita rossa coffee single pack','lavazza-qualita-rossa-espresso/016519-7923-7924'],
-    ['sainsburys','lavazza qualita rossa coffee twin pack','lavazza-coffee/lavazza-qualita-rossa-ground-coffee-twin-pack-espresso-x2-250g'],
-    ['asda','lavazza qualita rossa coffee twin pack','filter-cafetiere-coffee/lavazza-qualita-rossa-ground-coffee/1000008931457'],
-    ['tesco','lavazza qualita rossa coffee twin pack','257352903'],
-    ['morrisons','lavazza qualita rossa coffee twin pack','lavazza-qualita-rossa-ground-coffee-497497011'],
-    ['waitrose','lavazza qualita rossa coffee twin pack','lavazza-qualita-rossa-espresso/030254-14779-14780'],
-]
-
-
 def build_supermarket_attribs():
+    """
+    <div class="pd__cost">
+        <div data-test-id="pd-retail-price" class="pd__cost__total undefined">£5.50</div>
+        <span data-test-id="pd-unit-price" class="pd__cost__per-unit">8p / ea</span>
+    </div>
+    """
     sainsburys_tags = {
         'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
         'price_tag_type': 'div',
@@ -90,13 +59,39 @@ def build_supermarket_attribs():
         'price_class_name_or_value': 'product-pod-price',
         'pause_for_class_name': 'fullDetails___j6CuY'
     }
+    superdrug_tags = {
+        'link_prefix': 'https://www.superdrug.com/{0}',
+        'price_tag_type': 'span',
+        'price_tag_attr': 'itemprop',
+        'price_class_name_or_value': 'price',
+        'pause_for_class_name': 'bvRatingReview'
+    }
+
+    """
+    <div id="estore_product_price_widget" class="estore_product_price_widget_redesign price-reDesign">
+        <div class="price price_redesign" id="PDP_productPrice">£5.85</div>
+        <div class="productid productid_redesign" id="productId">5345006</div>
+        <span id="schemaOrgPrice" style="display:none;">5.85</span>
+        <input type="hidden" name="cm_productPrice" id="cm_productPrice" value="£5.85">
+        <div class="details details_redesign">65 UNI | £0.09 per 1UNI</div>
+    </div>
+    """
+    boots_tags = {
+        'link_prefix': 'https://www.boots.com/{0}',
+        'price_tag_type': 'div',
+        'price_tag_attr': 'id',
+        'price_class_name_or_value': 'PDP_productPrice',
+        'pause_for_class_name': 'global-footer'
+    }
 
     output = {
         'sainsburys': sainsburys_tags,
         'morrisons': morrisons_tags,
         'asda': asda_tags,
         'tesco': tesco_tags,
-        'waitrose': waitrose_tags
+        'waitrose': waitrose_tags,
+        'superdrug': superdrug_tags,
+        'boots': boots_tags
     }
     return output
 
@@ -114,6 +109,15 @@ def build_product_link(link_prefix, product_stub):
     return link_prefix.format(product_stub)
 
 
+def get_product_detail_row(filename):
+    # open the file
+    with open(filename, "r") as product_detail:
+        data_reader = csv.reader(product_detail)
+        for row in data_reader:
+            # return a row from the file
+            yield row
+
+
 class PriceWrapper:
     def extract_wrappers(self, shop_attribs_dict, product_link):
         try:
@@ -125,8 +129,8 @@ class PriceWrapper:
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
             output = soup.find(shop_attribs_dict['price_tag_type'],
                                attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict['price_class_name_or_value']})
-           # promo_wrapper = soup.find(shop_attribs_dict['promo_tag_type'],
-           #                           attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict['promo_class_name_or_value']})
+               # promo_wrapper = soup.find(shop_attribs_dict['promo_tag_type'],
+               #                           attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict['promo_class_name_or_value']})
         except:
             output = None
 
@@ -138,7 +142,7 @@ class PriceWrapper:
             if price_wrapper is None:
                 price = 'Unable to locate price wrapper'
             else:
-                price = '£' + re.findall(r'(\d+\.\d{2}|\d+)', str(price_wrapper))[0]
+                price = '£' + re.findall(r'(\d+\.\d+|\d+)', str(price_wrapper))[0]
         except TimeoutException:
             price = 'Unable to retrieve price - timeout'
 
@@ -155,6 +159,14 @@ class PriceWrapper:
 
         return promo
 
+def write_output(price_list):
+    with open("price_check.txt", "w") as file:
+        date = datetime.datetime.now().date()
+        hour = datetime.datetime.now().hour
+        minute = datetime.datetime.now().minute
+        file.write('{} {:02d}:{:02d}\n'.format(date, hour, minute))
+        file.write(price_list)
+
 def main():
     this.all_tags = build_supermarket_attribs()
 
@@ -163,8 +175,10 @@ def main():
     output = ''
     price_wrapper = PriceWrapper()
 
-    for product_detail in product_details:
-        shop, product_type, product_stub = product_detail
+    price_data = get_product_detail_row('price_links.csv')
+
+    for product_item in price_data:
+        shop, product_type, product_stub = product_item
         shop_attribs_dict = get_shop_attribs_dict(shop)
 
         product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
@@ -174,9 +188,7 @@ def main():
 
         output += '{0}, {1}: {2}\n'.format(shop.title(), product_type.title(), price)
 
-    with open("C:\\Temp\\price_check.txt", "w") as file:
-        file.write('{0} {1}:{2}:{3}\n'.format(datetime.datetime.now().date(), datetime.datetime.now().hour, datetime.datetime.now().minute, datetime.datetime.now().second))
-        file.write(output)
+    write_output(output)
 
     this.driver.quit()
 
