@@ -1,4 +1,4 @@
-from main import PriceWrapper
+from main import ProductWrapper
 from selenium import webdriver
 import unittest
 
@@ -63,7 +63,7 @@ class Test_price_wrapper(unittest.TestCase):
             'pause_for_class_name': 'pdp-main-details__price-container'
             }
         asda_promo = 'file://../test_data/asda_nybagels_promo.html'
-        price_wrapper = PriceWrapper()
+        price_wrapper = ProductWrapper()
         pw = price_wrapper.extract_wrappers(asda_tags, asda_promo)
         price = price_wrapper.get_price(pw)
 
@@ -78,7 +78,7 @@ class Test_price_wrapper(unittest.TestCase):
             'pause_for_class_name': 'pd__cost__per-unit'
             }
         sainsburys_promo = open('./test_data/sainsburys_nybagels_promo.html')
-        price_wrapper = PriceWrapper()
+        price_wrapper = ProductWrapper()
         pw = price_wrapper.extract_wrappers(sainsburys_tags, sainsburys_promo)
         price = price_wrapper.get_price(pw)
 

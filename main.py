@@ -24,11 +24,16 @@ def build_supermarket_attribs():
         <span data-test-id="pd-unit-price" class="pd__cost__per-unit">8p / ea</span>
     </div>
     """
+    """
+    """
     sainsburys_tags = {
         'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
         'price_tag_type': 'div',
         'price_tag_attr': 'data-test-id',
         'price_class_name_or_value': 'pd-retail-price',
+        'promo_tag_type': 'a',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'promotion-message__link',
         'pause_for_class_name': 'pd__cost__per-unit'
     }
     morrisons_tags = {
@@ -36,13 +41,19 @@ def build_supermarket_attribs():
         'price_tag_type': 'meta',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
-        'pause_for_class_name': 'bop-price__per'
+        'promo_tag_type': '',
+        'promo_tag_attr': '',
+        'promo_class_name_or_value': '',
+        'pause_for_class_name': 'ft-footer'
     }
     asda_tags = {
         'link_prefix': 'https://groceries.asda.com/product/{0}',
         'price_tag_type': 'strong',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'co-product__price pdp-main-details__price',
+        'promo_tag_type': '',
+        'promo_tag_attr': '',
+        'promo_class_name_or_value': '',
         'pause_for_class_name': 'pdp-main-details__price-container'
     }
     tesco_tags = {
@@ -50,6 +61,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'div',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
+        'promo_tag_type': '',
+        'promo_tag_attr': '',
+        'promo_class_name_or_value': '',
         'pause_for_class_name': 'price-details--wrapper'
     }
     waitrose_tags = {
@@ -57,6 +71,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'span',
         'price_tag_attr': 'data-test',
         'price_class_name_or_value': 'product-pod-price',
+        'promo_tag_type': '',
+        'promo_tag_attr': '',
+        'promo_class_name_or_value': '',
         'pause_for_class_name': 'fullDetails___j6CuY'
     }
     superdrug_tags = {
@@ -64,6 +81,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'span',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
+        'promo_tag_type': '',
+        'promo_tag_attr': '',
+        'promo_class_name_or_value': '',
         'pause_for_class_name': 'bvRatingReview'
     }
 
@@ -118,7 +138,7 @@ def get_product_detail_row(filename):
             yield row
 
 
-class PriceWrapper:
+class ProductWrapper:
     def extract_wrappers(self, shop_attribs_dict, product_link):
         try:
             # navigate to the grocery item site
@@ -127,12 +147,20 @@ class PriceWrapper:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-            output = soup.find(shop_attribs_dict['price_tag_type'],
-                               attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict['price_class_name_or_value']})
-               # promo_wrapper = soup.find(shop_attribs_dict['promo_tag_type'],
-               #                           attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict['promo_class_name_or_value']})
+            try:
+                price_wrapper = soup.find(shop_attribs_dict['price_tag_type'],
+                                   attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict['price_class_name_or_value']})
+            except:
+                price_wrapper = None
+            try:
+                promo_wrapper = soup.find(shop_attribs_dict['promo_tag_type'],
+                                          attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict['promo_class_name_or_value']})
+            except:
+                promo_wrapper = None
+
+            output = price_wrapper, promo_wrapper
         except:
-            output = None
+            output = None, None
 
         return output
 
@@ -151,9 +179,9 @@ class PriceWrapper:
     def get_promo(self, promo_wrapper):
         try:
             if promo_wrapper is None:
-                promo = 'Unable to locate promo wrapper'
+                promo = ''
             else:
-                promo = None
+                promo = promo_wrapper.text
         except:
             promo = None
 
@@ -173,7 +201,7 @@ def main():
     this.driver = webdriver.Chrome()
 
     output = ''
-    price_wrapper = PriceWrapper()
+    product_wrapper = ProductWrapper()
 
     price_data = get_product_detail_row('price_links.csv')
 
@@ -183,10 +211,11 @@ def main():
 
         product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
 
-        pw = price_wrapper.extract_wrappers(shop_attribs_dict, product_link)
-        price = price_wrapper.get_price(pw)
+        wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
+        price = product_wrapper.get_price(wrappers[0])
+        promo = product_wrapper.get_promo(wrappers[1])
 
-        output += '{0}, {1}: {2}\n'.format(shop.title(), product_type.title(), price)
+        output += '{0}, {1}: {2} {3}\n'.format(shop.title(), product_type.title(), price, promo)
 
     write_output(output)
 
