@@ -116,6 +116,9 @@ def build_supermarket_attribs():
     """
     boots_tags = {
         'link_prefix': 'https://www.boots.com/{0}',
+        'prod_details_type': 'div',
+        'prod_details_attr': 'id',
+        'prod_class_name_or_value': 'estore_pdp_trcol',
         'price_tag_type': 'div',
         'price_tag_attr': 'id',
         'price_class_name_or_value': 'PDP_productPrice',
@@ -207,7 +210,7 @@ class ProductWrapper:
         try:
             # prod_wrapper is a tuple comprising price and offer
             promo_wrapper = prod_wrapper[1]
-            if promo_wrapper is None:
+            if (promo_wrapper is None) or (len(promo_wrapper.text.strip()) == 0):
                 promo = ''
             else:
                 promo = ' - Offer - ' + promo_wrapper.text
