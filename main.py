@@ -37,13 +37,13 @@ def build_supermarket_attribs():
         'pause_for_class_name': 'pd__cost__per-unit'
     }
     morrisons_tags = {
-        'link_prefix': 'https://groceries.morrisons.com/webshop/product/{0}',
+        'link_prefix': 'https://groceries.morrisons.com/products/{0}',
         'price_tag_type': 'meta',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
-        'promo_tag_type': '',
-        'promo_tag_attr': '',
-        'promo_class_name_or_value': '',
+        'promo_tag_type': 'p',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'bop-promotion__description',
         'pause_for_class_name': 'ft-footer'
     }
     asda_tags = {
@@ -51,9 +51,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'strong',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'co-product__price pdp-main-details__price',
-        'promo_tag_type': '',
-        'promo_tag_attr': '',
-        'promo_class_name_or_value': '',
+        'promo_tag_type': 'span',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'co-product__promo-tex',
         'pause_for_class_name': 'pdp-main-details__price-container'
     }
     tesco_tags = {
@@ -61,9 +61,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'div',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
-        'promo_tag_type': '',
-        'promo_tag_attr': '',
-        'promo_class_name_or_value': '',
+        'promo_tag_type': 'div',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'list-item-content promo-content-small',
         'pause_for_class_name': 'price-details--wrapper'
     }
     waitrose_tags = {
@@ -71,9 +71,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'span',
         'price_tag_attr': 'data-test',
         'price_class_name_or_value': 'product-pod-price',
-        'promo_tag_type': '',
-        'promo_tag_attr': '',
-        'promo_class_name_or_value': '',
+        'promo_tag_type': 'span',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'offerDescription___1A6Ew underline___2kMYl',
         'pause_for_class_name': 'fullDetails___j6CuY'
     }
     superdrug_tags = {
@@ -81,9 +81,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'span',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
-        'promo_tag_type': '',
-        'promo_tag_attr': '',
-        'promo_class_name_or_value': '',
+        'promo_tag_type': 'a',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'promotion__item',
         'pause_for_class_name': 'bvRatingReview'
     }
 
@@ -101,6 +101,9 @@ def build_supermarket_attribs():
         'price_tag_type': 'div',
         'price_tag_attr': 'id',
         'price_class_name_or_value': 'PDP_productPrice',
+        'promo_tag_type': 'li',
+        'promo_tag_attr': 'class',
+        'promo_class_name_or_value': 'pdp-promotion-redesign',
         'pause_for_class_name': 'global-footer'
     }
 
@@ -164,9 +167,11 @@ class ProductWrapper:
 
         return output
 
-    def get_price(self, price_wrapper):
+    def get_price(self, prod_wrapper):
 
         try:
+            # prod_wrapper is a tuple comprising price and offer
+            price_wrapper = prod_wrapper[0]
             if price_wrapper is None:
                 price = 'Unable to locate price wrapper'
             else:
@@ -174,21 +179,23 @@ class ProductWrapper:
         except TimeoutException:
             price = 'Unable to retrieve price - timeout'
 
-        return price
+        return price.strip()
 
-    def get_promo(self, promo_wrapper):
+    def get_promo(self, prod_wrapper):
         try:
+            # prod_wrapper is a tuple comprising price and offer
+            promo_wrapper = prod_wrapper[1]
             if promo_wrapper is None:
                 promo = ''
             else:
-                promo = promo_wrapper.text
+                promo = ' - Offer - ' + promo_wrapper.text
         except:
-            promo = None
+            promo = ''
 
-        return promo
+        return promo.strip()
 
 def write_output(price_list):
-    with open("price_check.txt", "w") as file:
+    with open("price_check.txt", "w", encoding='utf8') as file:
         date = datetime.datetime.now().date()
         hour = datetime.datetime.now().hour
         minute = datetime.datetime.now().minute
@@ -212,8 +219,8 @@ def main():
         product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
 
         wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
-        price = product_wrapper.get_price(wrappers[0])
-        promo = product_wrapper.get_promo(wrappers[1])
+        price = product_wrapper.get_price(wrappers)
+        promo = product_wrapper.get_promo(wrappers)
 
         output += '{0}, {1}: {2} {3}\n'.format(shop.title(), product_type.title(), price, promo)
 
