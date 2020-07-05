@@ -41,6 +41,9 @@ def build_supermarket_attribs():
     }
     morrisons_tags = {
         'link_prefix': 'https://groceries.morrisons.com/products/{0}',
+        'prod_details_type': 'section',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'bop-section bop-basicInfo',
         'price_tag_type': 'meta',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
