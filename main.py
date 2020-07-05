@@ -28,6 +28,9 @@ def build_supermarket_attribs():
     """
     sainsburys_tags = {
         'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
+        'prod_details_type': 'div',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'pd__wrapper',
         'price_tag_type': 'div',
         'price_tag_attr': 'data-test-id',
         'price_class_name_or_value': 'pd-retail-price',
@@ -58,6 +61,9 @@ def build_supermarket_attribs():
     }
     tesco_tags = {
         'link_prefix': 'https://www.tesco.com/groceries/en-GB/products/{0}',
+        'prod_details_type': 'div',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'product-details-tile__main',
         'price_tag_type': 'div',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
@@ -150,13 +156,17 @@ class ProductWrapper:
             element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
+            prod_wrapper = soup.find(shop_attribs_dict['prod_details_type'],
+                                   attrs={shop_attribs_dict['prod_details_attr']: shop_attribs_dict['prod_class_name_or_value']})
+            prod_string = "".join(str(x) for x in prod_wrapper.contents)
+            prod_soup = BeautifulSoup(prod_string, 'html.parser')
             try:
-                price_wrapper = soup.find(shop_attribs_dict['price_tag_type'],
+                price_wrapper = prod_soup.find(shop_attribs_dict['price_tag_type'],
                                    attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict['price_class_name_or_value']})
             except:
                 price_wrapper = None
             try:
-                promo_wrapper = soup.find(shop_attribs_dict['promo_tag_type'],
+                promo_wrapper = prod_soup.find(shop_attribs_dict['promo_tag_type'],
                                           attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict['promo_class_name_or_value']})
             except:
                 promo_wrapper = None
