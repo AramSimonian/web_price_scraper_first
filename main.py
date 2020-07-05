@@ -51,12 +51,15 @@ def build_supermarket_attribs():
     }
     asda_tags = {
         'link_prefix': 'https://groceries.asda.com/product/{0}',
+        'prod_details_type': 'div',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'pdp-main-details',
         'price_tag_type': 'strong',
         'price_tag_attr': 'class',
         'price_class_name_or_value': 'co-product__price pdp-main-details__price',
         'promo_tag_type': 'span',
         'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'co-product__promo-tex',
+        'promo_class_name_or_value': 'co-product__promo-text',
         'pause_for_class_name': 'pdp-main-details__price-container'
     }
     tesco_tags = {
