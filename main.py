@@ -80,6 +80,9 @@ def build_supermarket_attribs():
     }
     waitrose_tags = {
         'link_prefix': 'https://www.waitrose.com/ecom/products/{0}',
+        'prod_details_type': 'section',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'productDetailContainer___1TUHx',
         'price_tag_type': 'span',
         'price_tag_attr': 'data-test',
         'price_class_name_or_value': 'product-pod-price',
@@ -90,6 +93,9 @@ def build_supermarket_attribs():
     }
     superdrug_tags = {
         'link_prefix': 'https://www.superdrug.com/{0}',
+        'prod_details_type': 'div',
+        'prod_details_attr': 'class',
+        'prod_class_name_or_value': 'content-wrapper pdp',
         'price_tag_type': 'span',
         'price_tag_attr': 'itemprop',
         'price_class_name_or_value': 'price',
