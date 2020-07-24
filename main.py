@@ -1,4 +1,3 @@
-import urllib3
 import re
 import sys
 import datetime
