@@ -1,0 +1,12 @@
+.git
+.gitignore
+.idea
+.pytest_cache
+.vs
+__pycache__
+bin
+*.log
+LICENSE
+price_check.txt
+supermarket_html_tags.txt
+README.md
