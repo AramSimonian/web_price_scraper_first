@@ -1,0 +1,78 @@
+Superdrug
+<div class="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+	<span class="pricing__now pricing__now--currency" itemprop="priceCurrency" content="GBP">£</span>
+	<span class="pricing__now" itemprop="price">5.85</span>
+	<p class="pricing__per-item small-text">9.00p each</p>
+	<span class="hide" itemprop="availability" href="http://schema.org/InStock">inStock</span>
+</div>
+
+
+Boots
+<div id="estore_product_price_widget" class="estore_product_price_widget_redesign price-reDesign">
+	<div class="price price_redesign" id="PDP_productPrice">£5.85</div>
+	<div class="productid productid_redesign" id="productId">5345006</div>
+	<span id="schemaOrgPrice" style="display:none;">5.85</span>
+	<input type="hidden" name="cm_productPrice" id="cm_productPrice" value="£5.85">
+		<div class="details details_redesign">65 UNI | £0.09 per 1UNI</div>
+	</div>
+
+
+Waitrose
+	<section class="productPricing___1GkLr">
+		<span data-test="product-pod-price">
+			<span>£8.75</span>
+		</span>
+		<span class="pricePerUnit___1L8TG">(£4.38 each)</span>
+		<span itemprop="offers" itemscope="" itemtype="http://schema.org/Offer" style="display:inline-block;height:0;overflow:hidden;width:0">
+			<span itemprop="price">8.75</span>
+			<meta itemprop="priceCurrency" content="GBP">
+			</span>
+		</section>
+
+
+Sainsburys
+		<div class="pd__cost">
+			<div data-test-id="pd-retail-price" class="pd__cost__total undefined">£5.50</div> 
+			<span data-test-id="pd-unit-price" class="pd__cost__per-unit">8p / ea</span>
+		</div>
+
+		<ul class="pd__promotions" data-test-id="pd-promotions">
+			<li class="pd__promotion">
+				<div>
+					<div class="promotion-message">
+						<a href="/shop/PromotionDisplayView?langId=44&storeId=10151&promotionId=10414148" target="_self" class="promotion-message__link">Only £2.50: Save 50p</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+
+Asda
+		<div class="pdp-main-details__price-container">
+			<strong aria-label="Now £2.80" class="co-product__price pdp-main-details__price">£2.80</strong>
+		</div>
+
+
+Morrisons
+		<div class="bop-price__wrapper" itemprop="offers" itemtype="http://schema.org/Offer">
+			<h2 class="bop-price__current ">
+				<meta itemprop="price" content="6.5">
+					<meta itemprop="priceCurrency" content="GBP">£6.50</h2>
+					<span class="bop-price__per">10p each</span>
+				</div>
+
+
+Tesco
+				<div class="price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item">
+					<div class="">
+						<span>
+							<span class="currency">£</span>
+							<span class="space"> </span>
+							<span data-auto="price-value" class="value">3.60</span>
+						</span>
+					</div>
+				</div>
+
+
+
+				
