@@ -23,8 +23,6 @@ def build_supermarket_attribs():
         <span data-test-id="pd-unit-price" class="pd__cost__per-unit">8p / ea</span>
     </div>
     """
-    """
-    """
     sainsburys_tags = {
         'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
         'prod_details_type': 'div',
