@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM joyzoursky/python-chromedriver
 
 # install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -14,22 +14,22 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 # set display port to avoid crash
 ENV DISPLAY=:99
 
-# upgrade pip
-RUN pip install --upgrade pip
+#upgrade pip
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
-# install selenium
-RUN pip install selenium
+#creating app directory in container (linux machine)
+RUN mkdir c:\home\web_scraper
 
-# install Beautiful Soup
-RUN pip install bs4
+#copying main.py from local directory to container's app directory
+COPY main.py /home/web_scraper/main.py
+COPY requirements.txt /home/web_scraper/requirements.txt
+COPY price_links.csv /home/web_scraper/price_links.csv
 
-# This should install all project references?
+#updating project references
+#CMD pip install bs4
+#CMD pip install selenium
+#CMD pip install urllib3
 RUN pip install -r /home/web_scraper/requirements.txt
 
-# Copy files required to run the program
-RUN cp main.py
-RUN cp supermarket_html_tags.txt
-RUN cp price_links.csv
-
-# Execute the program
+#running main.py in container
 CMD python /home/web_scraper/main.py
