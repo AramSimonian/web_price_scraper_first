@@ -236,6 +236,8 @@ class ProductWrapper:
                 price = '£' + re.findall(r'(\d+\.\d+|\d+)', str(price_wrapper))[0]
         except TimeoutException:
             price = 'Unable to retrieve price - timeout'
+        except IndexError:
+            price = 'Unable to retrieve price'
 
         return price.strip()
 
