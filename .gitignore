@@ -128,3 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /TestResults
+.idea/aws.xml
+.idea/misc.xml
+.idea/web_price_scraper.iml
+.vs/slnx.sqlite
+.vs/web_price_scraper/v16/TestStore/0/000.testlog
+/price_check.txt
