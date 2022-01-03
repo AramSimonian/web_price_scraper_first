@@ -9,9 +9,9 @@ morrisons,yeo valley strawb yog,yeo-valley-family-farm-strawberry-yogurt-2168920
 asda,yeo valley strawb yog,big-pots/yeo-valley-strawberry-yogurt/24151900
 tesco,yeo valley strawb yog,250983242
 waitrose,yeo valley strawb yog,yeo-valley-strawberry-bio-live-yeogurt/053024-26459-26460
-sainsburys,mcvities dark chocolate digestives 433g,mcvities-digestives-dark-chocolate-433g
-morrisons,mcvities dark chocolate digestives 433g,mcvitie-s-digestives-dark-chocolate-408294011
-asda,mcvities dark chocolate digestives 433g,chocolate-biscuits/mc-vities-digestives-dark-chocolate/1000052709666
+#sainsburys,mcvities dark chocolate digestives 433g,mcvities-digestives-dark-chocolate-433g
+#morrisons,mcvities dark chocolate digestives 433g,mcvitie-s-digestives-dark-chocolate-408294011
+#asda,mcvities dark chocolate digestives 433g,chocolate-biscuits/mc-vities-digestives-dark-chocolate/1000052709666
 sainsburys,mcvities dark chocolate digestives 2x316g,mcvities-digestives-dark-chocolate-x2-316g
 morrisons,mcvities dark chocolate digestives 2x316g,mcvitie-s-digestives-dark-chocolate-twin-pack-408291011
 asda,mcvities dark chocolate digestives 2x316g,chocolate-biscuits/mc-vities-digestives-dark-chocolate-twin-pack/1000046413189
@@ -64,3 +64,18 @@ asda,san pellegrino,sparkling-water/san-pellegrino-sparkling-natural-mineral-wat
 tesco,san pellegrino,254485998
 morrisons,san pellegrino,san-pellegrino-sparkling-natural-mineral-water-215922011
 waitrose,san pellegrino,san-pellegrino-sparkling-natural-mineral-water/069832-35400-35401
+sainsburys,,sainsburys-wholegrain-blueberry-wheats-500g
+asda,blueberry wheats,wheat-biscuits-mini-wheats/kelloggs-wheats-blueberry-cereal/1000330943200
+tesco,blueberry wheats,309786149
+morrisons,blueberry wheats,kellogg-s-blueberry-wheats-569044011
+waitrose,blueberry wheats,essential-blueberry-wheats/412042-437580-437581
+sainsburys,doritos cheesy,doritos-tangy-cheese-corn-chips-225g
+asda,doritos cheesy,910002962553
+tesco,doritos cheesy,296049236
+morrisons,doritos cheesy,doritos-tangy-cheese-sharing-tortilla-chips-365869011
+waitrose,doritos cheesy,doritos-tangy-cheese/822298-307234-307235
+#sainsburys,,
+#asda,,
+#tesco,,
+#morrisons,,
+#waitrose,,
