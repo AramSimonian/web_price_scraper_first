@@ -1,3 +1,5 @@
+import os
+import platform
 import re
 import sys
 import datetime
@@ -271,7 +273,13 @@ def main():
     #chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
 
-    this.driver = webdriver.Chrome(options=chrome_options)
+    this_os = platform.system()
+    if this_os == 'Linux':
+        chrome_exe_name = './chromedriver'
+    elif this_os == 'Windows':
+        chrome_exe_name = './chromedriver.exe'
+
+    this.driver = webdriver.Chrome(options=chrome_options, executable_path=chrome_exe_name)
 
     output = ''
     product_wrapper = ProductWrapper()
