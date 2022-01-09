@@ -134,3 +134,6 @@ dmypy.json
 .vs/slnx.sqlite
 .vs/web_price_scraper/v16/TestStore/0/000.testlog
 /price_check.txt
+chromedriver.exe
+.vs/web_price_scraper/v16/.suo
+.vscode/settings.json
