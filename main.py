@@ -6,11 +6,13 @@ import datetime
 import csv
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome import service
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 
 this = sys.modules[__name__]
 this.all_tags = {}
@@ -270,16 +272,18 @@ def main():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window_size=1420,1080')
-    #chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
 
     this_os = platform.system()
     if this_os == 'Linux':
         chrome_exe_name = './chromedriver'
     elif this_os == 'Windows':
-        chrome_exe_name = './chromedriver.exe'
+        chrome_exe_name = '.\chromedriver.exe'
 
-    this.driver = webdriver.Chrome(options=chrome_options, executable_path=chrome_exe_name)
+    s = Service(chrome_exe_name)
+
+    this.driver = webdriver.Chrome(options=chrome_options, service=s)
 
     output = ''
     product_wrapper = ProductWrapper()
