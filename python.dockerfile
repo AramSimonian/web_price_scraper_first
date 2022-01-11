@@ -25,7 +25,7 @@ ENV PORT=3000
 RUN pip install --upgrade pip
 
 # install selenium
-RUN pip3 install selenium
+RUN pip3 install --upgrade selenium
 
 # install Beautiful Soup
 RUN pip3 install bs4
