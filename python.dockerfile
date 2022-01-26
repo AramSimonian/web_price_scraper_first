@@ -2,6 +2,7 @@ FROM python:3.9
 LABEL author="Aram Simonian"
 
 WORKDIR /app/
+# RUN mkdir /app/output
 
 # debian
 # install google chrome
@@ -18,17 +19,18 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /app/
 
 # set display port to avoid crash
 ENV DISPLAY=:99
-
-ENV PORT=3000
+ENV PORT=5050
+# EXPOSE $PORT
+ENV PYTHONUNBUFFERED=1
 
 # upgrade pip
 RUN pip install --upgrade pip
 
 # install selenium
-RUN pip3 install --upgrade selenium
+RUN pip install --upgrade selenium
 
 # install Beautiful Soup
-RUN pip3 install bs4
+RUN pip install bs4
 
 # Copy files required to run the program
 COPY ./main.py /app/
@@ -36,4 +38,4 @@ COPY ./price_links.csv /app/
 
 # Execute the program
 #CMD python3 /app/main.py
-ENTRYPOINT [ "python3", "/app/main.py" ]
+ENTRYPOINT [ "python3", "main.py" ]
