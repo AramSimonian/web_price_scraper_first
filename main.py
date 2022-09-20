@@ -1,9 +1,11 @@
+from dotenv import load_dotenv
 import os
 import platform
 import re
 import sys
-import datetime
 import csv
+import mysql.connector as msq
+from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome import service
@@ -17,140 +19,81 @@ from selenium.webdriver.chrome.service import Service
 this = sys.modules[__name__]
 this.all_tags = {}
 this.driver = ''
+this.db_connection = ''
+this.db_cursor = ''
 
 timeout = 3
 
-def build_supermarket_attribs():
-    """
-    <div class="pd__cost">
-        <div data-test-id="pd-retail-price" class="pd__cost__total undefined">£5.50</div>
-        <span data-test-id="pd-unit-price" class="pd__cost__per-unit">8p / ea</span>
-    </div>
-    """
-    sainsburys_tags = {
-        'link_prefix': 'https://www.sainsburys.co.uk/shop/gb/groceries/product/details/{0}',
-        'prod_details_type': 'div',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'pd__wrapper',
-        'price_tag_type': 'div',
-        'price_tag_attr': 'data-test-id',
-        'price_class_name_or_value': 'pd-retail-price',
-        'promo_tag_type': 'a',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'promotion-message__link',
-        'pause_for_class_name': 'pd__cost__per-unit',        # id = pd-unit-price
-        'modal_button_class': ''
-    }
-    morrisons_tags = {
-        'link_prefix': 'https://groceries.morrisons.com/products/{0}',
-        'prod_details_type': 'section',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'bop-section bop-basicInfo',
-        'price_tag_type': 'meta',
-        'price_tag_attr': 'itemprop',
-        'price_class_name_or_value': 'price',
-        'promo_tag_type': 'p',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'bop-promotion__description',
-        'pause_for_class_name': 'ft-footer',
-        'pause_for_element_id': 'productInformation',
-        'modal_button_class': ''        # id = onetrust-accept-btn-handler
-    }
-    asda_tags = {
-        'link_prefix': 'https://groceries.asda.com/product/{0}',
-        'prod_details_type': 'div',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'pdp-main-details',
-        'price_tag_type': 'strong',
-        'price_tag_attr': 'class',
-        'price_class_name_or_value': 'co-product__price pdp-main-details__price',
-        'promo_tag_type': 'span',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'co-product__promo-text',
-        'pause_for_class_name': 'pdp-main-details__price-container',
-        'pause_for_element_id': '',
-        'modal_button_class': ''
-    }
-    tesco_tags = {
-        'link_prefix': 'https://www.tesco.com/groceries/en-GB/products/{0}',
-        'prod_details_type': 'div',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'product-details-tile__main',
-        'price_tag_type': 'div',
-        'price_tag_attr': 'class',
-        'price_class_name_or_value': 'price-per-sellable-unit price-per-sellable-unit--price price-per-sellable-unit--price-per-item',
-        'promo_tag_type': 'div',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'list-item-content promo-content-small',
-        'pause_for_class_name': 'price-details--wrapper',
-        'pause_for_element_id': '',
-        'modal_button_class': ''
-    }
-    waitrose_tags = {
-        'link_prefix': 'https://www.waitrose.com/ecom/products/{0}',
-        'prod_details_type': 'section',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'productDetailContainer___3jFlc',
-        'price_tag_type': 'span',
-        'price_tag_attr': 'data-test',
-        'price_class_name_or_value': 'product-pod-price',
-        'promo_tag_type': 'span',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'offerDescription___1A6Ew underline___2kMYl',
-        'pause_for_class_name': '',
-        'pause_for_element_id': 'fullDetails',
-        'modal_button_class': 'button___1TVlR secondary___GAGEQ'
-    }
-    superdrug_tags = {
-        'link_prefix': 'https://www.superdrug.com/{0}',
-        'prod_details_type': 'div',
-        'prod_details_attr': 'class',
-        'prod_class_name_or_value': 'content-wrapper pdp',
-        'price_tag_type': 'span',
-        'price_tag_attr': 'itemprop',
-        'price_class_name_or_value': 'price',
-        'promo_tag_type': 'a',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'promotion__item',
-        'pause_for_class_name': 'bvRatingReview',
-        'pause_for_element_id': '',
-        'modal_button_class': ''
-    }
+def clean_text(text_to_clean):
+    output = text_to_clean.strip()
+    output = output.replace('\t', '').replace('\n', '').replace('\r', '').replace('  ', '')
 
-    """
-    <div id="estore_product_price_widget" class="estore_product_price_widget_redesign price-reDesign">
-        <div class="price price_redesign" id="PDP_productPrice">£5.85</div>
-        <div class="productid productid_redesign" id="productId">5345006</div>
-        <span id="schemaOrgPrice" style="display:none;">5.85</span>
-        <input type="hidden" name="cm_productPrice" id="cm_productPrice" value="£5.85">
-        <div class="details details_redesign">65 UNI | £0.09 per 1UNI</div>
-    </div>
-    """
-    boots_tags = {
-        'link_prefix': 'https://www.boots.com/{0}',
-        'prod_details_type': 'div',
-        'prod_details_attr': 'id',
-        'prod_class_name_or_value': 'estore_pdp_trcol',
-        'price_tag_type': 'div',
-        'price_tag_attr': 'id',
-        'price_class_name_or_value': 'PDP_productPrice',
-        'promo_tag_type': 'li',
-        'promo_tag_attr': 'class',
-        'promo_class_name_or_value': 'pdp-promotion-redesign',
-        'pause_for_class_name': 'global-footer',
-        'pause_for_element_id': '',
-        'modal_button_class': ''
-    }
+    return output
 
-    output = {
-        'sainsburys': sainsburys_tags,
-        'morrisons': morrisons_tags,
-        'asda': asda_tags,
-        'tesco': tesco_tags,
-        'waitrose': waitrose_tags,
-        'superdrug': superdrug_tags,
-        'boots': boots_tags
-    }
+def get_db_connection(host, port, db_name, username, password):
+    this.db_connection = msq.connect(host=host,
+                             port=port,
+                             unix_socket="run/mysqld/mysqld10.sock",
+                             database=db_name,
+                             user=username,
+                             password=password)
+    this.db_cursor = this.db_connection.cursor()
+    return
+
+def execute_sql(sql, with_header):
+    this.db_cursor.execute(sql)
+
+    # fetchall outputs the data in the form of a list of tuples
+    if with_header:
+        results = [this.db_cursor.column_names] + this.db_cursor.fetchall()
+    else:
+        results = this.db_cursor.fetchall()
+
+    return results
+
+def build_retailer_attribs():
+    sm_attribs = execute_sql("SELECT * FROM vw_retailer", False)
+    output = {}
+
+    for sm_attrib in sm_attribs:
+        (retailer_id,
+        retailer_name,
+        link_prefix,
+        prod_details_type,
+        prod_details_attr,
+        prod_class_name_or_value,
+        price_tag_type,
+        price_tag_attr,
+        price_class_name_or_value,
+        price_per_tag_type,
+        price_per_tag_attr,
+        price_per_class_name_or_value,
+        promo_tag_type,
+        promo_tag_attr,
+        promo_class_name_or_value,
+        pause_for_class_name,
+        pause_for_element_id,
+        modal_button_class, _ ) = sm_attrib
+        output[retailer_name] = {
+            'retailer_id': retailer_id,
+            'link_prefix': link_prefix,
+            'prod_details_type': prod_details_type,
+            'prod_details_attr': prod_details_attr,
+            'prod_class_name_or_value': prod_class_name_or_value,
+            'price_tag_type': price_tag_type,
+            'price_tag_attr': price_tag_attr,
+            'price_class_name_or_value': price_class_name_or_value,
+            'price_per_tag_type': price_per_tag_type,
+            'price_per_tag_attr': price_per_tag_attr,
+            'price_per_class_name_or_value': price_per_class_name_or_value,
+            'promo_tag_type': promo_tag_type,
+            'promo_tag_attr': promo_tag_attr,
+            'promo_class_name_or_value': promo_class_name_or_value,
+            'pause_for_class_name': pause_for_class_name,
+            'pause_for_element_id': pause_for_element_id,
+            'modal_button_class': modal_button_class
+        }
+
     return output
 
 
@@ -179,6 +122,14 @@ def get_product_detail_row(filename):
             else:
                 yield row
 
+def get_retailer_product_by_category():
+    price_date = datetime.today().strftime('%Y-%m-%d')
+    args = (price_date,)
+    #this.db_cursor.callproc('usp_retailer_product_select_2', args)
+
+    this.db_cursor.execute('SELECT * FROM vw_retailer_product_select;')
+    this.db_cursor.fetchall()
+    return
 
 class ProductWrapper:
     def extract_wrappers(self, shop_attribs_dict, product_link):
@@ -189,6 +140,8 @@ class ProductWrapper:
 #                modal_cookie_button = this.driver.find_element_by_class_name(shop_attribs_dict['modal_button_class'])
 #                modal_cookie_button.click()
 
+            # The class or element here is used to allow enough of the page to load
+            # that we could be sure of extracting the details we need
             if shop_attribs_dict['pause_for_class_name'] != '':
                 element_present = EC.presence_of_element_located((By.CLASS_NAME, shop_attribs_dict['pause_for_class_name']))
             elif shop_attribs_dict['pause_for_element_id'] != '':
@@ -201,9 +154,10 @@ class ProductWrapper:
             prod_soup = BeautifulSoup(prod_string, 'html.parser')
 
             price_wrapper = self.get_price_wrapper(prod_soup, shop_attribs_dict)
+            price_per_wrapper = self.get_price_per_wrapper(prod_soup, shop_attribs_dict)
             promo_wrapper =  self.get_promo_wrapper(prod_soup, shop_attribs_dict)
 
-            output = price_wrapper, promo_wrapper
+            output = price_wrapper, price_per_wrapper, promo_wrapper
         except Exception as e:
             print('Error in extract_wrappers: ', e)
             output = None, None
@@ -230,36 +184,60 @@ class ProductWrapper:
 
         return promo_wrapper
 
+    def get_price_per_wrapper(self, prod_soup, shop_attribs_dict):
+        try:
+            price_per_wrapper = prod_soup.find(shop_attribs_dict['price_per_tag_type'],
+                                               attrs={shop_attribs_dict['price_per_tag_attr']: shop_attribs_dict['price_per_class_name_or_value']})
+        except:
+            price_per_wrapper = None
+
+        return price_per_wrapper
+
     def get_price(self, prod_wrapper):
         try:
-            # prod_wrapper is a tuple comprising price and offer
+            # prod_wrapper is a tuple comprising price, price_per and offer
             price_wrapper = prod_wrapper[0]
             if price_wrapper is None:
-                price = 'Unable to locate price wrapper'
+                price = 0 #'Unable to locate price wrapper'
             else:
-                price = '£' + re.findall(r'(\d+\.\d+|\d+)', str(price_wrapper))[0]
-        except TimeoutException:
-            price = 'Unable to retrieve price - timeout'
-        except IndexError:
-            price = 'Unable to retrieve price'
+                price = float(re.findall(r'(\d+\.\d+|\d+)', str(price_wrapper))[0])
 
-        return price.strip()
+        except:
+            price = 0 #'Unable to retrieve price'
+
+        return price
+
+    def get_price_per(self, prod_wrapper):
+        try:
+            # prod_wrapper is a tuple comprising price, price_per and offer
+            price_per_wrapper = prod_wrapper[1]
+            if price_per_wrapper is None:
+                price_per = 0 #'Unable to locate price_per wrapper'
+            else:
+                price_per = float(re.findall(r'(\d+\.\d+|\d+)', str(price_per_wrapper))[0])
+
+        except:
+            price = 0 #'Unable to retrieve price per'
+
+        return price_per
 
     def get_promo(self, prod_wrapper):
         try:
-            # prod_wrapper is a tuple comprising price and offer
-            promo_wrapper = prod_wrapper[1]
-            if (promo_wrapper is None) or (len(promo_wrapper.text.strip()) == 0):
+            # prod_wrapper is a tuple comprising price, price_per and offer
+            promo_wrapper = prod_wrapper[2]
+            if (promo_wrapper is None):
                 promo = ''
             else:
-                promo = ' - Offer - ' + promo_wrapper.text
+                promo = clean_text(promo_wrapper.text)
+                if len(promo) > 0 and promo.startswith('Offer') == False:
+                    promo = ' Offer - ' + promo
         except:
             promo = ''
 
-        return promo.strip()
+        return promo
 
 def write_output(price_list):
-    with open("price_check.txt", "w", encoding='utf8') as file:
+    with open("./price_check.txt", "w", encoding='utf8') as file:
         date = datetime.datetime.now().date()
         hour = datetime.datetime.now().hour
         minute = datetime.datetime.now().minute
@@ -267,19 +245,26 @@ def write_output(price_list):
         file.write(price_list)
 
 def main():
-    this.all_tags = build_supermarket_attribs()
+    load_dotenv()
+    get_db_connection(os.environ.get('ps_host'),
+                        os.environ.get('ps_port'),
+                        os.environ.get('ps_db_name'),
+                        os.environ.get('ps_username'),
+                        os.environ.get('ps_password'))
+
+    this.all_tags = build_retailer_attribs()
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--window_size=1420,1080')
-    chrome_options.add_argument('--disable-gpu')
+#    chrome_options.add_argument('--no-sandbox')
+#    chrome_options.add_argument('--window_size=1420,1080')
+#    chrome_options.add_argument('--disable-gpu')
     
     # Enabling this option blocks Sainsbury's prices
     #chrome_options.add_argument('--headless')
 
     this_os = platform.system()
     if this_os == 'Linux':
-        chrome_exe_name = './chromedriver'
+        chrome_exe_name = './chromedriver/chromedriver'
     elif this_os == 'Windows':
         chrome_exe_name = '.\chromedriver.exe'
 
@@ -290,24 +275,35 @@ def main():
     output = ''
     product_wrapper = ProductWrapper()
 
-    price_data = get_product_detail_row('price_links.csv')
+    #retailer_products = execute_sql('SELECT * FROM vw_retailer_products', False)
+    #retailer_products = get_retailer_product_by_category()
+    retailer_products = execute_sql('SELECT * FROM vw_retailer_product_select', False)
 
-    for product_item in price_data:
-        if product_item != '':
-            shop, product_type, product_stub = product_item
-            shop_attribs_dict = get_shop_attribs_dict(shop)
+    for retailer_product in retailer_products:
+        (retailer_product_id,
+         product_id,
+         product_name,
+         retailer_id,
+         retailer_name,
+         product_link_suffix) = retailer_product
 
-            product_link = build_product_link(shop_attribs_dict['link_prefix'], product_stub)
+        shop_attribs_dict = get_shop_attribs_dict(retailer_name)
+        product_link = shop_attribs_dict['link_prefix'] + product_link_suffix
 
-            wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
-            price = product_wrapper.get_price(wrappers)
-            promo = product_wrapper.get_promo(wrappers)
+        wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
+        price = product_wrapper.get_price(wrappers)
+        price_per = product_wrapper.get_price_per(wrappers)
+        promo = product_wrapper.get_promo(wrappers)
 
-            output += '{0}, {1}: {2} {3}\n'.format(shop.title(), product_type.title(), price, promo)
+        current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        offer_date = datetime.today().strftime('%Y-%m-%d')
 
-    write_output(output)
+        arg_list = (retailer_product_id, current_time, price, price_per, offer_date, offer_date)
+
+        this.db_cursor.callproc('usp_price_upsert', arg_list)
+        this.db_connection.commit()
+
 
     this.driver.quit()
-
 
 main()
