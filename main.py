@@ -33,7 +33,7 @@ def clean_text(text_to_clean):
 def get_db_connection(host, port, db_name, username, password):
     this.db_connection = msq.connect(host=host,
                              port=port,
-                             unix_socket="run/mysqld/mysqld10.sock",
+                             unix_socket="/run/mysqld/mysqld10.sock",
                              database=db_name,
                              user=username,
                              password=password)
@@ -255,8 +255,8 @@ def main():
     this.all_tags = build_retailer_attribs()
 
     chrome_options = webdriver.ChromeOptions()
-#    chrome_options.add_argument('--no-sandbox')
-#    chrome_options.add_argument('--window_size=1420,1080')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--window_size=1420,1080')
 #    chrome_options.add_argument('--disable-gpu')
     
     # Enabling this option blocks Sainsbury's prices
@@ -264,7 +264,7 @@ def main():
 
     this_os = platform.system()
     if this_os == 'Linux':
-        chrome_exe_name = './chromedriver/chromedriver'
+        chrome_exe_name = './chromedriver'
     elif this_os == 'Windows':
         chrome_exe_name = '.\chromedriver.exe'
 
