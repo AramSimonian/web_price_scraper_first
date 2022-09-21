@@ -298,7 +298,7 @@ def main():
         current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         offer_date = datetime.today().strftime('%Y-%m-%d')
 
-        arg_list = (retailer_product_id, current_time, price, price_per, offer_date, offer_date)
+        arg_list = (retailer_product_id, current_time, price, price_per, promo, offer_date, offer_date)
 
         this.db_cursor.callproc('usp_price_upsert', arg_list)
         this.db_connection.commit()
