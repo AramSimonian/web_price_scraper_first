@@ -125,7 +125,6 @@ def get_product_detail_row(filename):
 def get_retailer_product_by_category():
     price_date = datetime.today().strftime('%Y-%m-%d')
     args = (price_date,)
-    #this.db_cursor.callproc('usp_retailer_product_select_2', args)
 
     this.db_cursor.execute('SELECT * FROM vw_retailer_product_select;')
     this.db_cursor.fetchall()
@@ -229,8 +228,8 @@ class ProductWrapper:
                 promo = ''
             else:
                 promo = clean_text(promo_wrapper.text)
-                if len(promo) > 0 and promo.startswith('Offer') == False:
-                    promo = ' Offer - ' + promo
+                if len(promo) = 0:
+                    promo = ''
         except:
             promo = ''
 
@@ -275,8 +274,6 @@ def main():
     output = ''
     product_wrapper = ProductWrapper()
 
-    #retailer_products = execute_sql('SELECT * FROM vw_retailer_products', False)
-    #retailer_products = get_retailer_product_by_category()
     retailer_products = execute_sql('SELECT * FROM vw_retailer_product_select', False)
 
     for retailer_product in retailer_products:
