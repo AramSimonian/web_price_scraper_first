@@ -213,7 +213,7 @@ class ProductWrapper:
             if price_per_wrapper is None:
                 price_per = 0 #'Unable to locate price_per wrapper'
             else:
-                price_per = float(re.findall(r'(\d+\.\d+|\d+)', str(price_per_wrapper))[0])
+                price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper))[0])
 
         except:
             price = 0 #'Unable to retrieve price per'
@@ -228,12 +228,45 @@ class ProductWrapper:
                 promo = ''
             else:
                 promo = clean_text(promo_wrapper.text)
-                if len(promo) = 0:
+                if len(promo) == 0:
                     promo = ''
         except:
             promo = ''
 
         return promo
+
+    def get_offer_dates(self, promo_text):
+
+        date_format_dmy = '%d/%m/%Y'
+        date_format_ymd = '%Y-%m-%d'
+        try:
+            if len(promo_text)==0:
+                offer_start_date = '2000-01-01'
+                offer_end_date = '2000-01-01'
+            else:
+                # Find all matches for dd/mm/yyyy and sort them
+                offer_dates = re.findall(r'\d{2}\/\d{2}\/\d{4}', promo_text)
+               # offer_dates.sort()
+
+                if offer_dates is None or len(offer_dates)==0:
+                    # No dates found, but there is a promo, so there is an
+                    # offer start date at least, i.e. today
+                    offer_start_date = datetime.today().strftime(date_format_ymd)
+                    offer_end_date = '2000-01-01'
+                elif len(offer_dates)==1:
+                    # Just one date found, so probably the end date
+                    offer_start_date = datetime.today().strftime(date_format_ymd)
+                    offer_end_date = datetime.strptime(offer_dates[0], date_format_dmy).strftime(date_format_ymd)
+                elif len(offer_dates)>1:
+                    # Two or more dates found, so probably the start & end dates
+                    offer_start_date = datetime.strptime(offer_dates[0], date_format_dmy).strftime(date_format_ymd)
+                    offer_end_date = datetime.strptime(offer_dates[1], date_format_dmy).strftime(date_format_ymd)
+        except:
+            # Prepare for duff/null dates within promo text
+            offer_start_date = '2000-01-01'
+            offer_end_date = '2000-01-01'
+
+        return offer_start_date, offer_end_date
 
 def write_output(price_list):
     with open("./price_check.txt", "w", encoding='utf8') as file:
@@ -290,12 +323,12 @@ def main():
         wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
         price = product_wrapper.get_price(wrappers)
         price_per = product_wrapper.get_price_per(wrappers)
-        promo = product_wrapper.get_promo(wrappers)
+        promo_text = product_wrapper.get_promo(wrappers)
 
         current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        offer_date = datetime.today().strftime('%Y-%m-%d')
+        offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
 
-        arg_list = (retailer_product_id, current_time, price, price_per, promo, offer_date, offer_date)
+        arg_list = (retailer_product_id, current_time, price, price_per, promo_text, offer_start_date, offer_end_date)
 
         this.db_cursor.callproc('usp_price_upsert', arg_list)
         this.db_connection.commit()
