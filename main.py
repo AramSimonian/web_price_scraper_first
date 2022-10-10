@@ -22,7 +22,7 @@ this.driver = ''
 this.db_connection = ''
 this.db_cursor = ''
 
-timeout = 3
+timeout = 2
 
 def clean_text(text_to_clean):
     output = text_to_clean.strip()
