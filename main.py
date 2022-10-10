@@ -130,6 +130,9 @@ def get_retailer_product_by_category():
     this.db_cursor.fetchall()
     return
 
+def coalesce(*arg):
+    return next((a for a in arg if a is not None), None)
+
 class ProductWrapper:
     def extract_wrappers(self, shop_attribs_dict, product_link):
         try:
@@ -235,6 +238,34 @@ class ProductWrapper:
 
         return promo
 
+    def get_tesco_promo_price(self, promo_text):
+        try:
+            # Tesco-specific text
+            # £2.50 Clubcard PriceOffer [...]
+            tesco_promo_price = float(re.search(r'^((£\d{1,2}(\.\d{2})?)|(\d{2}p)) Clubcard', promo_text))
+        except:
+            tesco_promo_price = None
+
+        return tesco_promo_price
+
+    def get_multibuy_promo_price(self, promo_text):
+        try:
+            # Used by Morrisons, Asda & Tesco
+            # (Any/Buy) 3 for £4.25 [...]
+            multibuy_text = re.search(r'\d{1} for ((£\d{1,2}(\.\d{2})?)|(\d{2}p))', promo_text)
+            quantity = float(split(multibuy_text, ' for £')[0])
+            total_promo_cost = float(split(multibuy_text, ' for £')[1])
+            multibuy_promo_price = total_promo_cost / quantity
+        except:
+            multibuy_promo_price = None
+
+        return multibuy_promo_price
+
+    def get_promo_price(self, promo_text):
+        promo_price = coalesce(self.get_multibuy_promo_price(promo_text), self.get_tesco_promo_price(promo_text))
+
+        return promo_price
+
     def get_offer_dates(self, promo_text):
 
         date_format_dmy = '%d/%m/%Y'
@@ -321,9 +352,11 @@ def main():
         product_link = shop_attribs_dict['link_prefix'] + product_link_suffix
 
         wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
-        price = product_wrapper.get_price(wrappers)
-        price_per = product_wrapper.get_price_per(wrappers)
+
+        # Some promo prices need to be extracted from promo text
         promo_text = product_wrapper.get_promo(wrappers)
+        price = coalesce(product_wrapper.get_promo_price(promo_text), product_wrapper.get_price(wrappers))
+        price_per = product_wrapper.get_price_per(wrappers)
 
         current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
