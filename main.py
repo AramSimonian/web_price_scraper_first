@@ -133,6 +133,16 @@ def get_retailer_product_by_category():
 def coalesce(*arg):
     return next((a for a in arg if a is not None), None)
 
+def price_to_number(price):
+    if price.startswith('£'):
+        price_value = float(price[1:])
+    elif price.endswith('p'):
+        price_value = float(price[:-1])
+    else:
+        price_value = price
+
+    return price_value
+
 class ProductWrapper:
     def extract_wrappers(self, shop_attribs_dict, product_link):
         try:
@@ -202,7 +212,7 @@ class ProductWrapper:
             if price_wrapper is None:
                 price = 0 #'Unable to locate price wrapper'
             else:
-                price = float(re.findall(r'(\d+\.\d+|\d+)', str(price_wrapper))[0])
+                price = float(re.search(r'(\d+\.\d+|\d+)', str(price_wrapper)).group())
 
         except:
             price = 0 #'Unable to retrieve price'
@@ -216,7 +226,7 @@ class ProductWrapper:
             if price_per_wrapper is None:
                 price_per = 0 #'Unable to locate price_per wrapper'
             else:
-                price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper))[0])
+                price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
 
         except:
             price = 0 #'Unable to retrieve price per'
@@ -242,17 +252,18 @@ class ProductWrapper:
         try:
             # Tesco-specific text
             # £2.50 Clubcard PriceOffer [...]
-            tesco_promo_price = float(re.search(r'^((£\d{1,2}(\.\d{2})?)|(\d{2}p)) Clubcard', promo_text))
+            tesco_promo_price = re.match(r'(£\d{1,2}(\.\d{2})?)|(\d{2}p)', promo_text)
+            tesco_promo_price_value = price_to_number(tesco_promo_price.group())
         except:
-            tesco_promo_price = None
+            tesco_promo_price_value = None
 
-        return tesco_promo_price
+        return tesco_promo_price_value
 
     def get_multibuy_promo_price(self, promo_text):
         try:
             # Used by Morrisons, Asda & Tesco
             # (Any/Buy) 3 for £4.25 [...]
-            multibuy_text = re.search(r'\d{1} for ((£\d{1,2}(\.\d{2})?)|(\d{2}p))', promo_text)
+            multibuy_text = re.search(r'\d{1} for (£\d{1,2}(\.\d{2})?)', promo_text).group()
             quantity = float(split(multibuy_text, ' for £')[0])
             total_promo_cost = float(split(multibuy_text, ' for £')[1])
             multibuy_promo_price = total_promo_cost / quantity
@@ -277,7 +288,6 @@ class ProductWrapper:
             else:
                 # Find all matches for dd/mm/yyyy and sort them
                 offer_dates = re.findall(r'\d{2}\/\d{2}\/\d{4}', promo_text)
-               # offer_dates.sort()
 
                 if offer_dates is None or len(offer_dates)==0:
                     # No dates found, but there is a promo, so there is an
@@ -355,7 +365,9 @@ def main():
 
         # Some promo prices need to be extracted from promo text
         promo_text = product_wrapper.get_promo(wrappers)
-        price = coalesce(product_wrapper.get_promo_price(promo_text), product_wrapper.get_price(wrappers))
+        promo_price = product_wrapper.get_promo_price(promo_text)
+        non_promo_price = product_wrapper.get_price(wrappers)
+        price = coalesce(promo_price, non_promo_price)
         price_per = product_wrapper.get_price_per(wrappers)
 
         current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
