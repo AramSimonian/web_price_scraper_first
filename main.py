@@ -22,7 +22,7 @@ this.driver = ''
 this.db_connection = ''
 this.db_cursor = ''
 
-timeout = 2
+timeout = 3
 
 def clean_text(text_to_clean):
     output = text_to_clean.strip()
@@ -160,14 +160,17 @@ class ProductWrapper:
                 element_present = EC.presence_of_element_located((By.ID, shop_attribs_dict['pause_for_element_id']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-            prod_wrapper = soup.find(shop_attribs_dict['prod_details_type'],
-                                   attrs={shop_attribs_dict['prod_details_attr']: shop_attribs_dict['prod_class_name_or_value']})
-            prod_string = "".join(str(x) for x in prod_wrapper.contents)
-            prod_soup = BeautifulSoup(prod_string, 'html.parser')
+#            prod_wrapper = soup.find(shop_attribs_dict['prod_details_type'],
+#                                   attrs={shop_attribs_dict['prod_details_attr']: shop_attribs_dict['prod_class_name_or_value']})
+#            prod_string = "".join(str(x) for x in prod_wrapper.contents)
+#            prod_soup = BeautifulSoup(prod_string, 'html.parser')
 
-            price_wrapper = self.get_price_wrapper(prod_soup, shop_attribs_dict)
-            price_per_wrapper = self.get_price_per_wrapper(prod_soup, shop_attribs_dict)
-            promo_wrapper =  self.get_promo_wrapper(prod_soup, shop_attribs_dict)
+#            price_wrapper = self.get_price_wrapper(prod_soup, shop_attribs_dict)
+#            price_per_wrapper = self.get_price_per_wrapper(prod_soup, shop_attribs_dict)
+#            promo_wrapper =  self.get_promo_wrapper(prod_soup, shop_attribs_dict)
+            price_wrapper = self.get_price_wrapper(soup, shop_attribs_dict)
+            price_per_wrapper = self.get_price_per_wrapper(soup, shop_attribs_dict)
+            promo_wrapper =  self.get_promo_wrapper(soup, shop_attribs_dict)
 
             output = price_wrapper, price_per_wrapper, promo_wrapper
         except Exception as e:
@@ -181,7 +184,8 @@ class ProductWrapper:
             price_wrapper = prod_soup.find(shop_attribs_dict['price_tag_type'],
                                            attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict[
                                                'price_class_name_or_value']})
-        except:
+        except Exception as e:
+            print('Error in get_price_wrapper: ', e)
             price_wrapper = None
 
         return price_wrapper
@@ -191,7 +195,8 @@ class ProductWrapper:
             promo_wrapper = prod_soup.find(shop_attribs_dict['promo_tag_type'],
                                            attrs={shop_attribs_dict['promo_tag_attr']: shop_attribs_dict[
                                                'promo_class_name_or_value']})
-        except:
+        except Exception as e:
+            print('Error in get_promo_wrapper: ', e)
             promo_wrapper = None
 
         return promo_wrapper
@@ -200,7 +205,8 @@ class ProductWrapper:
         try:
             price_per_wrapper = prod_soup.find(shop_attribs_dict['price_per_tag_type'],
                                                attrs={shop_attribs_dict['price_per_tag_attr']: shop_attribs_dict['price_per_class_name_or_value']})
-        except:
+        except Exception as e:
+            print('Error in get_price_per_wrapper: ', e)
             price_per_wrapper = None
 
         return price_per_wrapper
@@ -210,12 +216,23 @@ class ProductWrapper:
             # prod_wrapper is a tuple comprising price, price_per and offer
             price_wrapper = prod_wrapper[0]
             if price_wrapper is None:
-                price = 0 #'Unable to locate price wrapper'
+                price_pounds = 0 #'Unable to locate price wrapper'
+                price_pence = 0
             else:
-                price = float(re.search(r'(\d+\.\d+|\d+)', str(price_wrapper)).group())
+                price_pounds_match = re.search(r'£?(\d+\.\d+|\d+[^p]', str(price_wrapper))
+                if price_pounds_match:
+                    price_pounds = float(price_to_number(price_pounds_match.group()))
 
-        except:
-            price = 0 #'Unable to retrieve price'
+                price_pence_match = re.search(r'[^£](\d+p?)', str(price_wrapper))
+                if price_pence_match:
+                    price_pence = float(price_to_number(price_pence_match.group()))
+
+        except Exception as e:
+            print('Error in get_price: ', e)
+            price_pounds = 0  # 'Unable to retrieve price'
+            price_pence = 0
+            
+        price = coalesce(price_pounds, price_pence, 0)
 
         return price
 
@@ -228,7 +245,8 @@ class ProductWrapper:
             else:
                 price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
 
-        except:
+        except Exception as e:
+            print('Error in get_price: ', e)
             price = 0 #'Unable to retrieve price per'
 
         return price_per
@@ -252,7 +270,7 @@ class ProductWrapper:
         try:
             # Tesco-specific text
             # £2.50 Clubcard PriceOffer [...]
-            tesco_promo_price = re.match(r'(£\d{1,2}(\.\d{2})?)|(\d{2}p)', promo_text)
+            tesco_promo_price = re.search(r'(£\d{1,2}(\.\d{2})?)|(\d{2}p)', promo_text)
             tesco_promo_price_value = price_to_number(tesco_promo_price.group())
         except:
             tesco_promo_price_value = None
@@ -348,10 +366,15 @@ def main():
     output = ''
     product_wrapper = ProductWrapper()
 
-    retailer_products = execute_sql('SELECT * FROM vw_retailer_product_select', False)
+    if len(sys.argv)==2 and sys.argv[1].isnumeric():
+        where_category_id = '= ' + sys.argv[1]
+    else:
+        where_category_id = '>=0'
+    retailer_products = execute_sql('SELECT * FROM vw_retailer_product_select WHERE category_id {}'.format(where_category_id), False)
 
     for retailer_product in retailer_products:
-        (retailer_product_id,
+        (category_id,
+         retailer_product_id,
          product_id,
          product_name,
          retailer_id,
