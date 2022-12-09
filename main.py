@@ -219,13 +219,28 @@ class ProductWrapper:
                 price_pounds = 0 #'Unable to locate price wrapper'
                 price_pence = 0
             else:
-                price_pounds_match = re.search(r'£?(\d+\.\d+|\d+[^p]', str(price_wrapper))
+                # Attempt to match pattern £33.33
+                if len(price_wrapper.text) > 0:
+                    price_wrapper_text = price_wrapper.text
+                elif len(price_wrapper['content']) > 0:
+                    price_wrapper_text = price_wrapper['content']
+                elif len(price_wrapper.span.text)>0:
+                    price_wrapper_text = price_wrapper.span.text
+                else:
+                    print('Unable to extract price from wrapper')
+                    price_wrapper_text = ''
+
+                price_pounds_match = re.search(r'(£?((\d+\.\d{1,2})|(\d+)))', price_wrapper_text)
+                
                 if price_pounds_match:
                     price_pounds = float(price_to_number(price_pounds_match.group()))
-
-                price_pence_match = re.search(r'[^£](\d+p?)', str(price_wrapper))
-                if price_pence_match:
-                    price_pence = float(price_to_number(price_pence_match.group()))
+                    price_pence = 0
+                else:
+                    # Attempt to match pattern 33p
+                    price_pence_match = re.search(r'((\d{1,2}+p?))', price_wrapper.text)
+                    if price_pence_match:
+                        price_pounds = 0
+                        price_pence = float(price_to_number(price_pence_match.group()))
 
         except Exception as e:
             print('Error in get_price: ', e)
@@ -282,8 +297,8 @@ class ProductWrapper:
             # Used by Morrisons, Asda & Tesco
             # (Any/Buy) 3 for £4.25 [...]
             multibuy_text = re.search(r'\d{1} for (£\d{1,2}(\.\d{2})?)', promo_text).group()
-            quantity = float(split(multibuy_text, ' for £')[0])
-            total_promo_cost = float(split(multibuy_text, ' for £')[1])
+            quantity = float(multibuy_text.split(' for £')[0])
+            total_promo_cost = float(multibuy_text.split(' for £')[1])
             multibuy_promo_price = total_promo_cost / quantity
         except:
             multibuy_promo_price = None
