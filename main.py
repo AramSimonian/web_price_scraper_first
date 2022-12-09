@@ -24,9 +24,12 @@ this.db_cursor = ''
 
 timeout = 3
 
-def clean_text(text_to_clean):
+def clean_text(text_to_clean, remove_brackets=False):
     output = text_to_clean.strip()
     output = output.replace('\t', '').replace('\n', '').replace('\r', '').replace('  ', '')
+
+    if remove_brackets:
+        output.replace('(', '').replace(')', '')
 
     return output
 
@@ -254,7 +257,8 @@ class ProductWrapper:
             if price_per_wrapper is None:
                 price_per = 0
             else:
-                price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
+                #price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
+                price_per = clean_text(price_per_wrapper.text, True)
 
         except Exception as e:
             print('Error in get_price: ', e)
