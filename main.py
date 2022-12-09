@@ -175,7 +175,7 @@ class ProductWrapper:
             output = price_wrapper, price_per_wrapper, promo_wrapper
         except Exception as e:
             print('Error in extract_wrappers: ', e)
-            output = None, None
+            output = None, None, None
 
         return output
 
@@ -211,12 +211,10 @@ class ProductWrapper:
 
         return price_per_wrapper
 
-    def get_price(self, prod_wrapper):
+    def get_price(self, price_wrapper):
         try:
-            # prod_wrapper is a tuple comprising price, price_per and offer
-            price_wrapper = prod_wrapper[0]
             if price_wrapper is None:
-                price_pounds = 0 #'Unable to locate price wrapper'
+                price_pounds = 0
                 price_pence = 0
             else:
                 # Attempt to match pattern £33.33
@@ -244,32 +242,28 @@ class ProductWrapper:
 
         except Exception as e:
             print('Error in get_price: ', e)
-            price_pounds = 0  # 'Unable to retrieve price'
+            price_pounds = 0
             price_pence = 0
             
         price = coalesce(price_pounds, price_pence, 0)
 
         return price
 
-    def get_price_per(self, prod_wrapper):
+    def get_price_per(self, price_per_wrapper):
         try:
-            # prod_wrapper is a tuple comprising price, price_per and offer
-            price_per_wrapper = prod_wrapper[1]
             if price_per_wrapper is None:
-                price_per = 0 #'Unable to locate price_per wrapper'
+                price_per = 0
             else:
                 price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
 
         except Exception as e:
             print('Error in get_price: ', e)
-            price = 0 #'Unable to retrieve price per'
+            price = 0
 
         return price_per
 
-    def get_promo(self, prod_wrapper):
+    def get_promo(self, promo_wrapper):
         try:
-            # prod_wrapper is a tuple comprising price, price_per and offer
-            promo_wrapper = prod_wrapper[2]
             if (promo_wrapper is None):
                 promo = ''
             else:
@@ -399,14 +393,15 @@ def main():
         shop_attribs_dict = get_shop_attribs_dict(retailer_name)
         product_link = shop_attribs_dict['link_prefix'] + product_link_suffix
 
-        wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
+#        wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
+        price_wrapper, price_per_wrapper, promo_wrapper = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
 
         # Some promo prices need to be extracted from promo text
-        promo_text = product_wrapper.get_promo(wrappers)
+        promo_text = product_wrapper.get_promo(promo_wrapper)
         promo_price = product_wrapper.get_promo_price(promo_text)
-        non_promo_price = product_wrapper.get_price(wrappers)
+        non_promo_price = product_wrapper.get_price(price_wrapper)
         price = coalesce(promo_price, non_promo_price)
-        price_per = product_wrapper.get_price_per(wrappers)
+        price_per = product_wrapper.get_price_per(price_per_wrapper)
 
         current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
