@@ -163,14 +163,7 @@ class ProductWrapper:
                 element_present = EC.presence_of_element_located((By.ID, shop_attribs_dict['pause_for_element_id']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
-#            prod_wrapper = soup.find(shop_attribs_dict['prod_details_type'],
-#                                   attrs={shop_attribs_dict['prod_details_attr']: shop_attribs_dict['prod_class_name_or_value']})
-#            prod_string = "".join(str(x) for x in prod_wrapper.contents)
-#            prod_soup = BeautifulSoup(prod_string, 'html.parser')
 
-#            price_wrapper = self.get_price_wrapper(prod_soup, shop_attribs_dict)
-#            price_per_wrapper = self.get_price_per_wrapper(prod_soup, shop_attribs_dict)
-#            promo_wrapper =  self.get_promo_wrapper(prod_soup, shop_attribs_dict)
             price_wrapper = self.get_price_wrapper(soup, shop_attribs_dict)
             price_per_wrapper = self.get_price_per_wrapper(soup, shop_attribs_dict)
             promo_wrapper =  self.get_promo_wrapper(soup, shop_attribs_dict)
@@ -221,6 +214,7 @@ class ProductWrapper:
                 price_pence = 0
             else:
                 # Attempt to match pattern £33.33
+                # Different ways to access the price tags
                 if len(price_wrapper.text) > 0:
                     price_wrapper_text = price_wrapper.text
                 elif len(price_wrapper['content']) > 0:
