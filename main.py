@@ -29,7 +29,7 @@ def clean_text(text_to_clean, remove_brackets=False):
     output = output.replace('\t', '').replace('\n', '').replace('\r', '').replace('  ', '')
 
     if remove_brackets:
-        output.replace('(', '').replace(')', '')
+        output = output.replace('(', '').replace(')', '')
 
     return output
 
