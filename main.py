@@ -24,6 +24,25 @@ this.db_cursor = ''
 
 timeout = 3
 
+def standardise_price_per(price_per):
+
+    # Dictionary insert order is maintained as of Python v3.6
+    text_replace = {
+        ' / ' : '/',
+        ' per ' : '/',
+        ' each' : '/each',
+        ' ea' : '/each',
+        '75c3' : '75cl',
+        'lt' : 'litre',
+        'ltr' :'litre'
+    }
+
+    output = price_per
+    for current_key in text_replace.keys():
+        output = output.replace(current_key, text_replace[current_key])
+
+    return output
+
 def clean_text(text_to_clean, remove_brackets=False):
     output = text_to_clean.strip()
     output = output.replace('\t', '').replace('\n', '').replace('\r', '').replace('  ', '')
@@ -252,7 +271,7 @@ class ProductWrapper:
                 price_per = 0
             else:
                 #price_per = float(re.search(r'(\d+\.\d+|\d+)', str(price_per_wrapper)).group())
-                price_per = clean_text(price_per_wrapper.text, True)
+                price_per = standardise_price_per(clean_text(price_per_wrapper.text, True))
 
         except Exception as e:
             print('Error in get_price: ', e)
