@@ -342,16 +342,7 @@ def write_output(price_list):
         file.write('{} {:02d}:{:02d}\n'.format(date, hour, minute))
         file.write(price_list)
 
-def main():
-    load_dotenv()
-    get_db_connection(os.environ.get('ps_host'),
-                        os.environ.get('ps_port'),
-                        os.environ.get('ps_db_name'),
-                        os.environ.get('ps_username'),
-                        os.environ.get('ps_password'))
-
-    this.all_tags = build_retailer_attribs()
-
+def get_browser_session():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window_size=1420,1080')
@@ -368,7 +359,19 @@ def main():
 
     s = Service(chrome_exe_name)
 
-    this.driver = webdriver.Chrome(options=chrome_options, service=s)
+    return webdriver.Chrome(options=chrome_options, service=s)
+
+def main():
+    load_dotenv()
+    get_db_connection(os.environ.get('ps_host'),
+                        os.environ.get('ps_port'),
+                        os.environ.get('ps_db_name'),
+                        os.environ.get('ps_username'),
+                        os.environ.get('ps_password'))
+
+    this.all_tags = build_retailer_attribs()
+
+    this.driver = get_browser_session()
 
     output = ''
     product_wrapper = ProductWrapper()
