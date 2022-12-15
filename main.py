@@ -4,17 +4,18 @@ import platform
 import re
 import sys
 import csv
-import mysql.connector as msq
+import mariadb as mdb
 from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome import service
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from nordvpn_switcher import initialize_VPN, rotate_VPN, terminate_VPN
 
 this = sys.modules[__name__]
 this.all_tags = {}
@@ -28,6 +29,8 @@ def standardise_price_per(price_per):
 
     # Dictionary insert order is maintained as of Python v3.6
     text_replace = {
+        ' / each' : '/each',
+        ' / ea' : '/each',
         ' / ' : '/',
         ' per ' : '/',
         ' each' : '/each',
@@ -53,8 +56,8 @@ def clean_text(text_to_clean, remove_brackets=False):
     return output
 
 def get_db_connection(host, port, db_name, username, password):
-    this.db_connection = msq.connect(host=host,
-                             port=port,
+    this.db_connection = mdb.connect(host=host,
+                             port=int(port),
                              unix_socket="/run/mysqld/mysqld10.sock",
                              database=db_name,
                              user=username,
@@ -88,6 +91,7 @@ def build_retailer_attribs():
         price_tag_attr,
         price_class_name_or_value,
         price_per_tag_type,
+        price_per_tag_type_2,
         price_per_tag_attr,
         price_per_class_name_or_value,
         promo_tag_type,
@@ -106,6 +110,7 @@ def build_retailer_attribs():
             'price_tag_attr': price_tag_attr,
             'price_class_name_or_value': price_class_name_or_value,
             'price_per_tag_type': price_per_tag_type,
+            'price_per_tag_type_2': price_per_tag_type_2,
             'price_per_tag_attr': price_per_tag_attr,
             'price_per_class_name_or_value': price_per_class_name_or_value,
             'promo_tag_type': promo_tag_type,
@@ -199,6 +204,7 @@ class ProductWrapper:
             price_wrapper = prod_soup.find(shop_attribs_dict['price_tag_type'],
                                            attrs={shop_attribs_dict['price_tag_attr']: shop_attribs_dict[
                                                'price_class_name_or_value']})
+
         except Exception as e:
             print('Error in get_price_wrapper: ', e)
             price_wrapper = None
@@ -220,6 +226,9 @@ class ProductWrapper:
         try:
             price_per_wrapper = prod_soup.find(shop_attribs_dict['price_per_tag_type'],
                                                attrs={shop_attribs_dict['price_per_tag_attr']: shop_attribs_dict['price_per_class_name_or_value']})
+            if price_per_wrapper is None:                
+                price_per_wrapper = prod_soup.find(shop_attribs_dict['price_per_tag_type_2'],
+                                                attrs={shop_attribs_dict['price_per_tag_attr']: shop_attribs_dict['price_per_class_name_or_value']})
         except Exception as e:
             print('Error in get_price_per_wrapper: ', e)
             price_per_wrapper = None
@@ -355,9 +364,9 @@ class ProductWrapper:
 
 def write_output(price_list):
     with open("./price_check.txt", "w", encoding='utf8') as file:
-        date = datetime.datetime.now().date()
-        hour = datetime.datetime.now().hour
-        minute = datetime.datetime.now().minute
+        date = datetime.now().date()
+        hour = datetime.now().hour
+        minute = datetime.now().minute
         file.write('{} {:02d}:{:02d}\n'.format(date, hour, minute))
         file.write(price_list)
 
@@ -365,18 +374,23 @@ def get_browser_session():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window_size=1420,1080')
-#    chrome_options.add_argument('--disable-gpu')
-    
+    #chrome_options.add_argument('--excludeSwitches=disable-popup-blocking')
+    #chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument("--remote-debugging-port=9222")
+
     # Enabling this option blocks Sainsbury's prices
     #chrome_options.add_argument('--headless')
 
     this_os = platform.system()
     if this_os == 'Linux':
         chrome_exe_name = './chromedriver'
+        chrome_options.binary_location ='./GoogleChromePortable/GoogleChromePortable.exe'
     elif this_os == 'Windows':
         chrome_exe_name = '.\chromedriver.exe'
+        chrome_options.binary_location = 'C:\\Temp\\web_scraper\\GoogleChromePortable\\GoogleChromePortable.exe'
 
     s = Service(chrome_exe_name)
+    
 
     return webdriver.Chrome(options=chrome_options, service=s)
 
@@ -432,6 +446,7 @@ def main():
         this.db_connection.commit()
 
 
+    this.driver.close()
     this.driver.quit()
 
 main()

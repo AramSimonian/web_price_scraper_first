@@ -138,3 +138,4 @@ chromedriver.exe
 .vs/web_price_scraper/v16/.suo
 .vscode/settings.json
 /chromedriver_win32.zip
+.vscode/launch.json
