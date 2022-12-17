@@ -4,6 +4,7 @@ import platform
 import re
 import sys
 import csv
+import time
 import mariadb as mdb
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -97,6 +98,15 @@ def build_retailer_attribs():
         promo_tag_type,
         promo_tag_attr,
         promo_class_name_or_value,
+        title_tag_type,
+        title_tag_attr,
+        title_class_name_or_value,
+        number_tag_type,
+        number_tag_attr,
+        number_class_name_or_value,
+        quantity_tag_type,
+        quantity_tag_attr,
+        quantity_class_name_or_value,        
         pause_for_class_name,
         pause_for_element_id,
         modal_button_class, _ ) = sm_attrib
@@ -116,6 +126,15 @@ def build_retailer_attribs():
             'promo_tag_type': promo_tag_type,
             'promo_tag_attr': promo_tag_attr,
             'promo_class_name_or_value': promo_class_name_or_value,
+            'title_tag_type': title_tag_type,
+            'title_tag_attr': title_tag_attr,
+            'title_class_name_or_value': title_class_name_or_value,
+            'number_tag_type': number_tag_type,
+            'number_tag_attr': number_tag_attr,
+            'number_class_name_or_value': number_class_name_or_value,
+            'quantity_tag_type': quantity_tag_type,
+            'quantity_tag_attr': quantity_tag_attr,
+            'quantity_class_name_or_value': quantity_class_name_or_value, 
             'pause_for_class_name': pause_for_class_name,
             'pause_for_element_id': pause_for_element_id,
             'modal_button_class': modal_button_class
@@ -191,11 +210,12 @@ class ProductWrapper:
             price_wrapper = self.get_price_wrapper(soup, shop_attribs_dict)
             price_per_wrapper = self.get_price_per_wrapper(soup, shop_attribs_dict)
             promo_wrapper =  self.get_promo_wrapper(soup, shop_attribs_dict)
+            title_wrapper = self.get_title_wrapper(soup, shop_attribs_dict)
 
-            output = price_wrapper, price_per_wrapper, promo_wrapper
+            output = price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper
         except Exception as e:
             print('Error in extract_wrappers: ', e)
-            output = None, None, None
+            output = None, None, None, None
 
         return output
 
@@ -234,6 +254,17 @@ class ProductWrapper:
             price_per_wrapper = None
 
         return price_per_wrapper
+
+    def get_title_wrapper(self, prod_soup, shop_attribs_dict):
+        try:
+            title_wrapper = prod_soup.find(shop_attribs_dict['title_tag_type'],
+                                           attrs={shop_attribs_dict['title_tag_attr']: 
+                                                    shop_attribs_dict['title_class_name_or_value']})
+        except Exception as e:
+            print('Error in get_title_wrapper: ', e)
+            title_wrapper = None
+
+        return title_wrapper
 
     def get_price(self, price_wrapper):
         try:
@@ -284,9 +315,22 @@ class ProductWrapper:
 
         except Exception as e:
             print('Error in get_price: ', e)
-            price = 0
+            price_per = 0
 
         return price_per
+
+    def get_title(self, title_wrapper):
+        try:
+            if title_wrapper is None:
+                title = ''
+            else:
+                title = clean_text(title_wrapper.text, True)
+
+        except Exception as e:
+            print('Error in get_title: ', e)
+            title = ''
+
+        return title
 
     def get_promo(self, promo_wrapper):
         try:
@@ -394,6 +438,14 @@ def get_browser_session():
 
     return webdriver.Chrome(options=chrome_options, service=s)
 
+def get_random_urls():
+    urls = execute_sql("SELECT * FROM vw_random_url WHERE retailer <> 'Sainsburys'", False)
+    return urls
+
+def get_regular_urls():
+    urls = execute_sql('SELECT * FROM vw_retailer_product_select WHERE category_id >=0', False)
+    return urls
+
 def main():
     load_dotenv()
     get_db_connection(os.environ.get('ps_host'),
@@ -409,41 +461,66 @@ def main():
     output = ''
     product_wrapper = ProductWrapper()
 
-    if len(sys.argv)==2 and sys.argv[1].isnumeric():
-        where_category_id = '= ' + sys.argv[1]
+    if len(sys.argv)==2 and sys.argv[1] == 'all':
+        # process all_urls
+        process_all = True
+        product_urls = get_random_urls()
     else:
-        where_category_id = '>=0'
-    retailer_products = execute_sql('SELECT * FROM vw_retailer_product_select WHERE category_id {}'.format(where_category_id), False)
+        # process the regular 200
+        product_urls = get_regular_urls()
+        process_all = False
 
-    for retailer_product in retailer_products:
-        (category_id,
-         retailer_product_id,
-         product_id,
-         product_name,
-         retailer_id,
-         retailer_name,
-         product_link_suffix) = retailer_product
+    instructions = initialize_VPN(area_input=['random countries europe 20'])
 
-        shop_attribs_dict = get_shop_attribs_dict(retailer_name)
-        product_link = shop_attribs_dict['link_prefix'] + product_link_suffix
+    while product_urls:
+        rotate_VPN(instructions)
+        # time.sleep(timeout)
 
-#        wrappers = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
-        price_wrapper, price_per_wrapper, promo_wrapper = product_wrapper.extract_wrappers(shop_attribs_dict, product_link)
+        for product_url in product_urls:
+            if process_all:
+                (url_id,
+                url,
+                retailer_name) = product_url
+            else:
+                (category_id,
+                retailer_product_id,
+                product_id,
+                product_name,
+                retailer_id,
+                retailer_name,
+                url) = product_url                
 
-        # Some promo prices need to be extracted from promo text
-        promo_text = product_wrapper.get_promo(promo_wrapper)
-        promo_price = product_wrapper.get_promo_price(promo_text)
-        non_promo_price = product_wrapper.get_price(price_wrapper)
-        price = coalesce(promo_price, non_promo_price)
-        price_per = product_wrapper.get_price_per(price_per_wrapper)
+            # Set the correct retailer dictionary
+            shop_attribs_dict = get_shop_attribs_dict(retailer_name)
 
-        current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
+            price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper = product_wrapper.extract_wrappers(shop_attribs_dict, url)
 
-        arg_list = (retailer_product_id, current_time, price, price_per, promo_text, offer_start_date, offer_end_date)
+            # Some promo prices need to be extracted from promo text
+            promo_text = product_wrapper.get_promo(promo_wrapper)
+            promo_price = product_wrapper.get_promo_price(promo_text)
+            non_promo_price = product_wrapper.get_price(price_wrapper)
+            price = coalesce(promo_price, non_promo_price)
+            price_per = product_wrapper.get_price_per(price_per_wrapper)
+            product_title = product_wrapper.get_title(title_wrapper)
 
-        this.db_cursor.callproc('usp_price_upsert', arg_list)
-        this.db_connection.commit()
+            current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+            offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
+
+            if process_all:
+                arg_list = (url_id, product_title, current_time)
+                this.db_cursor.callproc('usp_url_title_update', arg_list)
+            else:
+                arg_list = (retailer_product_id, current_time, price, price_per, promo_text, offer_start_date, offer_end_date)
+                this.db_cursor.callproc('usp_price_upsert', arg_list)
+
+            this.db_connection.commit()
+
+        # Get a new batch of urls
+        if process_all:
+            product_urls = get_random_urls()
+        else:
+            product_urls = get_regular_urls()
+
 
 
     this.driver.close()
