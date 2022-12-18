@@ -106,7 +106,14 @@ def build_retailer_attribs():
         number_class_name_or_value,
         quantity_tag_type,
         quantity_tag_attr,
-        quantity_class_name_or_value,        
+        quantity_class_name_or_value,
+        out_tag_type,
+        out_tag_attr,
+        out_class_name_or_value,
+        blocked_tag_type,
+        blocked_tag_attr,
+        blocked_class_name_or_value,
+        blocked_tag_value,
         pause_for_class_name,
         pause_for_element_id,
         modal_button_class, _ ) = sm_attrib
@@ -134,7 +141,14 @@ def build_retailer_attribs():
             'number_class_name_or_value': number_class_name_or_value,
             'quantity_tag_type': quantity_tag_type,
             'quantity_tag_attr': quantity_tag_attr,
-            'quantity_class_name_or_value': quantity_class_name_or_value, 
+            'quantity_class_name_or_value': quantity_class_name_or_value,
+            'out_tag_type': out_tag_type,
+            'out_tag_attr': out_tag_attr,
+            'out_class_name_or_value': out_class_name_or_value,
+            'blocked_tag_type': blocked_tag_type,
+            'blocked_tag_attr': blocked_tag_attr,
+            'blocked_class_name_or_value': blocked_class_name_or_value,
+            'blocked_tag_value': blocked_tag_value,
             'pause_for_class_name': pause_for_class_name,
             'pause_for_element_id': pause_for_element_id,
             'modal_button_class': modal_button_class
@@ -211,11 +225,13 @@ class ProductWrapper:
             price_per_wrapper = self.get_price_per_wrapper(soup, shop_attribs_dict)
             promo_wrapper =  self.get_promo_wrapper(soup, shop_attribs_dict)
             title_wrapper = self.get_title_wrapper(soup, shop_attribs_dict)
+            out_of_stock_wrapper = self.get_out_of_stock_wrapper(soup, shop_attribs_dict)
+            blocked_wrapper = self.get_blocked_wrapper(soup,shop_attribs_dict)
 
-            output = price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper
+            output = price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper, out_of_stock_wrapper, blocked_wrapper
         except Exception as e:
             print('Error in extract_wrappers: ', e)
-            output = None, None, None, None
+            output = None, None, None, None, None, None
 
         return output
 
@@ -265,6 +281,28 @@ class ProductWrapper:
             title_wrapper = None
 
         return title_wrapper
+
+    def get_out_of_stock_wrapper(self, prod_soup, shop_attribs_dict):
+        try:
+            out_of_stock_wrapper = prod_soup.find(shop_attribs_dict['out_tag_type'],
+                                           attrs={shop_attribs_dict['out_tag_attr']: 
+                                                    shop_attribs_dict['out_class_name_or_value']})
+        except Exception as e:
+            print('Error in get_out_of_stock_wrapper: ', e)
+            out_of_stock_wrapper = None
+
+        return out_of_stock_wrapper
+
+    def get_blocked_wrapper(self, prod_soup, shop_attribs_dict):
+        try:
+            blocked_wrapper = prod_soup.find(shop_attribs_dict['blocked_tag_type'],
+                                           attrs={shop_attribs_dict['blocked_tag_attr']: 
+                                                    shop_attribs_dict['blocked_class_name_or_value']})
+        except Exception as e:
+            print('Error in get_blocked_wrapper: ', e)
+            blocked_wrapper = None
+
+        return blocked_wrapper
 
     def get_price(self, price_wrapper):
         try:
@@ -331,6 +369,34 @@ class ProductWrapper:
             title = ''
 
         return title
+
+    def get_out_of_stock(self, out_of_stock_wrapper):
+        try:
+            if out_of_stock_wrapper is None:
+                out_of_stock = False
+            else:
+                out_of_stock = True
+
+        except Exception as e:
+            print('Error in get_product_out_of_stock: ', e)
+            out_of_stock = True
+
+        return out_of_stock
+
+    def get_url_blocked(self, blocked_wrapper, blocked_value):
+        try:
+            if blocked_wrapper is None:
+                url_blocked = False
+            elif blocked_wrapper.text == blocked_value:
+                url_blocked = True
+            else:
+                url_blocked = False
+
+        except Exception as e:
+            print('Error in get_url_blocked: ', e)
+            url_blocked = True
+
+        return url_blocked
 
     def get_promo(self, promo_wrapper):
         try:
@@ -430,8 +496,8 @@ def get_browser_session():
         chrome_exe_name = './chromedriver'
         chrome_options.binary_location ='./GoogleChromePortable/GoogleChromePortable.exe'
     elif this_os == 'Windows':
-        chrome_exe_name = '.\chromedriver.exe'
-        chrome_options.binary_location = 'C:\\Temp\\web_scraper\\GoogleChromePortable\\GoogleChromePortable.exe'
+        chrome_exe_name = './chromedriver.exe'
+        chrome_options.binary_location = 'C:/Temp/web_scraper/GoogleChromePortable/GoogleChromePortable.exe'
 
     s = Service(chrome_exe_name)
     
@@ -493,7 +559,12 @@ def main():
             # Set the correct retailer dictionary
             shop_attribs_dict = get_shop_attribs_dict(retailer_name)
 
-            price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper = product_wrapper.extract_wrappers(shop_attribs_dict, url)
+            (price_wrapper, 
+                price_per_wrapper, 
+                promo_wrapper, 
+                title_wrapper, 
+                out_of_stock_wrapper,
+                blocked_wrapper) = product_wrapper.extract_wrappers(shop_attribs_dict, url)
 
             # Some promo prices need to be extracted from promo text
             promo_text = product_wrapper.get_promo(promo_wrapper)
@@ -502,15 +573,17 @@ def main():
             price = coalesce(promo_price, non_promo_price)
             price_per = product_wrapper.get_price_per(price_per_wrapper)
             product_title = product_wrapper.get_title(title_wrapper)
+            out_of_stock = product_wrapper.get_out_of_stock(out_of_stock_wrapper)
+            url_blocked = product_wrapper.get_url_blocked(blocked_wrapper, shop_attribs_dict['blocked_tag_value'])
 
             current_time = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
             offer_start_date, offer_end_date = product_wrapper.get_offer_dates(promo_text)
 
             if process_all:
-                arg_list = (url_id, product_title, current_time)
+                arg_list = (url_id, product_title, current_time, out_of_stock, url_blocked)
                 this.db_cursor.callproc('usp_url_title_update', arg_list)
             else:
-                arg_list = (retailer_product_id, current_time, price, price_per, promo_text, offer_start_date, offer_end_date)
+                arg_list = (retailer_product_id, current_time, price, price_per, promo_text, offer_start_date, offer_end_date, out_of_stock, url_blocked)
                 this.db_cursor.callproc('usp_price_upsert', arg_list)
 
             this.db_connection.commit()
