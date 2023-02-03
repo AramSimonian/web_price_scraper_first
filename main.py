@@ -220,13 +220,17 @@ class ProductWrapper:
                 element_present = EC.presence_of_element_located((By.ID, shop_attribs_dict['pause_for_element_id']))
             WebDriverWait(this.driver, timeout).until(element_present)
             soup = BeautifulSoup(this.driver.page_source, 'html.parser')
+            
+            # This should pick out the first product on the page which helps to
+            # avoid extracting details for a different promo product further down
+            product_wrapper = self.get_product_wrapper(soup, shop_attribs_dict)
 
-            price_wrapper = self.get_price_wrapper(soup, shop_attribs_dict)
-            price_per_wrapper = self.get_price_per_wrapper(soup, shop_attribs_dict)
-            promo_wrapper =  self.get_promo_wrapper(soup, shop_attribs_dict)
-            title_wrapper = self.get_title_wrapper(soup, shop_attribs_dict)
-            out_of_stock_wrapper = self.get_out_of_stock_wrapper(soup, shop_attribs_dict)
-            blocked_wrapper = self.get_blocked_wrapper(soup,shop_attribs_dict)
+            price_wrapper = self.get_price_wrapper(product_wrapper, shop_attribs_dict)
+            price_per_wrapper = self.get_price_per_wrapper(product_wrapper, shop_attribs_dict)
+            promo_wrapper =  self.get_promo_wrapper(product_wrapper, shop_attribs_dict)
+            title_wrapper = self.get_title_wrapper(product_wrapper, shop_attribs_dict)
+            out_of_stock_wrapper = self.get_out_of_stock_wrapper(product_wrapper, shop_attribs_dict)
+            blocked_wrapper = self.get_blocked_wrapper(product_wrapper, shop_attribs_dict)
 
             output = price_wrapper, price_per_wrapper, promo_wrapper, title_wrapper, out_of_stock_wrapper, blocked_wrapper
         except Exception as e:
@@ -234,6 +238,18 @@ class ProductWrapper:
             output = None, None, None, None, None, None
 
         return output
+
+    def get_product_wrapper(self, prod_soup, shop_attribs_dict):
+        try:
+            product_wrapper = prod_soup.find(shop_attribs_dict['prod_details_type'],
+                                           attrs={shop_attribs_dict['prod_details_attr']: shop_attribs_dict[
+                                               'prod_class_name_or_value']})
+
+        except Exception as e:
+            print('Error in get_product_wrapper: ', e)
+            product_wrapper = None
+
+        return product_wrapper
 
     def get_price_wrapper(self, prod_soup, shop_attribs_dict):
         try:
@@ -493,8 +509,8 @@ def get_browser_session():
 
     this_os = platform.system()
     if this_os == 'Linux':
-        chrome_exe_name = './chromedriver'
-        chrome_options.binary_location ='./GoogleChromePortable/GoogleChromePortable.exe'
+        chrome_exe_name = '/usr/lib/chromium-browser/chromedriver'
+        chrome_options.binary_location ='/usr/lib/chromium-browser/chromium-browser'
     elif this_os == 'Windows':
         chrome_exe_name = './chromedriver.exe'
         chrome_options.binary_location = 'C:/Temp/web_scraper/GoogleChromePortable/GoogleChromePortable.exe'
@@ -505,7 +521,7 @@ def get_browser_session():
     return webdriver.Chrome(options=chrome_options, service=s)
 
 def get_random_urls():
-    urls = execute_sql("SELECT * FROM vw_random_url WHERE retailer <> 'Sainsburys'", False)
+    urls = execute_sql("SELECT * FROM vw_random_url", False)
     return urls
 
 def get_regular_urls():
@@ -536,10 +552,10 @@ def main():
         product_urls = get_regular_urls()
         process_all = False
 
-    instructions = initialize_VPN(area_input=['random countries europe 20'])
+    # instructions = initialize_VPN(area_input=['uk'])
 
     while product_urls:
-        rotate_VPN(instructions)
+        # rotate_VPN(instructions)
         # time.sleep(timeout)
 
         for product_url in product_urls:
